@@ -1,3 +1,6 @@
+![Check](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml/badge.svg)
+
+
 # ContactManager
 This app is being developed by three developers for a semester project at ZbW.
 It is a Contact Manager app that consists of the following:
