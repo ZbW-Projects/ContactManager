@@ -26,4 +26,4 @@ jobs:
         run: dotnet build ./ContactManager.sln --configuration Release
 
       - name: Run tests
-        run: dotnet test ./ContactManager.Tests --configuration Release
+        run: dotnet test ./src/ContactManager.Tests --configuration Release
