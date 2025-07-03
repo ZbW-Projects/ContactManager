@@ -1,0 +1,75 @@
+############################
+# Core .NET & C# settings
+############################
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+.vscode/
+TestResults/
+*.cache/
+*.log
+
+############################
+# Build output
+############################
+*.dll
+*.exe
+*.pdb
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+
+############################
+# Visual Studio & Rider
+############################
+*.ncrunch*
+_ReSharper*/
+*.DotSettings.user
+.idea/
+*.sln.iml
+
+############################
+# NuGet Packages
+############################
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+############################
+# OS files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# CSV or temp files (optional)
+############################
+*.csv
+*.bak
+*.tmp
+
+############################
+# GitHub Actions (optional)
+############################
+.github/workflows/*.log
+
+############################
+# Publish artifacts
+############################
+publish/
+*.zip
+*.tar.gz
+
+############################
+# Dotnet tools
+############################
+.tool-manifest
+.dotnet-tools.json
