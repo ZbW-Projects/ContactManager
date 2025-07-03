@@ -14,5 +14,5 @@ static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         WinFormsApp.Run(new Form1());
-    }    
+    }
 }

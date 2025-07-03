@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Tests;
+namespace ContactManager.Tests;
 
 [TestClass]
 public sealed class Test1

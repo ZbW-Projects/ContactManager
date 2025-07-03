@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Infrastructure;
+namespace ContactManager.Infrastructure;
 
 public class Class1
 {

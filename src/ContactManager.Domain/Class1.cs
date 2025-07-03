@@ -1,4 +1,4 @@
-﻿namespace ContactManager.Domain;
+namespace ContactManager.Domain;
 
 public class Class1
 {
