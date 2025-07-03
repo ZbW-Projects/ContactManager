@@ -17,13 +17,13 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore dependencies
-        run: dotnet restore ./src/ContactManager.sln
+        run: dotnet restore ./ContactManager.sln
 
       - name: Check code formatting
-        run: dotnet format --verify-no-changes ./src/ContactManager.sln
+        run: dotnet format --verify-no-changes ./ContactManager.sln
 
       - name: Build
-        run: dotnet build ./src/ContactManager.sln --configuration Release
+        run: dotnet build ./ContactManager.sln --configuration Release
 
       - name: Run tests
-        run: dotnet test ./src/ContactManager.Tests --configuration Release
+        run: dotnet test ./ContactManager.Tests --configuration Release
