@@ -3,7 +3,7 @@ This app is being developed by three developers for a semester project at ZbW.</
 It is a Contact Manager app that consists of the following:
 - Domain Driven Design 
 - Windows Forms for the Presentaion Layer.
-- Local Storage as the Backend
+- Local Storage as the DataStorage
 
 ---
 
