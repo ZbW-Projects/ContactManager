@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Login.BoundedContext\" />
+    <Folder Include="SharedKernel\Services\" />
   </ItemGroup>
 
 </Project>

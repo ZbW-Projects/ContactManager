@@ -1,12 +1,13 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactManager.Domain.Contact.BoundedContext.Person
+namespace ContactManager.Domain.SharedKernel.ValueObjects
 {
-    internal class PhoneNumber
+    internal class EmployeeNumber
     {
     }
 }
