@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ContactManager.Domain.Common
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        Task<int> SaveChangesAsync(CancellationToken canellationToken = default);
     }
 }
