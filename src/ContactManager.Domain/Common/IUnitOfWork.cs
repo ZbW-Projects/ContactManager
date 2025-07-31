@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactManager.Domain.Common
 {
-    public abstract class DomainEvent
+    internal interface IUnitOfWork
     {
-        public DateTime OccurredOn { get; } = DateTime.UtcNow;
     }
 }

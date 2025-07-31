@@ -5,13 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-/*
- * Resourcen:
- * https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/implement-value-objects
- * 
- */
-
-
 namespace ContactManager.Domain.Common
 {
     public abstract class ValueObject
