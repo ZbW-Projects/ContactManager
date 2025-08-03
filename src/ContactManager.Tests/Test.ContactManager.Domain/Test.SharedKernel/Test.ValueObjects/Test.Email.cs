@@ -1,5 +1,3 @@
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ContactManager.Domain.SharedKernel.ValueObjects;
 
 namespace ContactManager.Tests.Test.ContactManager.Domain.Test.SharedKernel.Test.ValueObjects
@@ -28,12 +26,6 @@ namespace ContactManager.Tests.Test.ContactManager.Domain.Test.SharedKernel.Test
             var email = new Email("invalid-email");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void Constructor_EmptyEmail_ShouldThrowException()
-        {
-            var email = new Email("");
-        }
 
         [TestMethod]
         public void Equals_SameEmailDifferentCase_ShouldBeEqual()

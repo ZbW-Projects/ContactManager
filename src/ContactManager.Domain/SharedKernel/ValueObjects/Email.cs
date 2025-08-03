@@ -1,35 +1,24 @@
-using ContactManager.Domain.Common;
 using System.Net.Mail;
 
 namespace ContactManager.Domain.SharedKernel.ValueObjects
 {
-    public class Email : ValueObject
+    public class Email : SingleValueObject<string>
     {
-        public string Value { get; }
+        public Email(string value) : base(Normalize(value)) { }
 
-        protected Email() { } // For EF or serialization
-        public Email(string value)
+        private static string Normalize(string input)
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentException("Email cannot be empty", nameof(value));
-            }
-
             try
             {
-                var email = new MailAddress(value);
-                Value = email.Address;
+                var mail = new MailAddress(input);
+                return mail.Address.ToLowerInvariant();
             }
             catch (FormatException)
             {
-                throw new ArgumentException("Email format is invalid", nameof(value));
+                throw new ArgumentException("Email format is invalid", nameof(input));
             }
         }
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return Value.ToLowerInvariant(); // Normailze for comparison
-        }
 
-        public override string ToString() => Value;
+        public static Email Create(string value) => new(value);
     }
 }
