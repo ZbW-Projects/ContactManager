@@ -1,0 +1,40 @@
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>SingleValueObject</Title>
+      <Shortcut>svo</Shortcut>
+      <Description>Creates a SingleValueObject class template</Description>
+      <Author>Edi</Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>ClassName</ID>
+          <ToolTip>Class name</ToolTip>
+          <Default>MyValueObject</Default>
+        </Literal>
+        <Literal>
+          <ID>ValueType</ID>
+          <ToolTip>The value type</ToolTip>
+          <Default>string</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[
+using ContactManager.Domain.Common;
+
+public class $ClassName$ : SingleValueObject<$ValueType$>
+{
+    public $ClassName$($ValueType$ value) : base(Normalize(value)) { }
+
+    private static $ValueType$ Normalize($ValueType$ value)
+    {
+        // Add validation here
+        return value;
+    }
+
+    public static $ClassName$ Create($ValueType$ value) => new(value);
+}
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

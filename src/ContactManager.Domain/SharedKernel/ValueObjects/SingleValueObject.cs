@@ -31,6 +31,11 @@ namespace ContactManager.Domain.SharedKernel.ValueObjects
                 return (DateTime)(object)value == default;
             }
 
+            if (typeof(T) == typeof(int))
+            {
+                return (int)(object)value <= 0;
+            }
+
             return false;
         }
 
