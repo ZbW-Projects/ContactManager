@@ -1,8 +1,8 @@
 using ContactManager.Domain.SharedKernel.ValueObjects;
 using System.Text.RegularExpressions;
 
-// Input: string 756.1234.5678.91
-// Output: 756.1234.5678.91
+// Input: string 756.9217.0769.85
+// Output: 756.9217.0769.85
 
 namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 {
