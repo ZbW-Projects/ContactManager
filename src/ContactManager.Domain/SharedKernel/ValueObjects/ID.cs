@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+// Input: int 1
+// Output: int 1
+
 
 namespace ContactManager.Domain.SharedKernel.ValueObjects
 {

@@ -1,4 +1,10 @@
+
+/*
+ * Für primitive, skalare Domaintypen, bei denen der Wert die gesamte Identität ist.
+*/
+
 using ContactManager.Domain.Common;
+
 
 namespace ContactManager.Domain.SharedKernel.ValueObjects
 {
