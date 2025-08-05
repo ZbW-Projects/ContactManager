@@ -13,7 +13,7 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 
         private static string Normalize(string value)
         {
-            var cleaned = value.Replace(" ", "").Replace("-", "").Repalce(".", "");
+            var cleaned = value.Replace(" ", "").Replace("-", "").Replace(".", "");
 
             if (cleaned.Length != 13 || !cleaned.StartsWith("756"))
             {
