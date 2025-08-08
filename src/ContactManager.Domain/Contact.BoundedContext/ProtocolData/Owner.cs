@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactManager.Domain.Contact.BoundedContext.ProtocolData
 {
-    internal class ProtocolMessage
+    internal class Owner
     {
     }
 }
