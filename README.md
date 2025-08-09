@@ -9,9 +9,9 @@ Die folgenden Schichten beinhalten:</br>
 
 ---
 ## Gruppenmitglieder 
-Eduard Anderegg ( Plannung / Development )
-Nadine Untersee ( UI/UX Development )
-Joël Rohner ( Unit Testing / Testing )
+Eduard Anderegg ( Plannung / Development )</br>
+Nadine Untersee ( UI/UX Development )</br>
+Joël Rohner ( Unit Testing / Testing )</br>
 
 ---
 ## Aufbau

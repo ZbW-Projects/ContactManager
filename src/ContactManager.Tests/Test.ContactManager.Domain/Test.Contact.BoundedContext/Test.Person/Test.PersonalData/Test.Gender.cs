@@ -14,7 +14,7 @@ namespace ContactManager.Tests.Test.ContactManager.Domain.Test.Contact.BoundedCo
             var all = Enumeration.GetAll<Gender>().ToList();
 
             // Assert
-            Assert.AreEqual(3,all.Count);
+            Assert.AreEqual(3, all.Count);
             CollectionAssert.Contains(all, Gender.Female);
             CollectionAssert.Contains(all, Gender.Male);
             CollectionAssert.Contains(all, Gender.Divers);
