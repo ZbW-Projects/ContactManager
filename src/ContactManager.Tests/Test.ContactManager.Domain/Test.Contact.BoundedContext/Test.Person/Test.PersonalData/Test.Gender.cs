@@ -1,5 +1,4 @@
 using ContactManager.Domain.Contact.BoundedContext.Person.PersonalData;
-using ContactManager.Domain.Common;
 
 namespace ContactManager.Tests.Test.ContactManager.Domain.Test.Contact.BoundedContext.Test.Person.Test.PersonalData
 {
@@ -11,7 +10,7 @@ namespace ContactManager.Tests.Test.ContactManager.Domain.Test.Contact.BoundedCo
         {
             // Arange
             // Act
-            var all = Enumeration.GetAll<Gender>().ToList();
+            var all = Gender.List().ToList();
 
             // Assert
             Assert.AreEqual(3, all.Count);

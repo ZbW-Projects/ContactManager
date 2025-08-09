@@ -35,9 +35,6 @@ namespace ContactManager.Domain.Common
 
         public int CompareTo(object other) => Id.CompareTo(((Enumeration)other).Id);
 
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
+        public override int GetHashCode() => HashCode.Combine(GetType(), Id);
     }
 }

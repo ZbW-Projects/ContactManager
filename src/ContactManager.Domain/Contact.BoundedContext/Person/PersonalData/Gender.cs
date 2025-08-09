@@ -10,6 +10,8 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 
         private Gender(int id, string name) : base(id, name) { }
 
+        public static IEnumerable<Gender> List() => GetAll<Gender>();
+
         // Diese Gender Methoden sind noch Optional
         public bool IsFemale() => this == Female;
         public bool IsMale() => this == Male;
@@ -18,11 +20,18 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 
         public static Gender FromName(string name)
         {
-            var gender = GetAll<Gender>().FirstOrDefault(g => string.Equals(g.Name, name, StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Name cannot be null or whitespace.", nameof(name));
+            }
+
+            var normalized = name.Trim();
+
+            var gender = GetAll<Gender>().FirstOrDefault(g => string.Equals(g.Name, normalized, StringComparison.OrdinalIgnoreCase));
 
             if (gender == null)
             {
-                throw new ArgumentException($"Invalid gender: {name}");
+                throw new ArgumentException($"Invalid gender: {name}", nameof(name));
             }
 
             return gender;
@@ -34,7 +43,7 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 
             if (gender == null)
             {
-                throw new ArgumentException($"Invalid gender ID: {id}");
+                throw new ArgumentException($"Invalid gender ID: {id}", nameof(id));
             }
 
             return gender;
