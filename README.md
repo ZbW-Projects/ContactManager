@@ -3,20 +3,26 @@ Diese App wird von drei Entwicklern im Rahmen eines Semesterprojekts an der ZbW 
 Als Architektur wird Clean Code verwendet.</br>
 Die folgenden Schichten beinhalten:</br>
 - **Kern:** Domain Driven Design 
+- **Application:** Use Cases entstehen aus User Stories 
 - **Presentation:** Windows Forms als UI
 - **Infrastructure:** Holt die Daten lokal.
 
+---
+## Gruppenmitglieder 
+Eduard Anderegg ( Plannung / Development )
+Nadine Untersee ( UI/UX Development )
+Joël Rohner ( Unit Testing / Testing )
 
 ---
 ## Aufbau
 
-## Clean Architecture
+### Clean Architecture
 ![Clean Architecture Diagram](docs/assets/Clean%20Architecture.png)
 
-## The Core Design (DDD) as a Diagram
+### The Core Design (DDD) as a Diagram
 ![Domain Driven Design Diagram](docs/assets/Domain%20Driven%20Design.png)
 
-## User Stories (ohne Login / Auth)
+### User Stories (ohne Login / Auth) für Use Cases
 | **ID**| **User Story**                                                                                                                  | **Priorität**| **Rolle (zukünftig)** |      **Kategorie**   |
 | ----- | ------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------- | --------------------------- |
 | CM-01 | Als Benutzer möchte ich eine Liste aller Kontakte anzeigen, damit ich die verfügbaren Personen durchsuchen kann.                | Hoch      | Alle              | Auflistung/Suche            |
