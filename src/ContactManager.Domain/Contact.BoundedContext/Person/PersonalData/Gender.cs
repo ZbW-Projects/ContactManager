@@ -12,7 +12,7 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 
         public static IEnumerable<Gender> List() => GetAll<Gender>();
 
-        // Diese Gender Methoden sind noch Optional
+        // Diese Methoden sind noch Optional
         public bool IsFemale() => this == Female;
         public bool IsMale() => this == Male;
         public bool IsDivers() => this == Divers;

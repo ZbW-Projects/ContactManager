@@ -14,12 +14,12 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.Type.Customer
 
         public static IEnumerable<CustomerType> List() => GetAll<CustomerType>();
 
-        // Diese Gender Methoden sind noch Optional
-        public bool IsCustomerTypeA() => this == A;
-        public bool IsCustomerTypeB() => this == B;
-        public bool IsCustomerTypeC() => this == C;
-        public bool IsCustomerTypeD() => this == D;
-        public bool IsCustomerTypeE() => this == E;
+        // Diese Methoden sind noch Optional
+        public bool IsA() => this == A;
+        public bool IsB() => this == B;
+        public bool IsC() => this == C;
+        public bool IsD() => this == D;
+        public bool IsE() => this == E;
 
 
 

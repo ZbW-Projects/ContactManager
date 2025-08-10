@@ -16,12 +16,12 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.Type.WorkCollege
         public static IEnumerable<ManagementLevel> List() => GetAll<ManagementLevel>();
 
         // Diese Methoden sind noch Optional
-        public bool IsManagementLevelZero() => this == Zero;
-        public bool IsManagementLevelOne() => this == One;
-        public bool IsManagementLevelTwo() => this == Two;
-        public bool IsManagementLevelThree() => this == Three;
-        public bool IsManagementLevelFour() => this == Four;
-        public bool IsManagementLevelFive() => this == Five;
+        public bool IsZero() => this == Zero;
+        public bool IsOne() => this == One;
+        public bool IsTwo() => this == Two;
+        public bool IsThree() => this == Three;
+        public bool IsFour() => this == Four;
+        public bool IsFive() => this == Five;
 
 
 

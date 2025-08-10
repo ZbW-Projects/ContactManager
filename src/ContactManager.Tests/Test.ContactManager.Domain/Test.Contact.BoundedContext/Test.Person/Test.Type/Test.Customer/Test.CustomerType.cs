@@ -86,11 +86,11 @@ namespace ContactManager.Tests.Test.ContactManager.Domain.Test.Contact.BoundedCo
         [TestMethod]
         public void HelperMethods_ShouldWork()
         {
-            Assert.IsTrue(CustomerType.A.IsCustomerTypeA());
-            Assert.IsTrue(CustomerType.B.IsCustomerTypeB());
-            Assert.IsTrue(CustomerType.C.IsCustomerTypeC());
-            Assert.IsTrue(CustomerType.D.IsCustomerTypeD());
-            Assert.IsTrue(CustomerType.E.IsCustomerTypeE());
+            Assert.IsTrue(CustomerType.A.IsA());
+            Assert.IsTrue(CustomerType.B.IsB());
+            Assert.IsTrue(CustomerType.C.IsC());
+            Assert.IsTrue(CustomerType.D.IsD());
+            Assert.IsTrue(CustomerType.E.IsE());
         }
     }
 }
