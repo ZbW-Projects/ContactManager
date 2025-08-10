@@ -1,84 +1,64 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
 
 namespace ContactManager.Domain.Common
 {
-    public abstract class Entity
+    public abstract class Entity<TId> where TId : notnull
     {
-        int? _requestedHashCode;
-        int _Id;
-        private List<INotification> _domainEvents;
-        public virtual int Id
-        {
-            get
-            {
-                return _Id;
-            }
-            protected set
-            {
-                _Id = value;
-            }
-        }
+        private readonly List<INotification> _domainEvents = new();
 
-        public List<INotification> DomainEvents => _domainEvents;
-        public void AddDomainEvent(INotification eventItem)
+        public TId Id { get; protected init; }
+
+        public bool IsTransient() => EqualityComparer<TId>.Default.Equals(Id, default!);
+
+        public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
+
+        protected void AddDomainEvent(INotification eventItem)
         {
-            _domainEvents = _domainEvents ?? new List<INotification>();
+            if (eventItem is null) return;
             _domainEvents.Add(eventItem);
         }
-        public void RemoveDomainEvent(INotification eventItem)
+
+        protected void RemoveDomainEvent(INotification eventItem)
         {
-            if (_domainEvents is null) return;
+            if (eventItem is null) return;
             _domainEvents.Remove(eventItem);
         }
 
-        public bool IsTransient()
-        {
-            return this.Id == default(Int32);
-        }
+        public void ClearDomainEvents() => _domainEvents.Clear();
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj == null || !(obj is Entity))
-                return false;
-            if (Object.ReferenceEquals(this, obj))
-                return true;
-            if (this.GetType() != obj.GetType())
-                return false;
-            Entity item = (Entity)obj;
-            if (item.IsTransient() || this.IsTransient())
-                return false;
-            else
-                return item.Id == this.Id;
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj is not Entity<TId> other) return false;
+
+            // Compare unproxied types to survive ORM proxies
+            if (GetUnproxiedType(this) != GetUnproxiedType(other)) return false;
+
+            if (IsTransient() || other.IsTransient()) return false;
+
+            return EqualityComparer<TId>.Default.Equals(Id, other.Id);
         }
 
         public override int GetHashCode()
         {
-            if (!IsTransient())
-            {
-                if (!_requestedHashCode.HasValue)
-                    _requestedHashCode = this.Id.GetHashCode() ^ 31;
-                // XOR for random distribution. See:
-                // https://learn.microsoft.com/archive/blogs/ericlippert/guidelines-and-rules-for-gethashcode
-                return _requestedHashCode.Value;
-            }
-            else
-                return base.GetHashCode();
+            return IsTransient()
+                ? base.GetHashCode()
+                : HashCode.Combine(GetUnproxiedType(this), Id);
         }
-        public static bool operator ==(Entity left, Entity right)
+
+        public static bool operator ==(Entity<TId>? left, Entity<TId>? right)
+            => Equals(left, right);
+
+        public static bool operator !=(Entity<TId>? left, Entity<TId>? right)
+            => !Equals(left, right);
+
+        private static Type GetUnproxiedType(object obj)
         {
-            if (Object.Equals(left, null))
-                return (Object.Equals(right, null));
-            else
-                return left.Equals(right);
-        }
-        public static bool operator !=(Entity left, Entity right)
-        {
-            return !(left == right);
+            var type = obj.GetType();
+            // If needed, strip proxies here (works for EF Core lazy proxies)
+            // e.g., return type.BaseType is { IsAbstract: false } && type.Name.EndsWith("Proxy") ? type.BaseType! : type;
+            return type;
         }
     }
 }

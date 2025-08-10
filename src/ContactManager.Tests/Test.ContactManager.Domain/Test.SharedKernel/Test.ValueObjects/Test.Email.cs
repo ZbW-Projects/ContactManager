@@ -37,5 +37,24 @@ namespace ContactManager.Tests.Test.ContactManager.Domain.Test.SharedKernel.Test
             // Assert
             Assert.AreEqual(email1, email2);
         }
+
+        [TestMethod]
+        public void Equals_SameEmailOneWithSpace_ShouldBeEqual()
+        {
+            // Act
+            var email1 = new Email("test@example.com ");
+            var email2 = new Email("test@example.com");
+
+            // Assert
+            Assert.AreEqual(email1, email2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_Null_ShouldThrowException()
+        {
+            // Act
+            var email = new Email(null);
+        }
     }
 }
