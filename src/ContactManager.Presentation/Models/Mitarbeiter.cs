@@ -1,6 +1,8 @@
 
-namespace ContactManager.Models {
-    public class Mitarbeiter : Person {
+namespace ContactManager.Models
+{
+    public class Mitarbeiter : Person
+    {
         public int MitarbeitendenNummer { get; set; }
         public string Abteilung { get; set; }
         public string AHVNummer { get; set; }

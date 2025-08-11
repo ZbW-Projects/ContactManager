@@ -4,9 +4,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using ContactManager.Models;
 
-namespace ContactManager.Utils {
-    public class PersonConverter : JsonConverter<Person> {
-        public override Person Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
+namespace ContactManager.Utils
+{
+    public class PersonConverter : JsonConverter<Person>
+    {
+        public override Person Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
             using var doc = JsonDocument.ParseValue(ref reader);
             var root = doc.RootElement;
             var isMitarbeiter = root.TryGetProperty("MitarbeitendenNummer", out _);
@@ -15,7 +18,8 @@ namespace ContactManager.Utils {
                 : JsonSerializer.Deserialize<Kunde>(root.GetRawText(), options);
         }
 
-        public override void Write(Utf8JsonWriter writer, Person value, JsonSerializerOptions options) {
+        public override void Write(Utf8JsonWriter writer, Person value, JsonSerializerOptions options)
+        {
             JsonSerializer.Serialize(writer, (object)value, value.GetType(), options);
         }
     }

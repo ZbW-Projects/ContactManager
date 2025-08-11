@@ -2,22 +2,30 @@
 using System;
 using System.Windows.Forms;
 using ContactManager.Models;
+using System.ComponentModel;
 
-namespace ContactManager.Presentation.Forms {
-    public partial class MitarbeiterEditForm : Form {
+namespace ContactManager.Presentation.Forms
+{
+    public partial class MitarbeiterEditForm : Form
+    {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Mitarbeiter NeuerMitarbeiter { get; private set; }
 
-        public MitarbeiterEditForm() {
+        public MitarbeiterEditForm()
+        {
             InitializeComponent();
         }
 
-        private void btnSpeichern_Click(object sender, EventArgs e) {
-            if (string.IsNullOrWhiteSpace(txtVorname.Text) || string.IsNullOrWhiteSpace(txtNachname.Text)) {
+        private void btnSpeichern_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtVorname.Text) || string.IsNullOrWhiteSpace(txtNachname.Text))
+            {
                 MessageBox.Show("Vorname und Nachname sind Pflichtfelder.");
                 return;
             }
 
-            NeuerMitarbeiter = new Mitarbeiter {
+            NeuerMitarbeiter = new Mitarbeiter
+            {
                 Vorname = txtVorname.Text,
                 Nachname = txtNachname.Text,
                 Eintrittsdatum = dtpEintritt.Value,

@@ -1,8 +1,10 @@
 
 using System.Collections.Generic;
 
-namespace ContactManager.Models {
-    public class Kunde : Person {
+namespace ContactManager.Models
+{
+    public class Kunde : Person
+    {
         public string Firmenname { get; set; }
         public string Geschaeftsadresse { get; set; }
         public string Kundentyp { get; set; }
