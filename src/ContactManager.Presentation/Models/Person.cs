@@ -1,6 +1,8 @@
 
-namespace ContactManager.Models {
-    public abstract class Person {
+namespace ContactManager.Models
+{
+    public abstract class Person
+    {
         public string Anrede { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }

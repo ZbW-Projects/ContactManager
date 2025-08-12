@@ -6,16 +6,20 @@ using System.Windows.Forms;
 using ContactManager.Models;
 using ContactManager.Utils;
 
-namespace ContactManager.Presentation.Forms {
-    public partial class SucheForm : Form {
+namespace ContactManager.Presentation.Forms
+{
+    public partial class SucheForm : Form
+    {
         private List<Person> alleDaten;
 
-        public SucheForm() {
+        public SucheForm()
+        {
             InitializeComponent();
             InitializeCustomComponents();
         }
 
-        private void InitializeCustomComponents() {
+        private void InitializeCustomComponents()
+        {
             this.Text = "Suche";
             this.Width = 800;
             this.Height = 400;
@@ -32,7 +36,8 @@ namespace ContactManager.Presentation.Forms {
 
             alleDaten = DataHandler.Load();
 
-            btn.Click += (s, e) => {
+            btn.Click += (s, e) =>
+            {
                 string suchbegriff = txt.Text.ToLower();
                 var result = alleDaten.Where(p =>
                     (p.Vorname != null && p.Vorname.ToLower().Contains(suchbegriff)) ||

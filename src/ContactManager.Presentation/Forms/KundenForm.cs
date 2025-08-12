@@ -5,7 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using ContactManager.Models;
 
-namespace ContactManager.Presentation.Forms {
+namespace ContactManager.Presentation.Forms
+{
     public partial class KundenForm : Form
     {
         private List<Kunde> kundenListe = new();
