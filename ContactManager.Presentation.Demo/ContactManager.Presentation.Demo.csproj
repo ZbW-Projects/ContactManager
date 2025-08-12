@@ -2,8 +2,8 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-	  <LangVersion>latest</LangVersion>
-	  <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <LangVersion>latest</LangVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{10E7F325-E621-4CC3-9BC1-FECB72E27CA7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -111,6 +111,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\ContactManager.Application.Contracts\ContactManager.Application.Contracts.csproj">
+      <Project>{7b3fe7e9-e78c-4cfa-bbbd-5139b7f94276}</Project>
+      <Name>ContactManager.Application.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
