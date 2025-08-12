@@ -19,7 +19,7 @@ Joël Rohner ( Unit Testing / Testing )</br>
 ### Clean Architecture
 ![Clean Architecture Diagram](docs/assets/Clean%20Architecture.png)
 
-### The Core Design (DDD) as a Diagram
+### The Core Design (DDD) als Diagram
 ![Domain Driven Design Diagram](docs/assets/Domain%20Driven%20Design.png)
 
 ### User Stories (ohne Login / Auth) für Use Cases
