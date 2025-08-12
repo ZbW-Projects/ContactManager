@@ -21,7 +21,7 @@ namespace ContactManager.Presentation.Demo.Services
         public InMemoryContacts()
         {
             _all.Add(new Contact { Id = "E-0001", FirstName = "Lena", LastName = "Meyer", Email = "lena@acme.ch", Role = ContactRole.Employee, Active = true, Phone = "+4179...", City = "Zürich", Zip = "8000" });
-            _all.Add(new Contact { Id = "T-0001", FirstName = "Joel", LastName = "Keller", Email = "joel@example.ch", Role = ContactRole.Trainee, Active = true });
+            _all.Add(new Contact { Id = "T-0001", FirstName = "Urs", LastName = "Keller", Email = "urs@example.ch", Role = ContactRole.Trainee, Active = true });
             _all.Add(new Contact { Id = "C-0001", FirstName = "Mark", LastName = "Hofstetter", Email = "mark@foo.ch", Role = ContactRole.Customer, Active = false, Company = "Foo AG" });
         }
 
