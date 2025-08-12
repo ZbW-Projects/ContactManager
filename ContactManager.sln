@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Presentation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Tests", "src\ContactManager.Tests\ContactManager.Tests.csproj", "{8F7DCB47-734C-4F86-83ED-BF2B5005E0A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Presentation.Demo", "ContactManager.Presentation.Demo\ContactManager.Presentation.Demo.csproj", "{10E7F325-E621-4CC3-9BC1-FECB72E27CA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Presentation.Demo", "src\ContactManager.Presentation.Demo\ContactManager.Presentation.Demo.csproj", "{10E7F325-E621-4CC3-9BC1-FECB72E27CA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Application.Contracts", "src\ContactManager.Application.Contracts\ContactManager.Application.Contracts.csproj", "{7B3FE7E9-E78C-4CFA-BBBD-5139B7F94276}"
 EndProject

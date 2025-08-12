@@ -113,7 +113,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\ContactManager.Application.Contracts\ContactManager.Application.Contracts.csproj">
+    <ProjectReference Include="..\ContactManager.Application.Contracts\ContactManager.Application.Contracts.csproj">
       <Project>{7b3fe7e9-e78c-4cfa-bbbd-5139b7f94276}</Project>
       <Name>ContactManager.Application.Contracts</Name>
     </ProjectReference>
