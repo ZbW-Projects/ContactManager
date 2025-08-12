@@ -1,5 +1,4 @@
 using ContactManager.Domain.SharedKernel.ValueObjects;
-using System.Text.RegularExpressions;
 
 // Input: string 756.9217.0769.85
 // Output: 756.9217.0769.85
@@ -8,26 +7,30 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 {
     public class AHVNumber : SingleValueObject<string>
     {
-        private static readonly Regex _ahvFormat = new(@"^756\.\d{4}\.\d{4}\.\d{2}$", RegexOptions.Compiled);
         private AHVNumber(string value) : base(Normalize(value)) { }
 
         private static string Normalize(string value)
         {
+            if (value is null)
+            {
+                throw new ArgumentNullException(nameof(value), "AHV number is required.");
+            }
+
             var cleaned = value.Replace(" ", "").Replace("-", "").Replace(".", "");
 
             if (cleaned.Length != 13 || !cleaned.StartsWith("756"))
             {
-                throw new ArgumentException("AHV number must start with 756 and be 13 digits long.");
+                throw new ArgumentException("AHV number must start with 756 and be 13 digits long.", nameof(value));
             }
 
             if (!ulong.TryParse(cleaned, out var _))
             {
-                throw new ArgumentException("AHV number must contain only digits.");
+                throw new ArgumentException("AHV number must contain only digits.", nameof(value));
             }
 
-            if (!IsValidChecksum(cleaned))
+            if (!HasValidEan13Checksum(cleaned))
             {
-                throw new ArgumentException("AHV checksum is invalid.");
+                throw new ArgumentException("AHV checksum is invalid.", nameof(value));
             }
 
             return Format(cleaned);
@@ -38,20 +41,18 @@ namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
             return $"{raw.Substring(0, 3)}.{raw.Substring(3, 4)}.{raw.Substring(7, 4)}.{raw.Substring(11, 2)}";
         }
 
-        private static bool IsValidChecksum(string number)
+        private static bool HasValidEan13Checksum(string ahvNumber)
         {
-            // Based on Modulo 11 (Swiss AHV)
-            int[] weights = { 5, 4, 3, 2, 7, 6, 5, 4, 3, 2, 1 };
             int sum = 0;
-
-            for (int i = 0; i < weights.Length; i++)
+            for (int i = 0; i < 12; i++)
             {
-                int digit = int.Parse(number[i].ToString());
-                sum += digit * weights[i];
+                int d = ahvNumber[i] - '0';
+                sum += (i % 2 == 0) ? d : (3 * d); // index 0 is leftmost digit
             }
-
-            return sum % 11 == 0;
+            int check = (10 - (sum % 10)) % 10;
+            return check == (ahvNumber[12] - '0');
         }
+
         public static AHVNumber Create(string value) => new(value);
     }
 
