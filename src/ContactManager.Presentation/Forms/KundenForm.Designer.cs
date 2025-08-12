@@ -63,7 +63,7 @@ namespace ContactManager.Presentation.Forms {
             // 
             // btnSuchen
             // 
-            btnSuchen.Location = new Point(218, 12);
+            btnSuchen.Location = new Point(326, 11);
             btnSuchen.Name = "btnSuchen";
             btnSuchen.Size = new Size(75, 23);
             btnSuchen.TabIndex = 4;
