@@ -1,3 +1,5 @@
+[![build-and-test](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml)
+
 # ContactManager
 Diese App wird von drei Entwicklern im Rahmen eines Semesterprojekts an der ZbW entwickelt.</br>
 Als Architektur wird Clean Code verwendet.</br>
