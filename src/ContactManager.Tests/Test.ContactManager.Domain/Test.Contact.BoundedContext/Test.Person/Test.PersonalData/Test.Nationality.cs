@@ -81,6 +81,7 @@ namespace ContactManager.Tests.Domain.ValueObjects
             var n1 = Nationality.Create("ch");
             var n2 = Nationality.Create("CH");
 
+
             // Falls SingleValueObject Equals implementiert:
             // Assert.AreEqual(n1, n2);
             // Sicher immer:
