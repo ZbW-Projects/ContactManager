@@ -9,10 +9,6 @@
     <EmbeddedResource Remove="Form1.resx" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ContactManager.Application.Contracts\ContactManager.Application.Contracts.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>

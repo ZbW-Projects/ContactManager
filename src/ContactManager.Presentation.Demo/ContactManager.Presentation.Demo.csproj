@@ -8,8 +8,4 @@
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<Prefer32Bit>false</Prefer32Bit>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\ContactManager.Application.Contracts\ContactManager.Application.Contracts.csproj" />
-	</ItemGroup>
 </Project>
