@@ -37,6 +37,7 @@ namespace ContactManager.Presentation.Forms
             Status = new DataGridViewTextBoxColumn();
             Mail = new DataGridViewTextBoxColumn();
             btnSearch1 = new Button();
+            btnloeschen = new Button();
             ((System.ComponentModel.ISupportInitialize)grdContacts).BeginInit();
             SuspendLayout();
             // 
@@ -44,7 +45,7 @@ namespace ContactManager.Presentation.Forms
             // 
             btnSearch.Location = new Point(309, 25);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(106, 24);
+            btnSearch.Size = new Size(76, 23);
             btnSearch.TabIndex = 0;
             btnSearch.Text = "Suche";
             btnSearch.UseVisualStyleBackColor = true;
@@ -62,9 +63,9 @@ namespace ContactManager.Presentation.Forms
             // 
             grdContacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             grdContacts.Columns.AddRange(new DataGridViewColumn[] { Vorname, Nachname, Typ, Status, Mail });
-            grdContacts.Location = new Point(58, 94);
+            grdContacts.Location = new Point(58, 71);
             grdContacts.Name = "grdContacts";
-            grdContacts.Size = new Size(543, 247);
+            grdContacts.Size = new Size(543, 312);
             grdContacts.TabIndex = 2;
             grdContacts.CellContentClick += grdContacts_CellContentClick;
             // 
@@ -95,7 +96,7 @@ namespace ContactManager.Presentation.Forms
             // 
             // btnSearch1
             // 
-            btnSearch1.Location = new Point(495, 24);
+            btnSearch1.Location = new Point(495, 26);
             btnSearch1.Name = "btnSearch1";
             btnSearch1.Size = new Size(106, 23);
             btnSearch1.TabIndex = 3;
@@ -103,11 +104,22 @@ namespace ContactManager.Presentation.Forms
             btnSearch1.UseVisualStyleBackColor = true;
             btnSearch1.Click += btnSearch1_Click;
             // 
+            // btnloeschen
+            // 
+            btnloeschen.Location = new Point(525, 403);
+            btnloeschen.Name = "btnloeschen";
+            btnloeschen.Size = new Size(76, 23);
+            btnloeschen.TabIndex = 5;
+            btnloeschen.Text = "Löschen";
+            btnloeschen.UseVisualStyleBackColor = true;
+            btnloeschen.Click += btnloeschen_Click;
+            // 
             // Contacts
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnloeschen);
             Controls.Add(btnSearch1);
             Controls.Add(grdContacts);
             Controls.Add(txtSearch);
@@ -130,5 +142,6 @@ namespace ContactManager.Presentation.Forms
         private DataGridViewTextBoxColumn Status;
         private DataGridViewTextBoxColumn Mail;
         private Button btnSearch1;
+        private Button btnloeschen;
     }
 }

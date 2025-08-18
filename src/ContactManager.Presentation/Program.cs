@@ -1,19 +1,22 @@
+using ContactManager.Application.Abstractions.UseCases;
+using ContactManager.Application.Fakes;
+using ContactManager.Presentation.Forms;
 using System;
-using System.Windows.Forms;
+using WinApp = System.Windows.Forms.Application;
 
-namespace ContactManager.Presentation
+namespace ContactManager.Presentation.Demo
 {
     internal static class Program
     {
-        /// <summary>
-        /// Der Haupteinstiegspunkt für die Anwendung.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.Contacts()); // Startet das Contacts-Formular
+            ApplicationConfiguration.Initialize();
+
+            IContactQueries queries = new FakeContactsService();
+            IContactCommands commands = (IContactCommands)queries;
+
+            WinApp.Run(new Contacts(queries, commands));
         }
     }
 }
