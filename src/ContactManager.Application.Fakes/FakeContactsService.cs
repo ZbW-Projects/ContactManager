@@ -235,7 +235,16 @@ namespace ContactManager.Application.Fakes
                         Gender="girl",
                         Nationality="US",
                         Email="lena1980meyer@privat.com",
-                        Phone="0764680246"
+                        Phone="0764680246",
+                        Address= new AddressDto
+                        {
+                            Street="anotherstreet",
+                            HouseNumber="2",
+                            ZipCode="7000",
+                            City="Las Vegas",
+                            State="Nevada",
+                            Country="U.S.A"
+                        }
                     }
                 },
             };

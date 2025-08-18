@@ -7,19 +7,24 @@ namespace ContactManager.Presentation.Demo
 {
     public class NewContactForm : Form
     {
-        // person (top-left)
-        ComboBox cbType; TextBox txtFirst, txtLast, txtEmail, txtPhone, txtStatus, txtRole, txtDept, txtEmpNo;
-        DateTimePicker dpEntry, dpLeave;
+        // Person (oben links)
+        ComboBox cbType;
+        TextBox txtFirst, txtLast, txtEmail, txtPhone, txtStatus, txtRole, txtDept, txtEmpNo;
+        DateTimePicker dpEntry, dpLeave;  // dpLeave optional (ShowCheckBox)
 
-        // company (top-right)
-        TextBox txtCompany, txtCompanyEmail, txtCompanyPhone, txtStreet, txtHouseNo, txtZip, txtCity, txtState, txtCountry;
+        // Firma (oben rechts)
+        TextBox txtCompany, txtCompanyEmail, txtCompanyPhone;
+        TextBox txtCStreet, txtCHouseNo, txtCZip, txtCCity, txtCState, txtCCountry;
 
-        // bottom – personal or protocol
+        // Unten: PersonalData ODER Customer-Protokoll
         Panel paneBottom;
-        // personal
+
+        // PersonalData (MA/Lernende)
         TextBox txtAhv, txtNationality, txtGender, txtPrivEmail, txtPrivPhone;
         DateTimePicker dpBirth;
-        // protocol
+        TextBox txtPStreet, txtPHouseNo, txtPZip, txtPCity, txtPState, txtPCountry;
+
+        // Protokoll (Kunden)
         TextBox txtOwner, txtNote;
 
         public NewContactForm()
@@ -32,7 +37,7 @@ namespace ContactManager.Presentation.Demo
 
             BuildUi();
             cbType.SelectedIndexChanged += (_, __) => SwitchBottom();
-            cbType.SelectedIndex = 0;  // Employee default
+            cbType.SelectedIndex = 0;   // Employee default
             SwitchBottom();
         }
 
@@ -44,10 +49,10 @@ namespace ContactManager.Presentation.Demo
             root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             Controls.Add(root);
 
-            var top = new SplitContainer { Dock = DockStyle.Fill, SplitterDistance = 500 };
+            var top = new SplitContainer { Dock = DockStyle.Fill, SplitterDistance = 520 };
             root.Controls.Add(top, 0, 0);
 
-            // --- Person (left)
+            // -------- Person (links)
             var left = TwoCol();
             cbType = AddCombo(left, "Type", "Employee", "Trainee", "Customer");
             txtStatus = AddText(left, "Status", "aktive");
@@ -59,27 +64,28 @@ namespace ContactManager.Presentation.Demo
             txtRole = AddText(left, "Role");
             txtDept = AddText(left, "Department");
             dpEntry = AddDate(left, "Entry Date", DateTime.Today);
-            dpLeave = AddDate(left, "Leave Date", DateTime.Today);
+            dpLeave = AddDate(left, "Leave Date (optional)", DateTime.Today, showCheckBox: true);
+            dpLeave.Checked = false; // -> optional
             top.Panel1.Controls.Add(left);
 
-            // --- Company (right)
+            // -------- Firma (rechts)
             var right = TwoCol();
             txtCompany = AddText(right, "Company");
             txtCompanyEmail = AddText(right, "Company Email");
             txtCompanyPhone = AddText(right, "Company Phone");
-            txtStreet = AddText(right, "Street");
-            txtHouseNo = AddText(right, "House No");
-            txtZip = AddText(right, "ZIP");
-            txtCity = AddText(right, "City");
-            txtState = AddText(right, "State");
-            txtCountry = AddText(right, "Country");
+            txtCStreet = AddText(right, "Street");
+            txtCHouseNo = AddText(right, "House No");
+            txtCZip = AddText(right, "ZIP");
+            txtCCity = AddText(right, "City");
+            txtCState = AddText(right, "State");
+            txtCCountry = AddText(right, "Country");
             top.Panel2.Controls.Add(right);
 
-            // --- Bottom panel where we swap content
+            // -------- Unten (wechselnd)
             paneBottom = new Panel { Dock = DockStyle.Fill };
             root.Controls.Add(paneBottom, 0, 1);
 
-            // Footer
+            // -------- Footer
             var footer = new FlowLayoutPanel { Dock = DockStyle.Fill, FlowDirection = FlowDirection.RightToLeft, AutoSize = true };
             var btnSave = new Button { Text = "Save", AutoSize = true };
             var btnCancel = new Button { Text = "Cancel", AutoSize = true };
@@ -97,32 +103,41 @@ namespace ContactManager.Presentation.Demo
             t.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             return t;
         }
+
         private ComboBox AddCombo(TableLayoutPanel tl, string label, params string[] items)
         {
             tl.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             var lbl = new Label { Text = label, AutoSize = true, Padding = new Padding(0, 6, 0, 0) };
-            var cb = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 220 };
+            var cb = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 240, Anchor = AnchorStyles.Left | AnchorStyles.Right };
             cb.Items.AddRange(items); cb.SelectedIndex = 0;
             tl.Controls.Add(lbl, 0, tl.RowCount);
             tl.Controls.Add(cb, 1, tl.RowCount);
             tl.RowCount++;
             return cb;
         }
+
         private TextBox AddText(TableLayoutPanel tl, string label, string defaultText = "")
         {
             tl.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             var lbl = new Label { Text = label, AutoSize = true, Padding = new Padding(0, 6, 0, 0) };
-            var tb = new TextBox { Width = 260, Text = defaultText };
+            var tb = new TextBox { Width = 280, Text = defaultText, Anchor = AnchorStyles.Left | AnchorStyles.Right };
             tl.Controls.Add(lbl, 0, tl.RowCount);
             tl.Controls.Add(tb, 1, tl.RowCount);
             tl.RowCount++;
             return tb;
         }
-        private DateTimePicker AddDate(TableLayoutPanel tl, string label, DateTime v)
+
+        private DateTimePicker AddDate(TableLayoutPanel tl, string label, DateTime v, bool showCheckBox = false)
         {
             tl.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             var lbl = new Label { Text = label, AutoSize = true, Padding = new Padding(0, 6, 0, 0) };
-            var dp = new DateTimePicker { Format = DateTimePickerFormat.Short, Value = v };
+            var dp = new DateTimePicker
+            {
+                Format = DateTimePickerFormat.Short,
+                Value = v,
+                ShowCheckBox = showCheckBox,
+                Anchor = AnchorStyles.Left
+            };
             tl.Controls.Add(lbl, 0, tl.RowCount);
             tl.Controls.Add(dp, 1, tl.RowCount);
             tl.RowCount++;
@@ -136,33 +151,55 @@ namespace ContactManager.Presentation.Demo
 
             if (string.Equals(type, "Customer", StringComparison.OrdinalIgnoreCase))
             {
-                var grid = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2 };
-                grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-                grid.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+                // Klarer Layout-Container, kein Überlappen -> Text sichtbar
+                var t = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 3, Padding = new Padding(6) };
+                t.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+                t.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+                t.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                t.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                t.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
-                txtOwner = new TextBox { PlaceholderText = "Owner (Author)", Dock = DockStyle.Top };
-                txtNote = new TextBox { Multiline = true, Dock = DockStyle.Fill, PlaceholderText = "First protocol note (optional)" };
+                t.Controls.Add(new Label { Text = "Owner (Author)", AutoSize = true }, 0, 0);
+                txtOwner = new TextBox { Width = 300, Anchor = AnchorStyles.Left | AnchorStyles.Right };
+                t.Controls.Add(txtOwner, 1, 0);
 
-                var left = new Panel { Dock = DockStyle.Fill };
-                left.Controls.Add(new Label { Text = "Initial Protocol (optional):", Dock = DockStyle.Top, AutoSize = true });
-                left.Controls.Add(txtOwner);
-                left.Controls.Add(txtNote);
+                t.Controls.Add(new Label { Text = "Protocol Note", AutoSize = true }, 0, 1);
+                txtNote = new TextBox
+                {
+                    Multiline = true,
+                    AcceptsReturn = true,
+                    ScrollBars = ScrollBars.Vertical,
+                    Dock = DockStyle.Fill,
+                    PlaceholderText = "Write the first protocol note…"
+                };
+                t.Controls.Add(txtNote, 1, 2);
 
-                var right = new Panel { Dock = DockStyle.Fill }; // reserved
-
-                grid.Controls.Add(left, 0, 0);
-                grid.Controls.Add(right, 1, 0);
-                paneBottom.Controls.Add(grid);
+                paneBottom.Controls.Add(t);
             }
             else
             {
+                // PersonalData inkl. Adresse
                 var t = TwoCol();
                 txtAhv = AddText(t, "AHV");
                 txtNationality = AddText(t, "Nationality");
                 txtGender = AddText(t, "Gender");
                 dpBirth = AddDate(t, "Birth Date", DateTime.Today);
+
                 txtPrivEmail = AddText(t, "Private Email");
                 txtPrivPhone = AddText(t, "Private Phone");
+
+                t.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                t.Controls.Add(new Label { Text = "Personal Address", Font = new Font(Font, FontStyle.Bold), AutoSize = true, Padding = new Padding(0, 12, 0, 0) }, 0, t.RowCount);
+                t.Controls.Add(new Label { Text = "", AutoSize = true }, 1, t.RowCount);
+                t.RowCount++;
+
+                txtPStreet = AddText(t, "Street");
+                txtPHouseNo = AddText(t, "House No");
+                txtPZip = AddText(t, "ZIP");
+                txtPCity = AddText(t, "City");
+                txtPState = AddText(t, "State");
+                txtPCountry = AddText(t, "Country");
+
                 paneBottom.Controls.Add(t);
             }
         }
@@ -181,7 +218,7 @@ namespace ContactManager.Presentation.Demo
                 Role = txtRole.Text,
                 Department = txtDept.Text,
                 EntryDate = dpEntry.Value.Date,
-                LeaveDate = dpLeave.Value.Date,
+                LeaveDate = dpLeave.ShowCheckBox && dpLeave.Checked ? dpLeave.Value.Date : (DateTime?)null,
                 Company = string.IsNullOrWhiteSpace(txtCompany.Text) ? null : new CompanyDto
                 {
                     Name = txtCompany.Text,
@@ -189,12 +226,12 @@ namespace ContactManager.Presentation.Demo
                     PhoneNumber = txtCompanyPhone.Text,
                     Address = new AddressDto
                     {
-                        Street = txtStreet.Text,
-                        HouseNumber = txtHouseNo.Text,
-                        ZipCode = txtZip.Text,
-                        City = txtCity.Text,
-                        State = txtState.Text,
-                        Country = txtCountry.Text
+                        Street = txtCStreet.Text,
+                        HouseNumber = txtCHouseNo.Text,
+                        ZipCode = txtCZip.Text,
+                        City = txtCCity.Text,
+                        State = txtCState.Text,
+                        Country = txtCCountry.Text
                     }
                 }
             };
@@ -208,13 +245,24 @@ namespace ContactManager.Presentation.Demo
                     Gender = txtGender?.Text,
                     Nationality = txtNationality?.Text,
                     Email = txtPrivEmail?.Text,
-                    Phone = txtPrivPhone?.Text
+                    Phone = txtPrivPhone?.Text,
+                    Address = new AddressDto
+                    {
+                        Street = txtPStreet?.Text,
+                        HouseNumber = txtPHouseNo?.Text,
+                        ZipCode = txtPZip?.Text,
+                        City = txtPCity?.Text,
+                        State = txtPState?.Text,
+                        Country = txtPCountry?.Text
+                    }
                 };
             }
             else if (!string.IsNullOrWhiteSpace(txtNote?.Text))
             {
                 dto.Protocol = new System.Collections.Generic.List<ProtocolDto> {
-                    new ProtocolDto { Author = string.IsNullOrWhiteSpace(txtOwner?.Text) ? "System" : txtOwner.Text.Trim(), Date = DateTime.UtcNow, Message = txtNote.Text }
+                    new ProtocolDto { Author = string.IsNullOrWhiteSpace(txtOwner?.Text) ? "System" : txtOwner.Text.Trim(),
+                                      Date = DateTime.UtcNow,
+                                      Message = txtNote.Text }
                 };
             }
 
