@@ -4,96 +4,93 @@ namespace ContactManager.Application.Abstractions.Dtos
 {
     public class ContactListItemDto
     {
-        public string? EmployeeNnumber { get; set; } // Optional
+        public int Id { get; set; }
+        public string? EmployeeNumber { get; set; }
         public string Type { get; set; }  // Employee | Trainee | Customer
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Status { get; set; } // aktive | off | left  
-        public string CompanyEmail { get; set; }
+        public string Email { get; set; }
         public string CompanyName { get; set; }
     }
 
-    public class ConatactFilterDto
+    public class ContactFilterDto
     {
         public string Search { get; set; } // name | company | email | EmployeeNumber
         public string Type { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } // aktive | off | left 
     }
 
-    public class ProtocolEntryDto
+    public class ProtocolDto
     {
         public DateTime Date { get; set; }
         public string Author { get; set; }
         public string Message { get; set; }
     }
 
+    public class AddressDto
+    {
+        public string Street { get; set; }
+        public string HouseNumber { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Country { get; set; }
+    }
+
+    public class CompanyDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public AddressDto Address { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+    }
+
+    public class PersonalDataDto
+    {
+        public string? AHVNumber { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string? Gender { get; set; }
+        public string? Nationality { get; set; }
+        public AddressDto? Address { get; set; }
+        public string? Email { get; set; }
+        public string? Phone { get; set; }
+    }
+
     public class ContactDetailsDto
     {
-        public string? EployeeNumber { get; set; }
+        public int Id { get; set; }
+        public string? EmployeeNumber { get; set; }
         public string Type { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } // aktive | off | left
         public string? Title { get; set; }
         public string? Salutation { get; set; }
-        public string FristName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string CompanyEmail { get; set; }
-        public string CompanyPhone { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime? LeaveDate { get; set; }
         public string? CustomerType { get; set; }
         public string? TrainingYear { get; set; }
         public string? ManagementLevel { get; set; }
-        public string CompanyName { get; set; }
-        public string CompanyAddress { get; set; }
         public string? DegreeOfEmployment { get; set; }
         public string? Department { get; set; }
         public string Role { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+
+        // Company Data
+        public CompanyDto Company { get; set; }
+
+        // Protocol Data
+        public List<ProtocolDto>? Protocol { get; set; }
 
         // PersonalData
-        public string? AHVNumber { get; set; }
-        public DateTime? BirthDate { get; set; }
-        public string? Gender { get; set; }
-        public string? Nationality { get; set; }
-        public string? Address { get; set; }
-        public string? Email { get; set; }
-        public string? Phone { get; set; }
+        public PersonalDataDto? PersonalData { get; set; }
 
     }
 
-    public class EmployeeCreateDto
-    {
 
-    }
-
-    public class TraineeCreateDto
-    {
-
-    }
-
-    public class CustomerCreateDto
-    {
-
-    }
-
-    public class ContactsUpdateEmployee
-    {
-
-    }
-
-    public class ContactsUpdateTrainee
-    {
-
-    }
-
-    public class ContactsUpdateCustomer
-    {
-
-    }
-
-    public class AddNoteDto
-    {
-
-    }
 
     public class ResultDto
     {

@@ -7,6 +7,7 @@ namespace ContactManager.Domain.SharedKernel.ValueObjects
 {
 
     using ContactManager.Domain.Common;
+    using System;
 
     public class ID : SingleValueObject<int>
     {

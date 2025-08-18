@@ -9,15 +9,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\UseCases\" />
-    <Folder Include="Common\" />
     <Folder Include="Services\" />
+	<Folder Include="Abstractions\" />
   </ItemGroup>
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net9.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
 </Project>

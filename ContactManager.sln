@@ -18,6 +18,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Presentation.Demo", "src\ContactManager.Presentation.Demo\ContactManager.Presentation.Demo.csproj", "{10E7F325-E621-4CC3-9BC1-FECB72E27CA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactManager.Application.Fakes", "src\ContactManager.Application.Fakes\ContactManager.Application.Fakes.csproj", "{4A227934-8EB3-4C68-8E48-672A2778667F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2F823923-B231-43E3-AC95-6988CFA2205F} = {2F823923-B231-43E3-AC95-6988CFA2205F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

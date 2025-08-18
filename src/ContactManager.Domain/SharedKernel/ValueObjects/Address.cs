@@ -1,4 +1,6 @@
 using ContactManager.Domain.Common;
+using System;
+using System.Collections.Generic;
 
 
 // Input: Beispielstrasse, 4, 8543, Dietikon, Zürich, Schweiz

@@ -1,4 +1,5 @@
 using ContactManager.Domain.SharedKernel.ValueObjects;
+using System;
 
 namespace ContactManager.Domain.Contact.BoundedContext.Person.PersonalData
 {

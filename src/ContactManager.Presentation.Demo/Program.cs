@@ -1,9 +1,7 @@
 using System;
-using System.Windows.Forms;
-using WinFormsApp = System.Windows.Forms.Application;
-
-using ContactManager.Presentation.Demo.Forms;
-using ContactManager.Presentation.Demo.Services;
+using WinApp = System.Windows.Forms.Application;
+using ContactManager.Application.Abstractions.UseCases;
+using ContactManager.Application.Fakes;
 
 namespace ContactManager.Presentation.Demo
 {
@@ -12,12 +10,12 @@ namespace ContactManager.Presentation.Demo
         [STAThread]
         static void Main()
         {
-            WinFormsApp.EnableVisualStyles();
-            WinFormsApp.SetCompatibleTextRenderingDefault(false);
-            WinFormsApp.SetHighDpiMode(HighDpiMode.SystemAware);
+            ApplicationConfiguration.Initialize();
 
-            var service = new InMemoryContacts(); // later: swap with real service
-            WinFormsApp.Run(new MainForm(service));
+            IContactQueries queries = new FakeContactsService();
+            IContactCommands commands = (IContactCommands)queries;
+
+            WinApp.Run(new MainForm(queries, commands));
         }
     }
 }

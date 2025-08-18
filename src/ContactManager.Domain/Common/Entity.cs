@@ -1,4 +1,6 @@
 using MediatR;
+using System;
+using System.Collections.Generic;
 
 namespace ContactManager.Domain.Common
 {

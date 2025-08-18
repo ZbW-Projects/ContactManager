@@ -1,4 +1,5 @@
 using ContactManager.Domain.Common;
+using System.Collections.Generic;
 
 namespace ContactManager.Domain.Contact.BoundedContext.Person
 {
