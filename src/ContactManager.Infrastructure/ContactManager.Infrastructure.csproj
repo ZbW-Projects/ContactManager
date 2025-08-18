@@ -9,6 +9,10 @@
     <ProjectReference Include="..\ContactManager.Domain\ContactManager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Test.Contact.BoundedContext\Test.ProtocolData\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

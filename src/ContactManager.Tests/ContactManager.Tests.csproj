@@ -22,9 +22,4 @@
     <ProjectReference Include="..\ContactManager.Application\ContactManager.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Test.ContactManager.Domain\Test.Contact.BoundedContext\Test.ProtocolData\" />
-    <Folder Include="Test.ContactManager.Domain\Test.Contact.BoundedContext\Test.Company\" />
-  </ItemGroup>
-
 </Project>
