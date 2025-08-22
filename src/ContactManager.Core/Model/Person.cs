@@ -8,6 +8,9 @@ namespace ContactManager.Core.Model
 {
     public abstract class Person
     {
+        #region Eigenschaften
+
+
         private Guid _id;
         private string _salutation;
         private string _firstName;
@@ -26,6 +29,10 @@ namespace ContactManager.Core.Model
         private string _streetNumber;
         private string _zipCode;
         private string _place;
+
+
+        #endregion
+
 
         public Guid Id { get => _id; private set => Guid.NewGuid(); }
         public string Salutation { get => _salutation; set => _salutation = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
