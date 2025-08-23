@@ -17,7 +17,7 @@ namespace ContactManager.Core.Model
 
         public int TraineeYears { get => _traineeYears; set => _traineeYears = value is >= 1 and <= 4 ? throw new ArgumentException("Der Wert ist ungültig.", nameof(value)) : value; }
         public int ActualTraineeYear => _actualTraineeYear;
-        public int SetActualTraineeYear(DateTime startDate, DateTime endDate = default) => DatesDiff.Year(startDate, endDate);
+        public void SetActualTraineeYear(DateTime startDate, DateTime endDate = default) => _actualTraineeYear = DatesDiff.Year(startDate, endDate);
     }
 
     /*===================================================================
