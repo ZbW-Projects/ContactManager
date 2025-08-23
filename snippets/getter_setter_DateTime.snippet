@@ -18,7 +18,7 @@
       </Literal>
     </Declarations>
     <Code Language="csharp"><![CDATA[
-    public DateTime ChangeMe { get => $_changeMe$; set => $_changeMe$ =  value == default ? throw new ArgumentException("Das Datum muss einen Wert enthalten.", nameof(value)) : value; }
+    public DateTime $name$ { get => $field$; set => $field$ =  value == default ? throw new ArgumentException("Das Datum muss einen Wert enthalten.", nameof(value)) : value; }
 $end$]]>
     </Code>
   </Snippet>
