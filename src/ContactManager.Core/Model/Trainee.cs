@@ -16,9 +16,19 @@ namespace ContactManager.Core.Model
         #endregion
 
         public int TraineeYears { get => _traineeYears; set => _traineeYears = value is >= 1 and <= 4 ? throw new ArgumentException("Der Wert ist ungültig.", nameof(value)) : value; }
+
+        /*
+         * Beobachtung:
+         * Man könnte "ActualTraineeYear" als Getter komplett weglassen,
+         * die Methode "SetActualTraineeYear" in "ActualTraineeYear" unbenennen und
+         * den Wert auf int setzen
+         */
         public int ActualTraineeYear => _actualTraineeYear;
         public void SetActualTraineeYear(DateTime startDate, DateTime endDate = default) => _actualTraineeYear = DatesDiff.Year(startDate, endDate);
     }
+
+
+
 
     /*===================================================================
      * 
