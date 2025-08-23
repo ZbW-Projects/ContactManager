@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactManager.Core.Model
 {
-    public class Employee : Person
+    public abstract class Employee : Person
     {
         #region Eigenschaften
 
@@ -26,7 +26,7 @@ namespace ContactManager.Core.Model
         public DateTime EndDate { get => _endDate; set => _endDate = value == default ? throw new ArgumentException("Das Datum muss einen Wert enthalten.", nameof(value)) : value; }
         public int Employment { get => _empolyment; set => _empolyment = value % 20 == 0 && value > 100 ? throw new ArgumentException("Der Beschäftigungsgrad ist nicht richtig", nameof(value)) : value; }
         public string Role { get => _role; set => _role = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
-        public int CadreLevel { get => _cadreLevel; set => _cadreLevel = value is > 0 and < 5 ? throw new ArgumentException("Der CadreLevel ist nicht richtig", nameof(value)) : value; }
+        public int CadreLevel { get => _cadreLevel; set => _cadreLevel = value is >= 0 and <= 5 ? throw new ArgumentException("Der CadreLevel ist nicht richtig", nameof(value)) : value; }
 
     }
 
