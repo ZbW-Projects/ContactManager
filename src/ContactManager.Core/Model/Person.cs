@@ -10,8 +10,6 @@ namespace ContactManager.Core.Model
     {
         #region Eigenschaften
 
-
-        private Guid _id;
         private string _salutation;
         private string _firstName;
         private string _lastName;
@@ -34,7 +32,7 @@ namespace ContactManager.Core.Model
         #endregion
 
 
-        public Guid Id { get => _id; private set => Guid.NewGuid(); }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Salutation { get => _salutation; set => _salutation = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
         public string FristName { get => _firstName; set => _firstName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
         public string LastName { get => _lastName; set => _lastName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
