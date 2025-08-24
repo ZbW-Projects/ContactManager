@@ -12,7 +12,8 @@ namespace ContactManager.Core.Data
     {
 
 
-        private static string _storagePath = @"\storage\contacts.json";
+        private static string _storageDir = Path.Combine(AppContext.BaseDirectory, "Data", "Storage");
+        private static string _storagePath = Path.Combine(_storageDir, "contacts.json");
 
         /*================================
          * Hauptdatenträger von Kontakten
@@ -23,12 +24,8 @@ namespace ContactManager.Core.Data
         /*================================
          * Accesor auf Kontakte
          ===============================*/
-        public static Dictionary<Guid, Person> Contacts
-        {
-            get => _contacts;
-            private set => _contacts = FetchData();
-        }
-
+        public static Dictionary<Guid, Person> Contacts => _contacts;
+        public static Dictionary<Guid, Person> SetContacts() => _contacts = FetchData();
 
         /*===============================
          * Manipulatoren
@@ -83,8 +80,13 @@ namespace ContactManager.Core.Data
 
         private static Dictionary<Guid, Person> FetchData()
         {
+            // Sicherstellen das Ordner Sotorage existiert
+            Directory.CreateDirectory(_storageDir);
+            if (!File.Exists(_storagePath)) return new Dictionary<Guid, Person>(); // Existiert contacts.json
+
             // Von lokalen Datenträger JSON auslesen und in einer Variable speichern
             string data = File.ReadAllText(_storagePath);
+            if (string.IsNullOrWhiteSpace(data)) return new Dictionary<Guid, Person>();
 
             // JSON in gespeicherte Variable zu eiem Dictionary umwandeln und ausgeben
             return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data);

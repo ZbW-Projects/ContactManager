@@ -27,6 +27,7 @@ namespace ContactManager.Core.Model
         private string _streetNumber;
         private string _zipCode;
         private string _place;
+        private string _type;
 
 
         #endregion
@@ -34,7 +35,7 @@ namespace ContactManager.Core.Model
 
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Salutation { get => _salutation; set => _salutation = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
-        public string FristName { get => _firstName; set => _firstName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
+        public string FirstName { get => _firstName; set => _firstName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
         public string LastName { get => _lastName; set => _lastName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
         public DateTime DateOfBirth { get => _dateOfBirth; set => _dateOfBirth = value == default || value > DateTime.Now ? throw new ArgumentException("Das Datum muss in der Vergangenheit liegen.", nameof(value)) : value; }
         public string Gender { get => _gender; set => _gender = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
@@ -50,6 +51,7 @@ namespace ContactManager.Core.Model
         public string StreetNumber { get => _streetNumber; set => _streetNumber = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
         public string ZipCode { get => _zipCode; set => _zipCode = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
         public string Place { get => _place; set => _place = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
+        public string Type { get => _type; set => _type = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
 
     }
 }
