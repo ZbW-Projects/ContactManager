@@ -18,7 +18,7 @@ namespace ContactManager.Core.Services
         private static readonly Dictionary<Guid, Person> _contacts;
         static Controller()
         {
-            // Setze lokale Daten zum Spin ein 
+            // Setze lokale Daten zum "Spin" ein 
             LocalStorage.SetContacts();
             // Binde Daten zu Controller
             _contacts = LocalStorage.Contacts;
@@ -26,7 +26,7 @@ namespace ContactManager.Core.Services
 
         /*====================================================
          * 
-         * Basiert auf dem CRUD-Design mit Fokus auf den 
+         *
          * Use Cases der Anwendung
          * 
          * Data Transfer Objects (DTOs), sowie die 

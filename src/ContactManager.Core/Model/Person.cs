@@ -3,9 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ContactManager.Core.Model
 {
+
+    #region JSON-Deserialisierung "Meta"-Daten
+
+    /*================================================
+     * 
+     * Deserialisierung bei Polymorphismus
+     * 
+     * Die Objekte werden in einer zentralen Datenstruktur gespeichert,
+     * in diesem Fall ein Dictionary vom Typ Person.
+     * Bei der Serialisierung der Objekte vom Typ "Person" 
+     * werden "Meta"-Daten (Achtung, kein offizieller Begriff!) erstellt.
+     * Diese "Meta"-Daten sind Attribute im JSON, die nach der Klasse bennant sind.
+     * 
+     * Das ist wichtig, da bei der Deserialisierung erkennbar sein muss, 
+     * welche Klasse für welchen "Type" eingesetzt werden soll.
+     * 
+     * Zum Beispiel:
+     * Bei der Umwandlung von JSON zu einem Objekt (Deserialisierung)
+     * wird das Attribut "$type" mit dem Wert "customer" gelesen. 
+     * Für die Objekt-Erstellung wird entsprechend die Klasse "Customer"
+     * verwendet.
+     * 
+     *===============================================*/
+
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+    [JsonDerivedType(typeof(Customer), "customer")]
+    [JsonDerivedType(typeof(Employee), "employee")]
+    [JsonDerivedType(typeof(Trainee), "trainee")]
+
+
+    #endregion
     public abstract class Person
     {
         #region Eigenschaften
@@ -31,7 +63,6 @@ namespace ContactManager.Core.Model
 
 
         #endregion
-
 
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Salutation { get => _salutation; set => _salutation = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }

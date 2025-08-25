@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactManager.Core.Model
 {
-    public abstract class Employee : Person
+    public class Employee : Person
     {
         #region Eigenschaften
 

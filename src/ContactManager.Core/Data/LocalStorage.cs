@@ -14,27 +14,40 @@ namespace ContactManager.Core.Data
 
         private static string _storageDir = Path.Combine(AppContext.BaseDirectory, "Data", "Storage");
         private static string _storagePath = Path.Combine(_storageDir, "contacts.json");
+        private static readonly JsonSerializerOptions _serializeOptions = new()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = true
+        };
 
         /*================================
          * Hauptdatenträger von Kontakten
          ==================================*/
         private static Dictionary<Guid, Person> _contacts;
 
+        /*===============================================================
+         *
+         * Basiert auf dem CRUD-Design
+         * 
+         ===============================================================*/
 
         /*================================
-         * Accesor auf Kontakte
+         * Accesor auf Kontakte "READ"
          ===============================*/
         public static Dictionary<Guid, Person> Contacts => _contacts;
         public static Dictionary<Guid, Person> SetContacts() => _contacts = FetchData();
 
         /*===============================
-         * Manipulatoren
+         * "Manipulatoren" CREATE, UPDATE, DELETE 
          * 
          * 1. Der Hauptdatenträger wird manipuliert
          * 2. Eine neue JSON entsteht 
          * 3. Daten werden Local gespeichert
+         * 4. Optional: Ereignisse am Controller weiterleiten
          * 
          * ==============================*/
+
+        // CREATE
         public static void StoreContact(Guid Id, Person contact)
         {
             // 1. Schirtt
@@ -45,6 +58,7 @@ namespace ContactManager.Core.Data
             SaveLocally(payload);
         }
 
+        // UPDATE
         public static void UpdateContact(Guid Id, Person contact)
         {
             //1.Schritt
@@ -55,6 +69,7 @@ namespace ContactManager.Core.Data
             SaveLocally(payload);
         }
 
+        // DELETE
         public static void DeleteContact(Guid Id, Person contact)
         {
             //1.Schritt
@@ -65,12 +80,17 @@ namespace ContactManager.Core.Data
             SaveLocally(payload);
         }
 
-        // Helper-Methoden, um Daten im JSON-Format umzuwandeln und lokal speichern
 
+        /*========================================================================
+         * 
+         * Helper-Methoden, um Daten im JSON-Format umzuwandeln und lokal speichern
+         * 
+         * ==========================================================================*/
         private static string ConvertToJSON(Dictionary<Guid, Person> contacts)
         {
             return JsonSerializer.Serialize(contacts);
         }
+
 
         private static void SaveLocally(string payload)
         {
@@ -89,7 +109,7 @@ namespace ContactManager.Core.Data
             if (string.IsNullOrWhiteSpace(data)) return new Dictionary<Guid, Person>();
 
             // JSON in gespeicherte Variable zu eiem Dictionary umwandeln und ausgeben
-            return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data);
+            return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data, _serializeOptions);
         }
     }
 }
