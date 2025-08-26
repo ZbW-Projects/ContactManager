@@ -156,5 +156,10 @@ namespace ContactManager.View.Forms
         {
 
         }
+
+        private void label33_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
