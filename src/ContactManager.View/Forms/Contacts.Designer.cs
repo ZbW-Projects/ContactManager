@@ -31,21 +31,22 @@ namespace ContactManager.View.Forms
             btnSearch = new Button();
             txtSearch = new TextBox();
             grdContacts = new DataGridView();
+            btnSearch1 = new Button();
+            btnloeschen = new Button();
             Vorname = new DataGridViewTextBoxColumn();
             Nachname = new DataGridViewTextBoxColumn();
             Typ = new DataGridViewTextBoxColumn();
             Status = new DataGridViewTextBoxColumn();
-            Mail = new DataGridViewTextBoxColumn();
-            btnSearch1 = new Button();
-            btnloeschen = new Button();
+            Tel = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)grdContacts).BeginInit();
             SuspendLayout();
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(309, 25);
+            btnSearch.Location = new Point(441, 42);
+            btnSearch.Margin = new Padding(4, 5, 4, 5);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(76, 23);
+            btnSearch.Size = new Size(109, 38);
             btnSearch.TabIndex = 0;
             btnSearch.Text = "Suche";
             btnSearch.UseVisualStyleBackColor = true;
@@ -53,52 +54,31 @@ namespace ContactManager.View.Forms
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(58, 25);
+            txtSearch.Location = new Point(83, 42);
+            txtSearch.Margin = new Padding(4, 5, 4, 5);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(235, 23);
+            txtSearch.Size = new Size(334, 31);
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged_1;
             // 
             // grdContacts
             // 
             grdContacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grdContacts.Columns.AddRange(new DataGridViewColumn[] { Vorname, Nachname, Typ, Status, Mail });
-            grdContacts.Location = new Point(58, 71);
+            grdContacts.Columns.AddRange(new DataGridViewColumn[] { Vorname, Nachname, Typ, Status, Tel });
+            grdContacts.Location = new Point(83, 118);
+            grdContacts.Margin = new Padding(4, 5, 4, 5);
             grdContacts.Name = "grdContacts";
-            grdContacts.Size = new Size(543, 312);
+            grdContacts.RowHeadersWidth = 62;
+            grdContacts.Size = new Size(814, 520);
             grdContacts.TabIndex = 2;
             grdContacts.CellContentClick += grdContacts_CellContentClick;
             // 
-            // Vorname
-            // 
-            Vorname.HeaderText = "Vorname";
-            Vorname.Name = "Vorname";
-            // 
-            // Nachname
-            // 
-            Nachname.HeaderText = "Nachname";
-            Nachname.Name = "Nachname";
-            // 
-            // Typ
-            // 
-            Typ.HeaderText = "Typ";
-            Typ.Name = "Typ";
-            // 
-            // Status
-            // 
-            Status.HeaderText = "Status";
-            Status.Name = "Status";
-            // 
-            // Mail
-            // 
-            Mail.HeaderText = "Mail";
-            Mail.Name = "Mail";
-            // 
             // btnSearch1
             // 
-            btnSearch1.Location = new Point(495, 26);
+            btnSearch1.Location = new Point(707, 43);
+            btnSearch1.Margin = new Padding(4, 5, 4, 5);
             btnSearch1.Name = "btnSearch1";
-            btnSearch1.Size = new Size(106, 23);
+            btnSearch1.Size = new Size(151, 38);
             btnSearch1.TabIndex = 3;
             btnSearch1.Text = "Neuer Kontakt";
             btnSearch1.UseVisualStyleBackColor = true;
@@ -106,24 +86,66 @@ namespace ContactManager.View.Forms
             // 
             // btnloeschen
             // 
-            btnloeschen.Location = new Point(525, 403);
+            btnloeschen.Location = new Point(750, 672);
+            btnloeschen.Margin = new Padding(4, 5, 4, 5);
             btnloeschen.Name = "btnloeschen";
-            btnloeschen.Size = new Size(76, 23);
+            btnloeschen.Size = new Size(109, 38);
             btnloeschen.TabIndex = 5;
             btnloeschen.Text = "Löschen";
             btnloeschen.UseVisualStyleBackColor = true;
             btnloeschen.Click += btnloeschen_Click;
             // 
+            // Vorname
+            // 
+            Vorname.HeaderText = "Vorname";
+            Vorname.MinimumWidth = 8;
+            Vorname.Name = "Vorname";
+            Vorname.ReadOnly = true;
+            Vorname.Width = 150;
+            // 
+            // Nachname
+            // 
+            Nachname.HeaderText = "Nachname";
+            Nachname.MinimumWidth = 8;
+            Nachname.Name = "Nachname";
+            Nachname.ReadOnly = true;
+            Nachname.Width = 150;
+            // 
+            // Typ
+            // 
+            Typ.HeaderText = "Typ";
+            Typ.MinimumWidth = 8;
+            Typ.Name = "Typ";
+            Typ.ReadOnly = true;
+            Typ.Width = 150;
+            // 
+            // Status
+            // 
+            Status.HeaderText = "Status";
+            Status.MinimumWidth = 8;
+            Status.Name = "Status";
+            Status.ReadOnly = true;
+            Status.Width = 150;
+            // 
+            // Tel
+            // 
+            Tel.HeaderText = "Tel";
+            Tel.MinimumWidth = 8;
+            Tel.Name = "Tel";
+            Tel.ReadOnly = true;
+            Tel.Width = 150;
+            // 
             // Contacts
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1143, 750);
             Controls.Add(btnloeschen);
             Controls.Add(btnSearch1);
             Controls.Add(grdContacts);
             Controls.Add(txtSearch);
             Controls.Add(btnSearch);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Contacts";
             Text = "Contacts";
             ((System.ComponentModel.ISupportInitialize)grdContacts).EndInit();
@@ -136,12 +158,12 @@ namespace ContactManager.View.Forms
         private Button btnSearch;
         private TextBox txtSearch;
         private DataGridView grdContacts;
+        private Button btnSearch1;
+        private Button btnloeschen;
         private DataGridViewTextBoxColumn Vorname;
         private DataGridViewTextBoxColumn Nachname;
         private DataGridViewTextBoxColumn Typ;
         private DataGridViewTextBoxColumn Status;
-        private DataGridViewTextBoxColumn Mail;
-        private Button btnSearch1;
-        private Button btnloeschen;
+        private DataGridViewTextBoxColumn Tel;
     }
 }

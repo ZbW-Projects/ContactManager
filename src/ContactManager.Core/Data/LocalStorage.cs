@@ -88,7 +88,7 @@ namespace ContactManager.Core.Data
          * ==========================================================================*/
         private static string ConvertToJSON(Dictionary<Guid, Person> contacts)
         {
-            return JsonSerializer.Serialize(contacts);
+            return JsonSerializer.Serialize(contacts, _serializeOptions);
         }
 
 
