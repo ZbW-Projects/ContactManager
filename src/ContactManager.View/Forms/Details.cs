@@ -37,10 +37,7 @@ namespace ContactManager.View.Forms
 
         }
 
-        private void CmbAnrede_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+    
 
         private void comboBox9_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -62,10 +59,7 @@ namespace ContactManager.View.Forms
 
         }
 
-        private void CmbTitel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void TxtVorname_TextChanged(object sender, EventArgs e)
         {
@@ -107,15 +101,9 @@ namespace ContactManager.View.Forms
 
         }
 
-        private void LblAnrede(object sender, EventArgs e)
-        {
+      
 
-        }
-
-        private void LblTitel(object sender, EventArgs e)
-        {
-
-        }
+    
 
         private void LblNachname(object sender, EventArgs e)
         {
@@ -152,12 +140,49 @@ namespace ContactManager.View.Forms
 
         }
 
+ /*********************************************
+ * ============================================
+ *  Titel: Persönliche Angaben
+ *  *******************************************
+ *  *******************************************
+ * ============================================
+ *********************************************/
+
         private void LblTitelPersoendlicheAngaben(object sender, EventArgs e)
         {
 
         }
 
+        private void LblAnrede(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CmbAnrede_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LblTitel(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTitel(object sender, EventArgs e)
+        {
+
+        }
         private void label33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbLehrjahre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -28,7 +28,7 @@ namespace ContactManager.View.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            lblPersoenlicheangaben = new Label();
             lblAnrede = new Label();
             lblTitel = new Label();
             lblVorname = new Label();
@@ -39,71 +39,71 @@ namespace ContactManager.View.Forms
             lblPostleitzahl = new Label();
             lblWohnort = new Label();
             label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
-            label15 = new Label();
-            label16 = new Label();
+            lblTelefongeschaeft = new Label();
+            lblTelefonprivat = new Label();
+            lblMobiltelefonnummer = new Label();
+            lblEmailadresse = new Label();
             cmbAnrede = new ComboBox();
             txtNachname = new TextBox();
             txtWohnort = new TextBox();
-            cmbTitel = new ComboBox();
+          
             txtAdresse = new TextBox();
             txtPostleitzahl = new TextBox();
             txtGeburtsdatum = new TextBox();
             textVorname = new TextBox();
-            textBox8 = new TextBox();
-            textBox9 = new TextBox();
-            textBox10 = new TextBox();
-            textBox11 = new TextBox();
-            label6 = new Label();
-            label17 = new Label();
-            label18 = new Label();
-            label19 = new Label();
-            label20 = new Label();
-            label21 = new Label();
-            label22 = new Label();
-            label23 = new Label();
-            label24 = new Label();
-            button1 = new Button();
-            textBox12 = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            comboBox5 = new ComboBox();
-            comboBox6 = new ComboBox();
-            comboBox7 = new ComboBox();
-            richTextBox1 = new RichTextBox();
-            label25 = new Label();
-            label27 = new Label();
-            comboBox8 = new ComboBox();
-            label28 = new Label();
-            comboBox9 = new ComboBox();
-            label29 = new Label();
-            label30 = new Label();
-            label31 = new Label();
-            comboBox10 = new ComboBox();
-            comboBox11 = new ComboBox();
-            textBox13 = new TextBox();
-            textBox14 = new TextBox();
-            textBox15 = new TextBox();
-            comboBox3 = new ComboBox();
-            label26 = new Label();
+            txtMobiltelefonnummer = new TextBox();
+            txtGeschaeft = new TextBox();
+            txtTelefonprivat = new TextBox();
+            txtEmail = new TextBox();
+            lblBeschaeftigungsdaten = new Label();
+            lblFirmenname = new Label();
+            lblGeschaeftsadresse = new Label();
+            lblEintritt = new Label();
+            lblAustritt = new Label();
+            lblFirmenkontakt = new Label();
+            lblRolle = new Label();
+            lblKaderstufe = new Label();
+            lblLehrjahre = new Label();
+            btnSpeichern = new Button();
+            txtFirmenkontakt = new TextBox();
+            dtpAustritt = new DateTimePicker();
+            dtpEintritt = new DateTimePicker();
+            cmbAbteilung = new ComboBox();
+            cmbLehrjahre = new ComboBox();
+            cmbRolle = new ComboBox();
+            txtPersoenlichenotiz = new RichTextBox();
+            lblPersoenlichenotiz = new Label();
+            lblAktuelleslehrjahr = new Label();
+            cmdAktlehrjahr = new ComboBox();
+            lblTyp = new Label();
+            cmbTyp = new ComboBox();
+            lblAbteilung = new Label();
+            lblAhvnummer = new Label();
+            lblBeschaeftigungsgrad = new Label();
+            cmbBeschaeftigungsgrad = new ComboBox();
+            cmbKaderstufe = new ComboBox();
+            txtAhvnummer = new TextBox();
+            txtGeschaeftsadresse = new TextBox();
+            txtFirmenname = new TextBox();
+            cmbStatus = new ComboBox();
+            lblStatus = new Label();
             cmbNationalität = new ComboBox();
             txtGeschlecht = new Label();
-            cmdGeschlecht = new ComboBox();
-            label33 = new Label();
-            label34 = new Label();
+            cmbGeschlecht = new ComboBox();
+            lblFirmaKunde = new Label();
+            lblAdministratives = new Label();
             SuspendLayout();
             // 
-            // label1
+            // lblPersoenlicheangaben
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label1.Location = new Point(21, 24);
-            label1.Name = "label1";
-            label1.Size = new Size(123, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Persönliche Angaben";
-            label1.Click += LblTitelPersoendlicheAngaben;
+            lblPersoenlicheangaben.AutoSize = true;
+            lblPersoenlicheangaben.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblPersoenlicheangaben.Location = new Point(21, 24);
+            lblPersoenlicheangaben.Name = "lblPersoenlicheangaben";
+            lblPersoenlicheangaben.Size = new Size(123, 15);
+            lblPersoenlicheangaben.TabIndex = 0;
+            lblPersoenlicheangaben.Text = "Persönliche Angaben";
+            lblPersoenlicheangaben.Click += LblTitelPersoendlicheAngaben;
             // 
             // lblAnrede
             // 
@@ -208,46 +208,46 @@ namespace ContactManager.View.Forms
             label12.TabIndex = 11;
             label12.Text = "Kontaktinformationen";
             // 
-            // label13
+            // lblTelefongeschaeft
             // 
-            label13.AutoSize = true;
-            label13.Location = new Point(546, 85);
-            label13.Name = "label13";
-            label13.Size = new Size(95, 15);
-            label13.TabIndex = 12;
-            label13.Text = "Telefon Geschäft";
+            lblTelefongeschaeft.AutoSize = true;
+            lblTelefongeschaeft.Location = new Point(546, 85);
+            lblTelefongeschaeft.Name = "lblTelefongeschaeft";
+            lblTelefongeschaeft.Size = new Size(95, 15);
+            lblTelefongeschaeft.TabIndex = 12;
+            lblTelefongeschaeft.Text = "Telefon Geschäft";
             // 
-            // label14
+            // lblTelefonprivat
             // 
-            label14.AutoSize = true;
-            label14.Location = new Point(546, 56);
-            label14.Name = "label14";
-            label14.Size = new Size(79, 15);
-            label14.TabIndex = 13;
-            label14.Text = "Telefon Privat";
+            lblTelefonprivat.AutoSize = true;
+            lblTelefonprivat.Location = new Point(546, 56);
+            lblTelefonprivat.Name = "lblTelefonprivat";
+            lblTelefonprivat.Size = new Size(79, 15);
+            lblTelefonprivat.TabIndex = 13;
+            lblTelefonprivat.Text = "Telefon Privat";
             // 
-            // label15
+            // lblMobiltelefonnummer
             // 
-            label15.AutoSize = true;
-            label15.Location = new Point(546, 114);
-            label15.Name = "label15";
-            label15.Size = new Size(121, 15);
-            label15.TabIndex = 14;
-            label15.Text = "Mobiltelefonnummer";
+            lblMobiltelefonnummer.AutoSize = true;
+            lblMobiltelefonnummer.Location = new Point(546, 114);
+            lblMobiltelefonnummer.Name = "lblMobiltelefonnummer";
+            lblMobiltelefonnummer.Size = new Size(121, 15);
+            lblMobiltelefonnummer.TabIndex = 14;
+            lblMobiltelefonnummer.Text = "Mobiltelefonnummer";
             // 
-            // label16
+            // lblEmailadresse
             // 
-            label16.AutoSize = true;
-            label16.Location = new Point(546, 143);
-            label16.Name = "label16";
-            label16.Size = new Size(85, 15);
-            label16.TabIndex = 15;
-            label16.Text = "E-Mail Adresse";
+            lblEmailadresse.AutoSize = true;
+            lblEmailadresse.Location = new Point(546, 143);
+            lblEmailadresse.Name = "lblEmailadresse";
+            lblEmailadresse.Size = new Size(85, 15);
+            lblEmailadresse.TabIndex = 15;
+            lblEmailadresse.Text = "E-Mail Adresse";
             // 
             // cmbAnrede
             // 
             cmbAnrede.FormattingEnabled = true;
-            cmbAnrede.Items.AddRange(new object[] { "Frau ", "Herr", "Divers", "Keine Angabe" });
+            cmbAnrede.Items.AddRange(new object[] { "Divers", "Frau ", "Herr", "Keine Angabe" });
             cmbAnrede.Location = new Point(115, 59);
             cmbAnrede.Name = "cmbAnrede";
             cmbAnrede.Size = new Size(121, 23);
@@ -272,13 +272,7 @@ namespace ContactManager.View.Forms
             // 
             // cmbTitel
             // 
-            cmbTitel.FormattingEnabled = true;
-            cmbTitel.Items.AddRange(new object[] { "Dr.", "Prof." });
-            cmbTitel.Location = new Point(113, 83);
-            cmbTitel.Name = "cmbTitel";
-            cmbTitel.Size = new Size(121, 23);
-            cmbTitel.TabIndex = 20;
-            cmbTitel.SelectedIndexChanged += CmbTitel_SelectedIndexChanged;
+       
             // 
             // txtAdresse
             // 
@@ -312,316 +306,316 @@ namespace ContactManager.View.Forms
             textVorname.TabIndex = 24;
             textVorname.TextChanged += TxtVorname_TextChanged;
             // 
-            // textBox8
-            // 
-            textBox8.Location = new Point(673, 111);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(121, 23);
-            textBox8.TabIndex = 25;
-            // 
-            // textBox9
-            // 
-            textBox9.Location = new Point(673, 82);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(121, 23);
-            textBox9.TabIndex = 26;
-            // 
-            // textBox10
-            // 
-            textBox10.Location = new Point(673, 53);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(121, 23);
-            textBox10.TabIndex = 27;
-            // 
-            // textBox11
-            // 
-            textBox11.Location = new Point(673, 140);
-            textBox11.Name = "textBox11";
-            textBox11.Size = new Size(121, 23);
-            textBox11.TabIndex = 28;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label6.Location = new Point(268, 24);
-            label6.Name = "label6";
-            label6.Size = new Size(124, 15);
-            label6.TabIndex = 30;
-            label6.Text = "Beschäftigungsdaten";
-            label6.Click += label6_Click;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(21, 376);
-            label17.Name = "label17";
-            label17.Size = new Size(74, 15);
-            label17.TabIndex = 31;
-            label17.Text = "Firmenname";
-            label17.Click += label17_Click;
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Location = new Point(22, 434);
-            label18.Name = "label18";
-            label18.Size = new Size(97, 15);
-            label18.TabIndex = 32;
-            label18.Text = "Geschäftsadresse";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Location = new Point(268, 398);
-            label19.Name = "label19";
-            label19.Size = new Size(42, 15);
-            label19.TabIndex = 33;
-            label19.Text = "Eintritt";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Location = new Point(268, 433);
-            label20.Name = "label20";
-            label20.Size = new Size(46, 15);
-            label20.TabIndex = 34;
-            label20.Text = "Austritt";
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new Point(22, 402);
-            label21.Name = "label21";
-            label21.Size = new Size(84, 15);
-            label21.TabIndex = 35;
-            label21.Text = "Firmenkontakt";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new Point(268, 86);
-            label22.Name = "label22";
-            label22.Size = new Size(33, 15);
-            label22.TabIndex = 36;
-            label22.Text = "Rolle";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(268, 174);
-            label23.Name = "label23";
-            label23.Size = new Size(63, 15);
-            label23.TabIndex = 37;
-            label23.Text = "Kaderstufe";
-            // 
-            // label24
-            // 
-            label24.AutoSize = true;
-            label24.Location = new Point(268, 203);
-            label24.Name = "label24";
-            label24.Size = new Size(56, 15);
-            label24.TabIndex = 38;
-            label24.Text = "Lehrjahre";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(718, 451);
-            button1.Name = "button1";
-            button1.Size = new Size(77, 30);
-            button1.TabIndex = 39;
-            button1.Text = "Speichern";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox12
-            // 
-            textBox12.Location = new Point(121, 402);
-            textBox12.Name = "textBox12";
-            textBox12.Size = new Size(121, 23);
-            textBox12.TabIndex = 41;
-            // 
-            // dateTimePicker1
-            // 
-            dateTimePicker1.Location = new Point(320, 427);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(199, 23);
-            dateTimePicker1.TabIndex = 43;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(320, 392);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(199, 23);
-            dateTimePicker2.TabIndex = 44;
-            // 
-            // comboBox5
-            // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Items.AddRange(new object[] { "IT", "Finanzen", "HR", "Verkauf", "Produktion", "Verwaltung" });
-            comboBox5.Location = new Point(395, 112);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(121, 23);
-            comboBox5.TabIndex = 46;
-            // 
-            // comboBox6
-            // 
-            comboBox6.FormattingEnabled = true;
-            comboBox6.Items.AddRange(new object[] { "1. Lehrjahre", "2. Lehrjahre", "3. Lehrjahre ", "4. Lehrjahre ", "" });
-            comboBox6.Location = new Point(395, 200);
-            comboBox6.Name = "comboBox6";
-            comboBox6.Size = new Size(121, 23);
-            comboBox6.TabIndex = 47;
-            // 
-            // comboBox7
-            // 
-            comboBox7.FormattingEnabled = true;
-            comboBox7.Items.AddRange(new object[] { "System Engineer", "Entwickler", "Projektleiter", "Kaufmännische/r Angestellte/r", "Support" });
-            comboBox7.Location = new Point(395, 83);
-            comboBox7.Name = "comboBox7";
-            comboBox7.Size = new Size(121, 23);
-            comboBox7.TabIndex = 48;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(546, 249);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(230, 84);
-            richTextBox1.TabIndex = 49;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
-            // label25
-            // 
-            label25.AutoSize = true;
-            label25.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label25.Location = new Point(546, 200);
-            label25.Name = "label25";
-            label25.Size = new Size(104, 15);
-            label25.TabIndex = 50;
-            label25.Text = "Persönliche Notiz";
-            // 
-            // label27
-            // 
-            label27.AutoSize = true;
-            label27.Location = new Point(268, 232);
-            label27.Name = "label27";
-            label27.Size = new Size(101, 15);
-            label27.TabIndex = 54;
-            label27.Text = "Aktuelles Lehrjahr";
-            label27.Click += label27_Click;
-            // 
-            // comboBox8
-            // 
-            comboBox8.FormattingEnabled = true;
-            comboBox8.Items.AddRange(new object[] { "1. Lehrjahr", "2. Lehrjahr", "3. Lehrjahr ", "4. Lehrjahr " });
-            comboBox8.Location = new Point(395, 229);
-            comboBox8.Name = "comboBox8";
-            comboBox8.Size = new Size(121, 23);
-            comboBox8.TabIndex = 55;
-            // 
-            // label28
-            // 
-            label28.AutoSize = true;
-            label28.Location = new Point(268, 62);
-            label28.Name = "label28";
-            label28.Size = new Size(26, 15);
-            label28.TabIndex = 56;
-            label28.Text = "Typ";
-            // 
-            // comboBox9
-            // 
-            comboBox9.FormattingEnabled = true;
-            comboBox9.Items.AddRange(new object[] { "Mitarbeiter", "Lernender", "", "", "", "", "Extern" });
-            comboBox9.Location = new Point(395, 54);
-            comboBox9.Name = "comboBox9";
-            comboBox9.Size = new Size(121, 23);
-            comboBox9.TabIndex = 57;
-            comboBox9.SelectedIndexChanged += comboBox9_SelectedIndexChanged;
-            // 
-            // label29
-            // 
-            label29.AutoSize = true;
-            label29.Location = new Point(268, 115);
-            label29.Name = "label29";
-            label29.Size = new Size(59, 15);
-            label29.TabIndex = 58;
-            label29.Text = "Abteilung";
-            // 
-            // label30
-            // 
-            label30.AutoSize = true;
-            label30.Location = new Point(268, 332);
-            label30.Name = "label30";
-            label30.Size = new Size(84, 15);
-            label30.TabIndex = 59;
-            label30.Text = "AHV-Nummer";
-            // 
-            // label31
-            // 
-            label31.AutoSize = true;
-            label31.Location = new Point(268, 144);
-            label31.Name = "label31";
-            label31.Size = new Size(112, 15);
-            label31.TabIndex = 60;
-            label31.Text = "Beschäftigungsgrad";
-            // 
-            // comboBox10
-            // 
-            comboBox10.FormattingEnabled = true;
-            comboBox10.Items.AddRange(new object[] { "100 %", "80 %", "60 %", "40 %", "20%" });
-            comboBox10.Location = new Point(395, 141);
-            comboBox10.Name = "comboBox10";
-            comboBox10.Size = new Size(121, 23);
-            comboBox10.TabIndex = 61;
-            // 
-            // comboBox11
-            // 
-            comboBox11.FormattingEnabled = true;
-            comboBox11.Items.AddRange(new object[] { "0 = keine Kaderfunktion", "1 = Teamleiter", "2 = Abteilungsleiter", "3 = Bereichsleiter", "4 = Geschäftsleitung ", "5 = Direktion" });
-            comboBox11.Location = new Point(395, 171);
-            comboBox11.Name = "comboBox11";
-            comboBox11.Size = new Size(121, 23);
-            comboBox11.TabIndex = 62;
-            // 
-            // textBox13
-            // 
-            textBox13.Location = new Point(377, 329);
-            textBox13.Name = "textBox13";
-            textBox13.Size = new Size(121, 23);
-            textBox13.TabIndex = 63;
-            textBox13.TextChanged += textBox13_TextChanged;
-            // 
-            // textBox14
-            // 
-            textBox14.Location = new Point(121, 431);
-            textBox14.Name = "textBox14";
-            textBox14.Size = new Size(121, 23);
-            textBox14.TabIndex = 64;
-            // 
-            // textBox15
-            // 
-            textBox15.Location = new Point(121, 373);
-            textBox15.Name = "textBox15";
-            textBox15.Size = new Size(121, 23);
-            textBox15.TabIndex = 65;
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Items.AddRange(new object[] { "Aktiv", "Passiv" });
-            comboBox3.Location = new Point(377, 358);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 23);
-            comboBox3.TabIndex = 66;
-            // 
-            // label26
-            // 
-            label26.AutoSize = true;
-            label26.Location = new Point(268, 361);
-            label26.Name = "label26";
-            label26.Size = new Size(39, 15);
-            label26.TabIndex = 67;
-            label26.Text = "Status";
+            // txtMobiltelefonnummer
+            // 
+            txtMobiltelefonnummer.Location = new Point(673, 111);
+            txtMobiltelefonnummer.Name = "txtMobiltelefonnummer";
+            txtMobiltelefonnummer.Size = new Size(121, 23);
+            txtMobiltelefonnummer.TabIndex = 25;
+            // 
+            // txtGeschaeft
+            // 
+            txtGeschaeft.Location = new Point(673, 82);
+            txtGeschaeft.Name = "txtGeschaeft";
+            txtGeschaeft.Size = new Size(121, 23);
+            txtGeschaeft.TabIndex = 26;
+            // 
+            // txtTelefonprivat
+            // 
+            txtTelefonprivat.Location = new Point(673, 53);
+            txtTelefonprivat.Name = "txtTelefonprivat";
+            txtTelefonprivat.Size = new Size(121, 23);
+            txtTelefonprivat.TabIndex = 27;
+            // 
+            // txtEmail
+            // 
+            txtEmail.Location = new Point(673, 140);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(121, 23);
+            txtEmail.TabIndex = 28;
+            // 
+            // lblBeschaeftigungsdaten
+            // 
+            lblBeschaeftigungsdaten.AutoSize = true;
+            lblBeschaeftigungsdaten.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblBeschaeftigungsdaten.Location = new Point(268, 24);
+            lblBeschaeftigungsdaten.Name = "lblBeschaeftigungsdaten";
+            lblBeschaeftigungsdaten.Size = new Size(124, 15);
+            lblBeschaeftigungsdaten.TabIndex = 30;
+            lblBeschaeftigungsdaten.Text = "Beschäftigungsdaten";
+            lblBeschaeftigungsdaten.Click += label6_Click;
+            // 
+            // lblFirmenname
+            // 
+            lblFirmenname.AutoSize = true;
+            lblFirmenname.Location = new Point(21, 376);
+            lblFirmenname.Name = "lblFirmenname";
+            lblFirmenname.Size = new Size(74, 15);
+            lblFirmenname.TabIndex = 31;
+            lblFirmenname.Text = "Firmenname";
+            lblFirmenname.Click += label17_Click;
+            // 
+            // lblGeschaeftsadresse
+            // 
+            lblGeschaeftsadresse.AutoSize = true;
+            lblGeschaeftsadresse.Location = new Point(22, 434);
+            lblGeschaeftsadresse.Name = "lblGeschaeftsadresse";
+            lblGeschaeftsadresse.Size = new Size(97, 15);
+            lblGeschaeftsadresse.TabIndex = 32;
+            lblGeschaeftsadresse.Text = "Geschäftsadresse";
+            // 
+            // lblEintritt
+            // 
+            lblEintritt.AutoSize = true;
+            lblEintritt.Location = new Point(268, 398);
+            lblEintritt.Name = "lblEintritt";
+            lblEintritt.Size = new Size(42, 15);
+            lblEintritt.TabIndex = 33;
+            lblEintritt.Text = "Eintritt";
+            // 
+            // lblAustritt
+            // 
+            lblAustritt.AutoSize = true;
+            lblAustritt.Location = new Point(268, 433);
+            lblAustritt.Name = "lblAustritt";
+            lblAustritt.Size = new Size(46, 15);
+            lblAustritt.TabIndex = 34;
+            lblAustritt.Text = "Austritt";
+            // 
+            // lblFirmenkontakt
+            // 
+            lblFirmenkontakt.AutoSize = true;
+            lblFirmenkontakt.Location = new Point(22, 402);
+            lblFirmenkontakt.Name = "lblFirmenkontakt";
+            lblFirmenkontakt.Size = new Size(84, 15);
+            lblFirmenkontakt.TabIndex = 35;
+            lblFirmenkontakt.Text = "Firmenkontakt";
+            // 
+            // lblRolle
+            // 
+            lblRolle.AutoSize = true;
+            lblRolle.Location = new Point(268, 86);
+            lblRolle.Name = "lblRolle";
+            lblRolle.Size = new Size(33, 15);
+            lblRolle.TabIndex = 36;
+            lblRolle.Text = "Rolle";
+            // 
+            // lblKaderstufe
+            // 
+            lblKaderstufe.AutoSize = true;
+            lblKaderstufe.Location = new Point(268, 174);
+            lblKaderstufe.Name = "lblKaderstufe";
+            lblKaderstufe.Size = new Size(63, 15);
+            lblKaderstufe.TabIndex = 37;
+            lblKaderstufe.Text = "Kaderstufe";
+            // 
+            // lblLehrjahre
+            // 
+            lblLehrjahre.AutoSize = true;
+            lblLehrjahre.Location = new Point(268, 203);
+            lblLehrjahre.Name = "lblLehrjahre";
+            lblLehrjahre.Size = new Size(56, 15);
+            lblLehrjahre.TabIndex = 38;
+            lblLehrjahre.Text = "Lehrjahre";
+            // 
+            // btnSpeichern
+            // 
+            btnSpeichern.Location = new Point(718, 451);
+            btnSpeichern.Name = "btnSpeichern";
+            btnSpeichern.Size = new Size(77, 30);
+            btnSpeichern.TabIndex = 39;
+            btnSpeichern.Text = "Speichern";
+            btnSpeichern.UseVisualStyleBackColor = true;
+            // 
+            // txtFirmenkontakt
+            // 
+            txtFirmenkontakt.Location = new Point(121, 402);
+            txtFirmenkontakt.Name = "txtFirmenkontakt";
+            txtFirmenkontakt.Size = new Size(121, 23);
+            txtFirmenkontakt.TabIndex = 41;
+            // 
+            // dtpAustritt
+            // 
+            dtpAustritt.Location = new Point(320, 427);
+            dtpAustritt.Name = "dtpAustritt";
+            dtpAustritt.Size = new Size(199, 23);
+            dtpAustritt.TabIndex = 43;
+            // 
+            // dtpEintritt
+            // 
+            dtpEintritt.Location = new Point(320, 392);
+            dtpEintritt.Name = "dtpEintritt";
+            dtpEintritt.Size = new Size(199, 23);
+            dtpEintritt.TabIndex = 44;
+            // 
+            // cmbAbteilung
+            // 
+            cmbAbteilung.FormattingEnabled = true;
+            cmbAbteilung.Items.AddRange(new object[] { "IT", "Finanzen", "HR", "Verkauf", "Produktion", "Verwaltung" });
+            cmbAbteilung.Location = new Point(395, 112);
+            cmbAbteilung.Name = "cmbAbteilung";
+            cmbAbteilung.Size = new Size(121, 23);
+            cmbAbteilung.TabIndex = 46;
+            // 
+            // cmbLehrjahre
+            // 
+            cmbLehrjahre.FormattingEnabled = true;
+            cmbLehrjahre.Items.AddRange(new object[] { "1. Lehrjahre", "2. Lehrjahre", "3. Lehrjahre ", "4. Lehrjahre ", "" });
+            cmbLehrjahre.Location = new Point(395, 200);
+            cmbLehrjahre.Name = "cmbLehrjahre";
+            cmbLehrjahre.Size = new Size(121, 23);
+            cmbLehrjahre.TabIndex = 47;
+            // 
+            // cmbRolle
+            // 
+            cmbRolle.FormattingEnabled = true;
+            cmbRolle.Items.AddRange(new object[] { "System Engineer", "Entwickler", "Projektleiter", "Kaufmännische/r Angestellte/r", "Support" });
+            cmbRolle.Location = new Point(395, 83);
+            cmbRolle.Name = "cmbRolle";
+            cmbRolle.Size = new Size(121, 23);
+            cmbRolle.TabIndex = 48;
+            // 
+            // txtPersoenlichenotiz
+            // 
+            txtPersoenlichenotiz.Location = new Point(546, 249);
+            txtPersoenlichenotiz.Name = "txtPersoenlichenotiz";
+            txtPersoenlichenotiz.Size = new Size(230, 84);
+            txtPersoenlichenotiz.TabIndex = 49;
+            txtPersoenlichenotiz.Text = "";
+            txtPersoenlichenotiz.TextChanged += richTextBox1_TextChanged;
+            // 
+            // lblPersoenlichenotiz
+            // 
+            lblPersoenlichenotiz.AutoSize = true;
+            lblPersoenlichenotiz.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblPersoenlichenotiz.Location = new Point(546, 200);
+            lblPersoenlichenotiz.Name = "lblPersoenlichenotiz";
+            lblPersoenlichenotiz.Size = new Size(104, 15);
+            lblPersoenlichenotiz.TabIndex = 50;
+            lblPersoenlichenotiz.Text = "Persönliche Notiz";
+            // 
+            // lblAktuelleslehrjahr
+            // 
+            lblAktuelleslehrjahr.AutoSize = true;
+            lblAktuelleslehrjahr.Location = new Point(268, 232);
+            lblAktuelleslehrjahr.Name = "lblAktuelleslehrjahr";
+            lblAktuelleslehrjahr.Size = new Size(101, 15);
+            lblAktuelleslehrjahr.TabIndex = 54;
+            lblAktuelleslehrjahr.Text = "Aktuelles Lehrjahr";
+            lblAktuelleslehrjahr.Click += label27_Click;
+            // 
+            // cmdAktlehrjahr
+            // 
+            cmdAktlehrjahr.FormattingEnabled = true;
+            cmdAktlehrjahr.Items.AddRange(new object[] { "1. Lehrjahr", "2. Lehrjahr", "3. Lehrjahr ", "4. Lehrjahr " });
+            cmdAktlehrjahr.Location = new Point(395, 229);
+            cmdAktlehrjahr.Name = "cmdAktlehrjahr";
+            cmdAktlehrjahr.Size = new Size(121, 23);
+            cmdAktlehrjahr.TabIndex = 55;
+            // 
+            // lblTyp
+            // 
+            lblTyp.AutoSize = true;
+            lblTyp.Location = new Point(268, 62);
+            lblTyp.Name = "lblTyp";
+            lblTyp.Size = new Size(26, 15);
+            lblTyp.TabIndex = 56;
+            lblTyp.Text = "Typ";
+            // 
+            // cmbTyp
+            // 
+            cmbTyp.FormattingEnabled = true;
+            cmbTyp.Items.AddRange(new object[] { "Mitarbeiter", "Lernender", "", "", "", "", "Extern" });
+            cmbTyp.Location = new Point(395, 54);
+            cmbTyp.Name = "cmbTyp";
+            cmbTyp.Size = new Size(121, 23);
+            cmbTyp.TabIndex = 57;
+            cmbTyp.SelectedIndexChanged += comboBox9_SelectedIndexChanged;
+            // 
+            // lblAbteilung
+            // 
+            lblAbteilung.AutoSize = true;
+            lblAbteilung.Location = new Point(268, 115);
+            lblAbteilung.Name = "lblAbteilung";
+            lblAbteilung.Size = new Size(59, 15);
+            lblAbteilung.TabIndex = 58;
+            lblAbteilung.Text = "Abteilung";
+            // 
+            // lblAhvnummer
+            // 
+            lblAhvnummer.AutoSize = true;
+            lblAhvnummer.Location = new Point(268, 332);
+            lblAhvnummer.Name = "lblAhvnummer";
+            lblAhvnummer.Size = new Size(84, 15);
+            lblAhvnummer.TabIndex = 59;
+            lblAhvnummer.Text = "AHV-Nummer";
+            // 
+            // lblBeschaeftigungsgrad
+            // 
+            lblBeschaeftigungsgrad.AutoSize = true;
+            lblBeschaeftigungsgrad.Location = new Point(268, 144);
+            lblBeschaeftigungsgrad.Name = "lblBeschaeftigungsgrad";
+            lblBeschaeftigungsgrad.Size = new Size(112, 15);
+            lblBeschaeftigungsgrad.TabIndex = 60;
+            lblBeschaeftigungsgrad.Text = "Beschäftigungsgrad";
+            // 
+            // cmbBeschaeftigungsgrad
+            // 
+            cmbBeschaeftigungsgrad.FormattingEnabled = true;
+            cmbBeschaeftigungsgrad.Items.AddRange(new object[] { "100 %", "80 %", "60 %", "40 %", "20%" });
+            cmbBeschaeftigungsgrad.Location = new Point(395, 141);
+            cmbBeschaeftigungsgrad.Name = "cmbBeschaeftigungsgrad";
+            cmbBeschaeftigungsgrad.Size = new Size(121, 23);
+            cmbBeschaeftigungsgrad.TabIndex = 61;
+            // 
+            // cmbKaderstufe
+            // 
+            cmbKaderstufe.FormattingEnabled = true;
+            cmbKaderstufe.Items.AddRange(new object[] { "0 = keine Kaderfunktion", "1 = Teamleiter", "2 = Abteilungsleiter", "3 = Bereichsleiter", "4 = Geschäftsleitung ", "5 = Direktion" });
+            cmbKaderstufe.Location = new Point(395, 171);
+            cmbKaderstufe.Name = "cmbKaderstufe";
+            cmbKaderstufe.Size = new Size(121, 23);
+            cmbKaderstufe.TabIndex = 62;
+            // 
+            // txtAhvnummer
+            // 
+            txtAhvnummer.Location = new Point(377, 329);
+            txtAhvnummer.Name = "txtAhvnummer";
+            txtAhvnummer.Size = new Size(121, 23);
+            txtAhvnummer.TabIndex = 63;
+            txtAhvnummer.TextChanged += textBox13_TextChanged;
+            // 
+            // txtGeschaeftsadresse
+            // 
+            txtGeschaeftsadresse.Location = new Point(121, 431);
+            txtGeschaeftsadresse.Name = "txtGeschaeftsadresse";
+            txtGeschaeftsadresse.Size = new Size(121, 23);
+            txtGeschaeftsadresse.TabIndex = 64;
+            // 
+            // txtFirmenname
+            // 
+            txtFirmenname.Location = new Point(121, 373);
+            txtFirmenname.Name = "txtFirmenname";
+            txtFirmenname.Size = new Size(121, 23);
+            txtFirmenname.TabIndex = 65;
+            // 
+            // cmbStatus
+            // 
+            cmbStatus.FormattingEnabled = true;
+            cmbStatus.Items.AddRange(new object[] { "Aktiv", "Passiv" });
+            cmbStatus.Location = new Point(377, 358);
+            cmbStatus.Name = "cmbStatus";
+            cmbStatus.Size = new Size(121, 23);
+            cmbStatus.TabIndex = 66;
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(268, 361);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(39, 15);
+            lblStatus.TabIndex = 67;
+            lblStatus.Text = "Status";
             // 
             // cmbNationalität
             // 
@@ -643,95 +637,95 @@ namespace ContactManager.View.Forms
             txtGeschlecht.Text = "Geschlecht";
             txtGeschlecht.Click += LblGeshlecht;
             // 
-            // cmdGeschlecht
+            // cmbGeschlecht
             // 
-            cmdGeschlecht.FormattingEnabled = true;
-            cmdGeschlecht.Items.AddRange(new object[] { "Männlich", "Weiblich", "Divers ", "Keine Angabe" });
-            cmdGeschlecht.Location = new Point(113, 199);
-            cmdGeschlecht.Name = "cmdGeschlecht";
-            cmdGeschlecht.Size = new Size(121, 23);
-            cmdGeschlecht.TabIndex = 70;
-            cmdGeschlecht.SelectedIndexChanged += CmbGeschlecht_SelectedIndexChanged;
+            cmbGeschlecht.FormattingEnabled = true;
+            cmbGeschlecht.Items.AddRange(new object[] { "Männlich", "Weiblich", "Divers ", "Keine Angabe" });
+            cmbGeschlecht.Location = new Point(113, 199);
+            cmbGeschlecht.Name = "cmbGeschlecht";
+            cmbGeschlecht.Size = new Size(121, 23);
+            cmbGeschlecht.TabIndex = 70;
+            cmbGeschlecht.SelectedIndexChanged += CmbGeschlecht_SelectedIndexChanged;
             // 
-            // label33
+            // lblFirmaKunde
             // 
-            label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label33.Location = new Point(20, 350);
-            label33.Name = "label33";
-            label33.Size = new Size(85, 15);
-            label33.TabIndex = 71;
-            label33.Text = "Firma / Kunde";
-            label33.Click += label33_Click;
+            lblFirmaKunde.AutoSize = true;
+            lblFirmaKunde.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblFirmaKunde.Location = new Point(20, 350);
+            lblFirmaKunde.Name = "lblFirmaKunde";
+            lblFirmaKunde.Size = new Size(85, 15);
+            lblFirmaKunde.TabIndex = 71;
+            lblFirmaKunde.Text = "Firma / Kunde";
+            lblFirmaKunde.Click += label33_Click;
             // 
-            // label34
+            // lblAdministratives
             // 
-            label34.AutoSize = true;
-            label34.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
-            label34.Location = new Point(268, 294);
-            label34.Name = "label34";
-            label34.Size = new Size(94, 15);
-            label34.TabIndex = 72;
-            label34.Text = "Administratives";
+            lblAdministratives.AutoSize = true;
+            lblAdministratives.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 0);
+            lblAdministratives.Location = new Point(268, 294);
+            lblAdministratives.Name = "lblAdministratives";
+            lblAdministratives.Size = new Size(94, 15);
+            lblAdministratives.TabIndex = 72;
+            lblAdministratives.Text = "Administratives";
             // 
             // Details
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(807, 493);
-            Controls.Add(label34);
-            Controls.Add(label33);
-            Controls.Add(cmdGeschlecht);
+            Controls.Add(lblAdministratives);
+            Controls.Add(lblFirmaKunde);
+            Controls.Add(cmbGeschlecht);
             Controls.Add(txtGeschlecht);
             Controls.Add(cmbNationalität);
-            Controls.Add(label26);
-            Controls.Add(comboBox3);
-            Controls.Add(textBox15);
-            Controls.Add(textBox14);
-            Controls.Add(textBox13);
-            Controls.Add(comboBox11);
-            Controls.Add(comboBox10);
-            Controls.Add(label31);
-            Controls.Add(label30);
-            Controls.Add(label29);
-            Controls.Add(comboBox9);
-            Controls.Add(label28);
-            Controls.Add(comboBox8);
-            Controls.Add(label27);
-            Controls.Add(label25);
-            Controls.Add(richTextBox1);
-            Controls.Add(comboBox7);
-            Controls.Add(comboBox6);
-            Controls.Add(comboBox5);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(textBox12);
-            Controls.Add(button1);
-            Controls.Add(label24);
-            Controls.Add(label23);
-            Controls.Add(label22);
-            Controls.Add(label21);
-            Controls.Add(label20);
-            Controls.Add(label19);
-            Controls.Add(label18);
-            Controls.Add(label17);
-            Controls.Add(label6);
-            Controls.Add(textBox11);
-            Controls.Add(textBox10);
-            Controls.Add(textBox9);
-            Controls.Add(textBox8);
+            Controls.Add(lblStatus);
+            Controls.Add(cmbStatus);
+            Controls.Add(txtFirmenname);
+            Controls.Add(txtGeschaeftsadresse);
+            Controls.Add(txtAhvnummer);
+            Controls.Add(cmbKaderstufe);
+            Controls.Add(cmbBeschaeftigungsgrad);
+            Controls.Add(lblBeschaeftigungsgrad);
+            Controls.Add(lblAhvnummer);
+            Controls.Add(lblAbteilung);
+            Controls.Add(cmbTyp);
+            Controls.Add(lblTyp);
+            Controls.Add(cmdAktlehrjahr);
+            Controls.Add(lblAktuelleslehrjahr);
+            Controls.Add(lblPersoenlichenotiz);
+            Controls.Add(txtPersoenlichenotiz);
+            Controls.Add(cmbRolle);
+            Controls.Add(cmbLehrjahre);
+            Controls.Add(cmbAbteilung);
+            Controls.Add(dtpEintritt);
+            Controls.Add(dtpAustritt);
+            Controls.Add(txtFirmenkontakt);
+            Controls.Add(btnSpeichern);
+            Controls.Add(lblLehrjahre);
+            Controls.Add(lblKaderstufe);
+            Controls.Add(lblRolle);
+            Controls.Add(lblFirmenkontakt);
+            Controls.Add(lblAustritt);
+            Controls.Add(lblEintritt);
+            Controls.Add(lblGeschaeftsadresse);
+            Controls.Add(lblFirmenname);
+            Controls.Add(lblBeschaeftigungsdaten);
+            Controls.Add(txtEmail);
+            Controls.Add(txtTelefonprivat);
+            Controls.Add(txtGeschaeft);
+            Controls.Add(txtMobiltelefonnummer);
             Controls.Add(textVorname);
             Controls.Add(txtGeburtsdatum);
             Controls.Add(txtPostleitzahl);
             Controls.Add(txtAdresse);
-            Controls.Add(cmbTitel);
+           
             Controls.Add(txtWohnort);
             Controls.Add(txtNachname);
             Controls.Add(cmbAnrede);
-            Controls.Add(label16);
-            Controls.Add(label15);
-            Controls.Add(label14);
-            Controls.Add(label13);
+            Controls.Add(lblEmailadresse);
+            Controls.Add(lblMobiltelefonnummer);
+            Controls.Add(lblTelefonprivat);
+            Controls.Add(lblTelefongeschaeft);
             Controls.Add(label12);
             Controls.Add(lblWohnort);
             Controls.Add(lblPostleitzahl);
@@ -742,7 +736,7 @@ namespace ContactManager.View.Forms
             Controls.Add(lblVorname);
             Controls.Add(lblTitel);
             Controls.Add(lblAnrede);
-            Controls.Add(label1);
+            Controls.Add(lblPersoenlicheangaben);
             Name = "Details";
             Text = "Details";
             Load += Details_Load;
@@ -752,7 +746,7 @@ namespace ContactManager.View.Forms
 
         #endregion
 
-        private Label label1;
+        private Label lblPersoenlicheangaben;
         private Label lblAnrede;
         private Label lblTitel;
         private Label lblVorname;
@@ -763,58 +757,58 @@ namespace ContactManager.View.Forms
         private Label lblPostleitzahl;
         private Label lblWohnort;
         private Label label12;
-        private Label label13;
-        private Label label14;
-        private Label label15;
-        private Label label16;
+        private Label lblTelefongeschaeft;
+        private Label lblTelefonprivat;
+        private Label lblMobiltelefonnummer;
+        private Label lblEmailadresse;
         private ComboBox cmbAnrede;
         private TextBox txtNachname;
         private TextBox txtWohnort;
-        private ComboBox cmbTitel;
+ 
         private TextBox txtAdresse;
         private TextBox txtPostleitzahl;
         private TextBox txtGeburtsdatum;
         private TextBox textVorname;
-        private TextBox textBox8;
-        private TextBox textBox9;
-        private TextBox textBox10;
-        private TextBox textBox11;
-        private Label label6;
-        private Label label17;
-        private Label label18;
-        private Label label19;
-        private Label label20;
-        private Label label21;
-        private Label label22;
-        private Label label23;
-        private Label label24;
-        private Button button1;
-        private TextBox textBox12;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
-        private ComboBox comboBox5;
-        private ComboBox comboBox6;
-        private ComboBox comboBox7;
-        private RichTextBox richTextBox1;
-        private Label label25;
-        private Label label27;
-        private ComboBox comboBox8;
-        private Label label28;
-        private ComboBox comboBox9;
-        private Label label29;
-        private Label label30;
-        private Label label31;
-        private ComboBox comboBox10;
-        private ComboBox comboBox11;
-        private TextBox textBox13;
-        private TextBox textBox14;
-        private TextBox textBox15;
-        private ComboBox comboBox3;
-        private Label label26;
+        private TextBox txtMobiltelefonnummer;
+        private TextBox txtGeschaeft;
+        private TextBox txtTelefonprivat;
+        private TextBox txtEmail;
+        private Label lblBeschaeftigungsdaten;
+        private Label lblFirmenname;
+        private Label lblGeschaeftsadresse;
+        private Label lblEintritt;
+        private Label lblAustritt;
+        private Label lblFirmenkontakt;
+        private Label lblRolle;
+        private Label lblKaderstufe;
+        private Label lblLehrjahre;
+        private Button btnSpeichern;
+        private TextBox txtFirmenkontakt;
+        private DateTimePicker dtpAustritt;
+        private DateTimePicker dtpEintritt;
+        private ComboBox cmbAbteilung;
+        private ComboBox cmbLehrjahre;
+        private ComboBox cmbRolle;
+        private RichTextBox txtPersoenlichenotiz;
+        private Label lblPersoenlichenotiz;
+        private Label lblAktuelleslehrjahr;
+        private ComboBox cmdAktlehrjahr;
+        private Label lblTyp;
+        private ComboBox cmbTyp;
+        private Label lblAbteilung;
+        private Label lblAhvnummer;
+        private Label lblBeschaeftigungsgrad;
+        private ComboBox cmbBeschaeftigungsgrad;
+        private ComboBox cmbKaderstufe;
+        private TextBox txtAhvnummer;
+        private TextBox txtGeschaeftsadresse;
+        private TextBox txtFirmenname;
+        private ComboBox cmbStatus;
+        private Label lblStatus;
         private ComboBox cmbNationalität;
         private Label txtGeschlecht;
-        private ComboBox cmdGeschlecht;
-        private Label label33;
-        private Label label34;
+        private ComboBox cmbGeschlecht;
+        private Label lblFirmaKunde;
+        private Label lblAdministratives;
     }
 }

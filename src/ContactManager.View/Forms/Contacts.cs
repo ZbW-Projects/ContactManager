@@ -31,7 +31,7 @@ namespace ContactManager.View.Forms
         //Grid mit Datensatz
         private void grdContacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+        
             //Bearbeiten 
             // Instanz vom Form "Details" erstellen
             Details detailsForm = new Details();
