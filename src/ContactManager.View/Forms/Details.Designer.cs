@@ -662,6 +662,7 @@ namespace ContactManager.View.Forms
             label33.Size = new Size(85, 15);
             label33.TabIndex = 71;
             label33.Text = "Firma / Kunde";
+            label33.Click += label33_Click;
             // 
             // label34
             // 
