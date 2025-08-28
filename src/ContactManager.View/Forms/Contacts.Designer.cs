@@ -59,7 +59,6 @@ namespace ContactManager.View.Forms
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(334, 31);
             txtSearch.TabIndex = 1;
-            txtSearch.TextChanged += txtSearch_TextChanged_1;
             // 
             // grdContacts
             // 

@@ -1,9 +1,14 @@
 ﻿using ContactManager.Core.Data;
 using ContactManager.Core.Model;
+using ContactManager.Core.Services.features;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +21,7 @@ namespace ContactManager.Core.Services
          * Logic, um die Daten am Controller verfügbar zu stellen.
          * 
          *===================================================*/
-        private static Dictionary<Guid, Person> _contacts;
+        private static Dictionary<Guid, Person> _contacts = [];
 
         public static void SpinData()
         {
@@ -53,6 +58,32 @@ namespace ContactManager.Core.Services
             if (string.IsNullOrWhiteSpace(term)) return GetList();
 
             return _contacts.Values.Where(contact => Matches(contact, term)).Select(MapToDTOPersonRow).ToList();
+        }
+
+        public static (bool ok, string message) DeleteContact(Guid id)
+        {
+            try
+            {
+                // Es wird versucht ein Kontakt zu löschen
+                if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
+
+                // Daten persistieren 
+                LocalStorage.DeleteContact(id);
+
+                // Cache aktualisieren
+                UpdateContacts();
+
+                // Erfolgsmeldung
+                return (true, "Kontakt wurde erfolgreich gelöscht!");
+            }
+            catch (ArgumentException ex)
+            {
+                return (false, $"Eingabefehler; {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
+            }
         }
 
         #region Mappers
@@ -129,7 +160,7 @@ namespace ContactManager.Core.Services
                 // Daten persistieren 
                 LocalStorage.StoreContact(customer.Id, customer);
 
-                // Daten aktualisieren
+                // Cache aktualisieren
                 UpdateContacts();
 
                 // Erfolgsmeldung
@@ -144,7 +175,47 @@ namespace ContactManager.Core.Services
                 return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
             }
         }
+        public static (bool ok, string message) UpdateCustomer(Guid id, DtoCustomer cmd)
+        {
+            try
+            {
+                // Es wird versucht Customer zu verändern
+                if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
+                if (person is not Customer customer) return (false, "Ausgewählte Person ist kein Kunde.");
 
+                customer.Salutation = cmd.Salutaion;
+                customer.FirstName = cmd.FirstName;
+                customer.LastName = cmd.LastName;
+                customer.Title = cmd.Title;
+                customer.PhoneNumberBuisness = cmd.PhoneNumberBuisness;
+                customer.Status = cmd.Status;
+                customer.Street = cmd.Street;
+                customer.StreetNumber = cmd.StreetNumber;
+                customer.ZipCode = cmd.ZipCode;
+                customer.Place = cmd.Place;
+                customer.Type = cmd.Type;
+                customer.CompanyName = cmd.CompanyName;
+                customer.CustomerType = cmd.CustomerType;
+                customer.CompanyContact = cmd.CompanyContact;
+
+                // Daten persistieren 
+                LocalStorage.UpdateContact(customer.Id, customer);
+
+                // Cache aktualisieren
+                UpdateContacts();
+
+                // Erfolgsmeldung
+                return (true, "Kunde wurde erfolgreich geändert!");
+            }
+            catch (ArgumentException ex)
+            {
+                return (false, $"Eingabefehler; {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
+            }
+        }
         public static (bool ok, string message) AddCustomerNote(Guid customerId, Customer customer, string content, string owner)
         {
             try
@@ -174,6 +245,223 @@ namespace ContactManager.Core.Services
         }
 
         #endregion
+
+        #region Use Cases für Employee
+
+        public static (bool ok, string message) CreateEmployee(DtoEmployee cmd)
+        {
+            try
+            {
+                // EmployeeNummer wird generiert
+                int number = NumberSequence.NextEmployeeNumber();
+                // Es wird versucht Employee zu instanziieren
+                Person employee = new Employee("M", number)
+                {
+                    Salutation = cmd.Salutation,
+                    FirstName = cmd.FirstName,
+                    LastName = cmd.LastName,
+                    DateOfBirth = cmd.DateOfBirth,
+                    Gender = cmd.Gender,
+                    Title = cmd.Title,
+                    SocialSecurityNumber = cmd.SocialSecurityNumber,
+                    PhoneNumberPrivate = cmd.PhoneNumberPrivate,
+                    PhoneNumberMobile = cmd.PhoneNumberMobile,
+                    PhoneNumberBuisness = cmd.PhoneNumberBuisness,
+                    EmailPrivat = cmd.EmailPrivat,
+                    Status = cmd.Status,
+                    Nationality = cmd.Nationality,
+                    Street = cmd.Street,
+                    ZipCode = cmd.ZipCode,
+                    Place = cmd.Place,
+                    Type = cmd.Type,
+                    Department = cmd.Department,
+                    StartDate = cmd.StartDate,
+                    EndDate = cmd.EndDate,
+                    Employment = cmd.Employment,
+                    Role = cmd.Role,
+                    CadreLevel = cmd.CadreLevel
+                };
+
+                // Daten persistieren 
+                LocalStorage.StoreContact(employee.Id, employee);
+
+                // Cache aktualisieren
+                UpdateContacts();
+
+                // Erfolgsmeldung
+                return (true, "Mitarbeiter wurde erfolgreich gespeichert!");
+            }
+            catch (ArgumentException ex)
+            {
+                return (false, $"Eingabefehler; {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
+            }
+        }
+        public static (bool ok, string message) UpdateMitarbeiter(Guid id, DtoEmployee cmd)
+        {
+            try
+            {
+                // Es wird versucht Trainee zu verändern
+                if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
+                if (person is not Employee employee) return (false, "Ausgewählte Person ist kein Mitarbeiter.");
+
+                employee.Salutation = cmd.Salutation;
+                employee.FirstName = cmd.FirstName;
+                employee.LastName = cmd.LastName;
+                employee.DateOfBirth = cmd.DateOfBirth;
+                employee.Gender = cmd.Gender;
+                employee.Title = cmd.Title;
+                employee.SocialSecurityNumber = cmd.SocialSecurityNumber;
+                employee.PhoneNumberPrivate = cmd.PhoneNumberPrivate;
+                employee.PhoneNumberMobile = cmd.PhoneNumberMobile;
+                employee.PhoneNumberBuisness = cmd.PhoneNumberBuisness;
+                employee.EmailPrivat = cmd.EmailPrivat;
+                employee.Status = cmd.Status;
+                employee.Nationality = cmd.Nationality;
+                employee.Street = cmd.Street;
+                employee.ZipCode = cmd.ZipCode;
+                employee.Place = cmd.Place;
+                employee.Type = cmd.Type;
+                employee.Department = cmd.Department;
+                employee.StartDate = cmd.StartDate;
+                employee.EndDate = cmd.EndDate;
+                employee.Employment = cmd.Employment;
+                employee.Role = cmd.Role;
+                employee.CadreLevel = cmd.CadreLevel;
+
+                // Daten persistieren 
+                LocalStorage.UpdateContact(employee.Id, employee);
+
+                // Cache aktualisieren
+                UpdateContacts();
+
+                // Erfolgsmeldung
+                return (true, "Employee wurde erfolgreich geändert!");
+            }
+            catch (ArgumentException ex)
+            {
+                return (false, $"Eingabefehler; {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
+            }
+        }
+
+        #endregion
+
+        #region Use Cases für Trainee
+
+        public static (bool ok, string message) CreateTrainee(DtoTrainee cmd)
+        {
+            try
+            {
+                // EmployeeNummer wird generiert
+                int number = NumberSequence.NextEmployeeNumber();
+                // Es wird versucht Trainee zu instanziieren
+                Person trainee = new Trainee("L", number)
+                {
+                    Salutation = cmd.Salutation,
+                    FirstName = cmd.FirstName,
+                    LastName = cmd.LastName,
+                    DateOfBirth = cmd.DateOfBirth,
+                    Gender = cmd.Gender,
+                    Title = cmd.Title,
+                    SocialSecurityNumber = cmd.SocialSecurityNumber,
+                    PhoneNumberPrivate = cmd.PhoneNumberPrivate,
+                    PhoneNumberMobile = cmd.PhoneNumberMobile,
+                    PhoneNumberBuisness = cmd.PhoneNumberBuisness,
+                    EmailPrivat = cmd.EmailPrivat,
+                    Status = cmd.Status,
+                    Nationality = cmd.Nationality,
+                    Street = cmd.Street,
+                    ZipCode = cmd.ZipCode,
+                    Place = cmd.Place,
+                    Type = cmd.Type,
+                    Department = cmd.Department,
+                    StartDate = cmd.StartDate,
+                    EndDate = cmd.EndDate,
+                    Employment = cmd.Employment,
+                    Role = cmd.Role,
+                    CadreLevel = cmd.CadreLevel,
+                    TraineeYears = cmd.TraineeYears,
+                };
+
+                // Daten persistieren 
+                LocalStorage.StoreContact(trainee.Id, trainee);
+
+                // Cache aktualisieren
+                UpdateContacts();
+
+                // Erfolgsmeldung
+                return (true, "Lehrling wurde erfolgreich gespeichert!");
+            }
+            catch (ArgumentException ex)
+            {
+                return (false, $"Eingabefehler; {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
+            }
+        }
+        public static (bool ok, string message) UpdateTrainee(Guid id, DtoTrainee cmd)
+        {
+            try
+            {
+                // Es wird versucht Trainee zu verändern
+                if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
+                if (person is not Trainee trainee) return (false, "Ausgewählte Person ist kein Lehrling.");
+
+                trainee.Salutation = cmd.Salutation;
+                trainee.FirstName = cmd.FirstName;
+                trainee.LastName = cmd.LastName;
+                trainee.DateOfBirth = cmd.DateOfBirth;
+                trainee.Gender = cmd.Gender;
+                trainee.Title = cmd.Title;
+                trainee.SocialSecurityNumber = cmd.SocialSecurityNumber;
+                trainee.PhoneNumberPrivate = cmd.PhoneNumberPrivate;
+                trainee.PhoneNumberMobile = cmd.PhoneNumberMobile;
+                trainee.PhoneNumberBuisness = cmd.PhoneNumberBuisness;
+                trainee.EmailPrivat = cmd.EmailPrivat;
+                trainee.Status = cmd.Status;
+                trainee.Nationality = cmd.Nationality;
+                trainee.Street = cmd.Street;
+                trainee.ZipCode = cmd.ZipCode;
+                trainee.Place = cmd.Place;
+                trainee.Type = cmd.Type;
+                trainee.Department = cmd.Department;
+                trainee.StartDate = cmd.StartDate;
+                trainee.EndDate = cmd.EndDate;
+                trainee.Employment = cmd.Employment;
+                trainee.Role = cmd.Role;
+                trainee.CadreLevel = cmd.CadreLevel;
+                trainee.CadreLevel = cmd.CadreLevel;
+                trainee.TraineeYears = cmd.TraineeYears;
+
+                // Daten persistieren 
+                LocalStorage.UpdateContact(trainee.Id, trainee);
+
+                // Cache aktualisieren
+                UpdateContacts();
+
+                // Erfolgsmeldung
+                return (true, "Lehrling wurde erfolgreich geändert!");
+            }
+            catch (ArgumentException ex)
+            {
+                return (false, $"Eingabefehler; {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
+            }
+        }
+
+        #endregion
     }
 
 
@@ -188,42 +476,42 @@ namespace ContactManager.Core.Services
     public sealed class DTOPersonRow
     {
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Type { get; set; }
-        public string Status { get; set; }
-        public string PhoneNumberBuisness { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
+        public string PhoneNumberBuisness { get; set; } = string.Empty;
     }
 
     #endregion 
 
     #region DTOEmployee
-    public sealed class DTOEmployee
+    public sealed class DtoEmployee
     {
         public Guid Id { get; init; }
-        public string Salutation { get; init; }
-        public string FirstName { get; init; }
-        public string LastName { get; init; }
-        public string DateOfBirth { get; init; }
-        public string Gender { get; init; }
-        public string Title { get; init; }
-        public string SocialSecurityNumber { get; init; }
-        public string PhoneNumberPrivate { get; init; }
-        public string PhoneNumberMobile { get; init; }
-        public string PhoneNumberBuisness { get; init; }
-        public string EmailPrivat { get; init; }
+        public string Salutation { get; init; } = string.Empty;
+        public string FirstName { get; init; } = string.Empty;
+        public string LastName { get; init; } = string.Empty;
+        public DateTime DateOfBirth { get; init; }
+        public string Gender { get; init; } = string.Empty;
+        public string Title { get; init; } = string.Empty;
+        public string SocialSecurityNumber { get; init; } = string.Empty;
+        public string PhoneNumberPrivate { get; init; } = string.Empty;
+        public string PhoneNumberMobile { get; init; } = string.Empty;
+        public string PhoneNumberBuisness { get; init; } = string.Empty;
+        public string EmailPrivat { get; init; } = string.Empty;
         public bool Status { get; init; }
-        public string Nationality { get; init; }
-        public string Street { get; init; }
-        public string ZipCode { get; init; }
-        public string Place { get; init; }
-        public string Type { get; init; }
-        public string EmployeeNumber { get; init; }
-        public string Department { get; init; }
-        public string StartDate { get; init; }
-        public string EndDate { get; init; }
-        public string Employment { get; init; }
-        public string Role { get; init; }
+        public string Nationality { get; init; } = string.Empty;
+        public string Street { get; init; } = string.Empty;
+        public string ZipCode { get; init; } = string.Empty;
+        public string Place { get; init; } = string.Empty;
+        public string Type { get; init; } = string.Empty;
+        public string EmployeeNumber { get; init; } = string.Empty;
+        public string Department { get; init; } = string.Empty;
+        public DateTime StartDate { get; init; }
+        public DateTime EndDate { get; init; }
+        public int Employment { get; init; }
+        public string Role { get; init; } = string.Empty;
         public int CadreLevel { get; init; }
 
     }
@@ -231,32 +519,32 @@ namespace ContactManager.Core.Services
     #endregion 
 
     #region DTOTrainee
-    public sealed class DTOTrainee
+    public sealed class DtoTrainee
     {
         public Guid Id { get; init; }
-        public string Salutation { get; init; }
-        public string FirstName { get; init; }
-        public string LastName { get; init; }
-        public string DateOfBirth { get; init; }
-        public string Gender { get; init; }
-        public string Title { get; init; }
-        public string SocialSecurityNumber { get; init; }
-        public string PhoneNumberPrivate { get; init; }
-        public string PhoneNumberMobile { get; init; }
-        public string PhoneNumberBuisness { get; init; }
-        public string EmailPrivat { get; init; }
+        public string Salutation { get; init; } = string.Empty;
+        public string FirstName { get; init; } = string.Empty;
+        public string LastName { get; init; } = string.Empty;
+        public DateTime DateOfBirth { get; init; }
+        public string Gender { get; init; } = string.Empty;
+        public string Title { get; init; } = string.Empty;
+        public string SocialSecurityNumber { get; init; } = string.Empty;
+        public string PhoneNumberPrivate { get; init; } = string.Empty;
+        public string PhoneNumberMobile { get; init; } = string.Empty;
+        public string PhoneNumberBuisness { get; init; } = string.Empty;
+        public string EmailPrivat { get; init; } = string.Empty;
         public bool Status { get; init; }
-        public string Nationality { get; init; }
-        public string Street { get; init; }
-        public string ZipCode { get; init; }
-        public string Place { get; init; }
-        public string Type { get; init; }
-        public string EmployeeNumber { get; init; }
-        public string Department { get; init; }
-        public string StartDate { get; init; }
-        public string EndDate { get; init; }
-        public string Employment { get; init; }
-        public string Role { get; init; }
+        public string Nationality { get; init; } = string.Empty;
+        public string Street { get; init; } = string.Empty;
+        public string ZipCode { get; init; } = string.Empty;
+        public string Place { get; init; } = string.Empty;
+        public string Type { get; init; } = string.Empty;
+        public string EmployeeNumber { get; init; } = string.Empty;
+        public string Department { get; init; } = string.Empty;
+        public DateTime StartDate { get; init; }
+        public DateTime EndDate { get; init; }
+        public int Employment { get; init; }
+        public string Role { get; init; } = string.Empty;
         public int CadreLevel { get; init; }
         public int TraineeYears { get; init; }
         public int ActualTraineeYear { get; init; }
@@ -269,20 +557,20 @@ namespace ContactManager.Core.Services
     public sealed class DtoCustomer
     {
         public Guid Id { get; init; }
-        public string Salutaion { get; init; }
-        public string FirstName { get; init; }
-        public string LastName { get; init; }
-        public string Title { get; init; }
-        public string PhoneNumberBuisness { get; init; }
+        public string Salutaion { get; init; } = string.Empty;
+        public string FirstName { get; init; } = string.Empty;
+        public string LastName { get; init; } = string.Empty;
+        public string Title { get; init; } = string.Empty;
+        public string PhoneNumberBuisness { get; init; } = string.Empty;
         public bool Status { get; init; }
-        public string Street { get; init; }
-        public string StreetNumber { get; init; }
-        public string ZipCode { get; init; }
-        public string Place { get; init; }
-        public string Type { get; init; }
-        public string CompanyName { get; init; }
+        public string Street { get; init; } = string.Empty;
+        public string StreetNumber { get; init; } = string.Empty;
+        public string ZipCode { get; init; } = string.Empty;
+        public string Place { get; init; } = string.Empty;
+        public string Type { get; init; } = string.Empty;
+        public string CompanyName { get; init; } = string.Empty;
         public char CustomerType { get; init; }
-        public string CompanyContact { get; init; }
+        public string CompanyContact { get; init; } = string.Empty;
         public Protocol Messages { get; init; } = new();
     }
 

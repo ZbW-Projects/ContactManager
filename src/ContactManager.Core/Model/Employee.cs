@@ -14,7 +14,7 @@ namespace ContactManager.Core.Model
 
         protected string _employeeNumber;
         private string _department = "";
-        private DateTime _startDate;
+        protected DateTime _startDate;
         protected DateTime _endDate;
         private int _empolyment;
         private string _role = "";

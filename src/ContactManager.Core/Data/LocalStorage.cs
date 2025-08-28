@@ -70,7 +70,7 @@ namespace ContactManager.Core.Data
         }
 
         // DELETE
-        public static void DeleteContact(Guid Id, Person contact)
+        public static void DeleteContact(Guid Id)
         {
             //1.Schritt
             _contacts.Remove(Id);

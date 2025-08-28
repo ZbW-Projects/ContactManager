@@ -15,6 +15,7 @@ namespace ContactManager.View.Forms
 {
     public partial class Contacts : Form
     {
+        // Zentrale Binding-Quelle für das Grid
         private readonly BindingSource _binding = new();
         public Contacts()
         {
@@ -22,12 +23,10 @@ namespace ContactManager.View.Forms
             ConfigureGrid();
             WireEvents();
         }
-
         private void Contacts_Load(object sender, EventArgs e)
         {
-            ReloadGrid();
+            ReloadGrid();  // Starte Datenladung
         }
-
         private void ConfigureGrid()
         {
             grdContacts.AutoGenerateColumns = false;
@@ -81,7 +80,6 @@ namespace ContactManager.View.Forms
 
             grdContacts.DataSource = _binding;
         }
-
         private void WireEvents()
         {
             this.Load += Contacts_Load;
@@ -94,6 +92,7 @@ namespace ContactManager.View.Forms
             grdContacts.CellDoubleClick += (s, e) => OpenSelected();
         }
 
+        #region Aktionen (Use Cases Aufrufe und UI Updates)
         private void ReloadGrid()
         {
             // UseCase anbindung
@@ -101,7 +100,6 @@ namespace ContactManager.View.Forms
             _binding.DataSource = rows;
             grdContacts.ClearSelection();
         }
-
         private void DoSearch()
         {
             var term = txtSearch.Text?.Trim();
@@ -110,7 +108,6 @@ namespace ContactManager.View.Forms
             _binding.DataSource = rows;
             grdContacts.ClearSelection();
         }
-
         private void OpenSelected()
         {
             if (grdContacts.CurrentRow?.DataBoundItem is DTOPersonRow row)
@@ -120,12 +117,12 @@ namespace ContactManager.View.Forms
                 detailsForm.ShowDialog();
             }
         }
-        private void GrdContacts_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
-        //Aktion Neuer Kontakt 2. Formular öffnen
+        #endregion
+
+        #region Window Designer generiertes code
+
+        //Öffnet das Detail-Form
         private void btnSearch1_Click(object sender, EventArgs e)
         {
             // Instanz vom Form "Details" erstellen
@@ -134,30 +131,25 @@ namespace ContactManager.View.Forms
             detailsForm.ShowDialog();
         }
 
-        //Grid mit Datensatz
+        //Grid Zellklick triggert Methode OpenSelected
         private void grdContacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             OpenSelected();
         }
 
-
-        //Aktion Neuer Kontakt
+        // Suche Button 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             DoSearch();
-        }
-        //Textbox für die Suche
-
-        private void txtSearch_TextChanged_1(object sender, EventArgs e)
-        {
-            // wenn du live filtern willst:
-            // DoSearch();
         }
 
         //Aktion (Wenn ausgewählt löschen)
         private void btnloeschen_Click(object sender, EventArgs e)
         {
-            // optional: hier später Delete-Use-Case aufrufen
+            //TODO: Delete Use Case aktivieren
+            // Controller.DeleteContact
         }
+
+        #endregion
     }
 }

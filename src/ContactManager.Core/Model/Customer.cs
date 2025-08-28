@@ -19,6 +19,7 @@ namespace ContactManager.Core.Model
 
         #endregion
 
+        public override string EmailPrivat { get; set; }
         public string CompanyName { get => _companyName; set => _companyName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Firmenname darf nicht leer sein.") : Name.Normalize(value); }
         public char CustomerType { get => _customerType; set => _customerType = !char.IsLetter(value) ? throw new ArgumentException("Der Kundentyp muss ein Buchstabe sein.", nameof(value)) : char.ToUpper(value); }
         public string CompanyContact { get => _companyContact; set => _companyContact = !Email.IsValid(value) ? throw new ArgumentException("Die Geschäftsemail ist nicht gültig.", nameof(value)) : value.Trim(); }

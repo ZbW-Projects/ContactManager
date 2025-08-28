@@ -16,11 +16,6 @@ namespace ContactManager.View
             Controller.SpinData();
             ApplicationConfiguration.Initialize();
             Application.Run(new Contacts());
-
-            // Test 
-            var p = Path.Combine(AppContext.BaseDirectory, "Data", "Storage", "contacts.json");
-            MessageBox.Show(File.Exists(p) ? $"Gefunden:\n{p}" : $"FEHLT:\n{p}");
-
         }
     }
 }

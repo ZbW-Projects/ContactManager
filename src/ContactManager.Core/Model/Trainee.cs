@@ -12,7 +12,6 @@ namespace ContactManager.Core.Model
         #region Eigenschaften 
 
         private int _traineeYears;
-        private int _actualTraineeYear;
 
         #endregion
 
@@ -22,8 +21,7 @@ namespace ContactManager.Core.Model
         public override DateTime EndDate { get => _endDate; set => _endDate = value == default ? throw new ArgumentException("Das EndDatum muss einen Wert enthalten.", nameof(value)) : value; }
         public override int CadreLevel { get => _cadreLevel; set => _cadreLevel = 0; }
         public int TraineeYears { get => _traineeYears; set => _traineeYears = value < 0 || value > 4 ? throw new ArgumentException("Die Lehrjahre sind ungültig.", nameof(value)) : value; }
-        public int ActualTraineeYear => _actualTraineeYear;
-        public int SetActualTraineeYear(DateTime startDate, DateTime endDate = default) => _actualTraineeYear = DatesDiff.Year(startDate, endDate);
+        public int ActualTraineeYear => DatesDiff.Year(_startDate, _endDate);
 
     }
 
