@@ -1,11 +1,13 @@
-﻿using System;
+﻿using ContactManager.Core.Model;
+using ContactManager.Core.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ContactManager.Core.Services;
 
 namespace ContactManager.Test.Test.Services
 {
@@ -43,12 +45,12 @@ namespace ContactManager.Test.Test.Services
         [TestMethod]
         public void DeleteContact_removes_contact()
         {
-            var first = Controller.GetList().First();
-            var (ok, msg) = Controller.DeleteContact(first.Id);
+            var last = Controller.GetList().Last();
+            var (ok, msg) = Controller.DeleteContact(last.Id);
             Assert.IsTrue(ok, msg);
 
             var list = Controller.GetList();
-            Assert.IsFalse(list.Any(c => c.Id == first.Id));
+            Assert.IsFalse(list.Any(c => c.Id == last.Id));
         }
 
         #endregion
@@ -59,7 +61,7 @@ namespace ContactManager.Test.Test.Services
         {
             var dto = new DtoCustomer
             {
-                Salutaion = "Herr",
+                Salutation = "Herr",
                 FirstName = "Max",
                 LastName = "Meier",
                 PhoneNumberBuisness = "0440000000",
@@ -90,7 +92,7 @@ namespace ContactManager.Test.Test.Services
             var dto = new DtoCustomer
             {
                 Id = firstCustomer.Id,
-                Salutaion = "Herr",
+                Salutation = "Herr",
                 FirstName = "Update",
                 LastName = "Kunde",
                 Title = "",
@@ -116,8 +118,47 @@ namespace ContactManager.Test.Test.Services
             Assert.AreEqual("Inaktiv", updated.Status);
         }
 
+        [TestMethod]
+        public void GetCustomer_returns_expected_customer()
+        {
+            // Arrange
+            var row = Controller.Search("Meier").First();
+            var customerId = row.Id;
+
+            // Act Kunde laden
+            var dto = Controller.GetCustomer(customerId);
+            // Assert – prüfen ob Daten korrekt zurückkommen
+            Assert.IsNotNull(dto);
+            Assert.AreEqual("Max", dto.FirstName);
+            Assert.AreEqual("Meier", dto.LastName);
+            Assert.AreEqual(customerId, dto.Id);
+            Assert.AreEqual("Test ag", dto.CompanyName);
+        }
+
         #region Messages
 
+        [TestMethod]
+        public void AddCustomerNote_persists_one_message_and_owner()
+        {
+            // Arrange
+            var row = Controller.Search("Meier").First();
+            var customerId = row.Id;
+
+            //Act füge eine Nachricht
+            var (ok, msg) = Controller.AddCustomerNote(customerId, "Versucht Herrn Meier zu erreichen.", "Edi");
+            Assert.IsTrue(ok, msg);
+
+
+            // Assert
+            Assert.IsTrue(ContactManager.Core.Data.LocalStorage.Contacts.TryGetValue(customerId, out var p));
+            var c2 = (Customer)p!;
+            Assert.IsTrue(c2.Messages.Items.Count >= 1);
+            var last = c2.Messages.Items[^1];
+            Assert.AreEqual("Edi", last.Owner);
+            Assert.AreEqual("Versucht Herrn Meier zu erreichen.", last.Content);
+            Assert.IsTrue(last.TimeStamp <= DateTime.UtcNow);
+
+        }
 
         #endregion
 

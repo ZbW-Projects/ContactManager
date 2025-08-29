@@ -47,13 +47,13 @@ namespace ContactManager.Core.Services
 
 
         #region Generelle Use Cases
-        public static List<DTOPersonRow> GetList()
+
+        public static List<DtoPersonRow> GetList()
         {
             // Mapping von Person zu DTOPersonRow
             return _contacts.Values.Select(MapToDTOPersonRow).ToList();
         }
-
-        public static List<DTOPersonRow> Search(string term)
+        public static List<DtoPersonRow> Search(string term)
         {
             if (string.IsNullOrWhiteSpace(term)) return GetList();
 
@@ -86,10 +86,10 @@ namespace ContactManager.Core.Services
             }
         }
 
-        #region Mappers
-        private static DTOPersonRow MapToDTOPersonRow(Person contact)
+        #region Mapper
+        private static DtoPersonRow MapToDTOPersonRow(Person contact)
         {
-            return new DTOPersonRow
+            return new DtoPersonRow
             {
                 Id = contact.Id,
                 FirstName = contact.FirstName,
@@ -133,6 +133,11 @@ namespace ContactManager.Core.Services
 
         #region Use Cases für Customer
 
+        public static DtoCustomer GetCustomer(Guid id)
+        {
+            Customer contact = (Customer)_contacts[id];
+            return MapToDtoCustomer(contact);
+        }
         public static (bool ok, string message) CreateCustomer(DtoCustomer cmd)
         {
             try
@@ -140,7 +145,7 @@ namespace ContactManager.Core.Services
                 // Es wird versucht Customer zu instanziieren
                 Person customer = new Customer
                 {
-                    Salutation = cmd.Salutaion,
+                    Salutation = cmd.Salutation,
                     FirstName = cmd.FirstName,
                     LastName = cmd.LastName,
                     Title = cmd.Title,
@@ -183,7 +188,7 @@ namespace ContactManager.Core.Services
                 if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
                 if (person is not Customer customer) return (false, "Ausgewählte Person ist kein Kunde.");
 
-                customer.Salutation = cmd.Salutaion;
+                customer.Salutation = cmd.Salutation;
                 customer.FirstName = cmd.FirstName;
                 customer.LastName = cmd.LastName;
                 customer.Title = cmd.Title;
@@ -216,18 +221,25 @@ namespace ContactManager.Core.Services
                 return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
             }
         }
-        public static (bool ok, string message) AddCustomerNote(Guid customerId, Customer customer, string content, string owner)
+        public static (bool ok, string message) AddCustomerNote(Guid customerId, string content, string owner)
         {
             try
             {
-                if (!_contacts.TryGetValue(customerId, out var p)) return (false, "Kunde ist noch nicht vorhanden");
+                if (!_contacts.TryGetValue(customerId, out Person? person)) return (false, "Kunde ist noch nicht vorhanen");
 
-                customer.AddMessage(content);
-                var last = customer.Messages.Messages[^1];
-                last.Owner = owner;
+                // Message Einfügen
+                if (person is Customer customer)
+                {
+                    customer.AddMessage(content, owner);
+                }
+                else
+                {
+                    return (false, "Diese Person ist kein Kunde");
+                }
 
                 // Daten persistieren 
                 LocalStorage.UpdateContact(customer.Id, customer);
+
                 // Daten aktualisieren
                 UpdateContacts();
 
@@ -243,6 +255,32 @@ namespace ContactManager.Core.Services
             }
 
         }
+
+        #region Mapper
+        private static DtoCustomer MapToDtoCustomer(Customer customer)
+        {
+            return new DtoCustomer
+            {
+                Id = customer.Id,
+                Salutation = customer.Salutation,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Title = customer.Title,
+                PhoneNumberBuisness = customer.PhoneNumberBuisness,
+                Status = customer.Status,
+                Street = customer.Street,
+                StreetNumber = customer.StreetNumber,
+                ZipCode = customer.ZipCode,
+                Place = customer.Place,
+                Type = customer.Type,
+                CompanyName = customer.CompanyName,
+                CustomerType = customer.CustomerType,
+                CompanyContact = customer.CompanyContact,
+                Messages = customer.Messages,
+            };
+        }
+
+        #endregion
 
         #endregion
 
@@ -473,7 +511,7 @@ namespace ContactManager.Core.Services
      *=======================================================*/
 
     #region DTO für die Auflistung von Personen Kontakten
-    public sealed class DTOPersonRow
+    public sealed class DtoPersonRow
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
@@ -557,7 +595,7 @@ namespace ContactManager.Core.Services
     public sealed class DtoCustomer
     {
         public Guid Id { get; init; }
-        public string Salutaion { get; init; } = string.Empty;
+        public string Salutation { get; init; } = string.Empty;
         public string FirstName { get; init; } = string.Empty;
         public string LastName { get; init; } = string.Empty;
         public string Title { get; init; } = string.Empty;

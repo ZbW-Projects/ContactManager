@@ -110,7 +110,7 @@ namespace ContactManager.View.Forms
         }
         private void OpenSelected()
         {
-            if (grdContacts.CurrentRow?.DataBoundItem is DTOPersonRow row)
+            if (grdContacts.CurrentRow?.DataBoundItem is DtoPersonRow row)
             {
                 // Hier wäre möglich Details-Form öffnen
                 var detailsForm = new Details(/* row.Id falls benötigt übergeben*/);
