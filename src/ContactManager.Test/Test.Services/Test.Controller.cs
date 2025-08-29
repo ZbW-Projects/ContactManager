@@ -45,12 +45,12 @@ namespace ContactManager.Test.Test.Services
         [TestMethod]
         public void DeleteContact_removes_contact()
         {
-            var last = Controller.GetList().Last();
-            var (ok, msg) = Controller.DeleteContact(last.Id);
+            var first = Controller.GetList().First();
+            var (ok, msg) = Controller.DeleteContact(first.Id);
             Assert.IsTrue(ok, msg);
 
             var list = Controller.GetList();
-            Assert.IsFalse(list.Any(c => c.Id == last.Id));
+            Assert.IsFalse(list.Any(c => c.Id == first.Id));
         }
 
         #endregion
