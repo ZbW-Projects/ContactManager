@@ -15,17 +15,17 @@ namespace ContactManager.Core.Model
         private string _companyName = "";
         private char _customerType;
         private string _companyContact = "";
-        private Protocol _messages = new Protocol();
 
         #endregion
 
         // Vorübergehende Lösung (um EmailPrivat zu überschreiben!)
-        public override string EmailPrivat { get; set; }
+        public override string EmailPrivat { get; set; } = string.Empty;
         public string CompanyName { get => _companyName; set => _companyName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Firmenname darf nicht leer sein.") : Name.Normalize(value); }
         public char CustomerType { get => _customerType; set => _customerType = !char.IsLetter(value) ? throw new ArgumentException("Der Kundentyp muss ein Buchstabe sein.", nameof(value)) : char.ToUpper(value); }
         public string CompanyContact { get => _companyContact; set => _companyContact = !Email.IsValid(value) ? throw new ArgumentException("Die Geschäftsemail ist nicht gültig.", nameof(value)) : value.Trim(); }
-        public Protocol Messages => _messages;
-        public void AddMessage(string content, string owner) => _messages.Add(content, owner);
+        [JsonInclude]
+        public Protocol Messages { get; private set; } = new();
+        public void AddMessage(string content, string owner) => Messages.Add(content, owner);
     }
 
 
@@ -40,7 +40,7 @@ namespace ContactManager.Core.Model
     public class Protocol
     {
         [JsonInclude]
-        public List<Message> Items { get; set; } = new();
+        public List<Message> Items { get; private set; } = new();
 
         public void Add(string content, string owner)
         {
@@ -51,7 +51,8 @@ namespace ContactManager.Core.Model
 
     public sealed class Message
     {
-        private string _owner;
+        private string _owner = string.Empty;
+        [JsonConstructor]
         public Message(string content, string owner, DateTime timeStamp)
         {
             Content = content;

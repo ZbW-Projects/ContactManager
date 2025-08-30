@@ -18,7 +18,7 @@ namespace ContactManager.Test.Test.Services
         [TestInitialize]
         public void Setup()
         {
-            // ersetzt das Frontend: lädt LocalStorage und setzt _contacts
+            //lädt LocalStorage und setzt _contacts
             Controller.SpinData();
         }
 
@@ -42,15 +42,16 @@ namespace ContactManager.Test.Test.Services
             Assert.IsTrue(results.Any(r => r.LastName.Equals(term, StringComparison.OrdinalIgnoreCase)));
         }
 
+
         [TestMethod]
         public void DeleteContact_removes_contact()
         {
-            var first = Controller.GetList().First();
-            var (ok, msg) = Controller.DeleteContact(first.Id);
+            var last = Controller.GetList().Last();
+            var (ok, msg) = Controller.DeleteContact(last.Id);
             Assert.IsTrue(ok, msg);
 
             var list = Controller.GetList();
-            Assert.IsFalse(list.Any(c => c.Id == first.Id));
+            Assert.IsFalse(list.Any(c => c.Id == last.Id));
         }
 
         #endregion
@@ -91,21 +92,19 @@ namespace ContactManager.Test.Test.Services
 
             var dto = new DtoCustomer
             {
-                Id = firstCustomer.Id,
                 Salutation = "Herr",
                 FirstName = "Update",
-                LastName = "Kunde",
-                Title = "",
-                PhoneNumberBuisness = "0441112233",
+                LastName = "Update",
+                PhoneNumberBuisness = "0440003333",
                 Status = false,
-                Street = "Neue Strasse",
-                StreetNumber = "2",
-                ZipCode = "8001",
+                Street = "Test",
+                StreetNumber = "1",
+                ZipCode = "8000",
                 Place = "Zürich",
                 Type = "Customer",
-                CompanyName = "Update GmbH",
-                CustomerType = 'B',
-                CompanyContact = "update@example.com"
+                CompanyName = "Test AG",
+                CustomerType = 'A',
+                CompanyContact = "update.update@test.com"
             };
 
             var (ok, msg) = Controller.UpdateCustomer(firstCustomer.Id, dto);
@@ -122,15 +121,15 @@ namespace ContactManager.Test.Test.Services
         public void GetCustomer_returns_expected_customer()
         {
             // Arrange
-            var row = Controller.Search("Meier").First();
+            var row = Controller.Search("Update").Last();
             var customerId = row.Id;
 
             // Act Kunde laden
             var dto = Controller.GetCustomer(customerId);
             // Assert – prüfen ob Daten korrekt zurückkommen
             Assert.IsNotNull(dto);
-            Assert.AreEqual("Max", dto.FirstName);
-            Assert.AreEqual("Meier", dto.LastName);
+            Assert.AreEqual("Update", dto.FirstName);
+            Assert.AreEqual("Update", dto.LastName);
             Assert.AreEqual(customerId, dto.Id);
             Assert.AreEqual("Test ag", dto.CompanyName);
         }
@@ -141,11 +140,11 @@ namespace ContactManager.Test.Test.Services
         public void AddCustomerNote_persists_one_message_and_owner()
         {
             // Arrange
-            var row = Controller.Search("Meier").First();
+            var row = Controller.Search("Update").First();
             var customerId = row.Id;
 
             //Act füge eine Nachricht
-            var (ok, msg) = Controller.AddCustomerNote(customerId, "Versucht Herrn Meier zu erreichen.", "Edi");
+            var (ok, msg) = Controller.AddCustomerNote(customerId, "Versucht Herrn Update zu erreichen.", "Edi");
             Assert.IsTrue(ok, msg);
 
 
@@ -155,7 +154,7 @@ namespace ContactManager.Test.Test.Services
             Assert.IsTrue(c2.Messages.Items.Count >= 1);
             var last = c2.Messages.Items[^1];
             Assert.AreEqual("Edi", last.Owner);
-            Assert.AreEqual("Versucht Herrn Meier zu erreichen.", last.Content);
+            Assert.AreEqual("Versucht Herrn Update zu erreichen.", last.Content);
             Assert.IsTrue(last.TimeStamp <= DateTime.UtcNow);
 
         }
@@ -163,5 +162,212 @@ namespace ContactManager.Test.Test.Services
         #endregion
 
         #endregion
+
+        #region Test Employee Use Cases
+
+        [TestMethod]
+        public void CreateEmployee_generates_new_employee()
+        {
+            var dto = new DtoEmployee
+            {
+                Salutation = "Herr",
+                FirstName = "John",
+                LastName = "Doe",
+                DateOfBirth = new DateTime(1991, 1, 1),
+                Gender = "M",
+                Title = "",
+                SocialSecurityNumber = "756.7538.5284.04",
+                PhoneNumberPrivate = "0791234567",
+                PhoneNumberMobile = "0791234567",
+                PhoneNumberBuisness = "0441234567",
+                EmailPrivat = "luca.meier.emp@test.local",
+                Status = true,
+                Nationality = "Schweiz",
+                Street = "Bahnhofstrasse",
+                StreetNumber = "1a",
+                ZipCode = "8000",
+                Place = "Zürich",
+                Type = "Employee",
+                Department = "IT",
+                StartDate = new DateTime(2024, 9, 1),
+                EndDate = default,
+                Employment = 80,
+                Role = "Developer",
+                CadreLevel = 1
+            };
+
+            var (ok, msg) = Controller.CreateEmployee(dto);
+            Assert.IsTrue(ok, msg);
+
+            var list = Controller.Search("Doe");
+            Assert.IsTrue(list.Any(c => c.LastName == "Doe"));
+
+        }
+
+        [TestMethod]
+        public void UpdateEmployee_changes_data()
+        {
+            var firstCustomer = Controller.GetList().FirstOrDefault(c => c.Type == "Employee");
+            Assert.IsNotNull(firstCustomer);
+
+            var dto = new DtoEmployee
+            {
+                Salutation = "Herr",
+                FirstName = "John",
+                LastName = "Wayne",
+                DateOfBirth = new DateTime(1991, 1, 1),
+                Gender = "M",
+                Title = "Dr.",
+                SocialSecurityNumber = "756.7538.5284.04",
+                PhoneNumberPrivate = "0791234567",
+                PhoneNumberMobile = "0791234567",
+                PhoneNumberBuisness = "0441234567",
+                EmailPrivat = "luca.meier.emp@test.local",
+                Status = false,
+                Nationality = "Schweiz",
+                Street = "Bahnhofstrasse",
+                StreetNumber = "1a",
+                ZipCode = "8000",
+                Place = "Zürich",
+                Type = "Employee",
+                Department = "IT",
+                StartDate = new DateTime(2024, 9, 1),
+                EndDate = new DateTime(2026, 10, 10),
+                Employment = 80,
+                Role = "Security",
+                CadreLevel = 2
+            };
+
+            var (ok, msg) = Controller.UpdateEmployee(firstCustomer.Id, dto);
+            Assert.IsTrue(ok, msg);
+
+            var list = Controller.GetList();
+            var updated = list.FirstOrDefault(c => c.Id == firstCustomer.Id);
+            Assert.IsNotNull(updated);
+            Assert.AreEqual("Wayne", updated.LastName);
+            Assert.AreEqual("Inaktiv", updated.Status);
+        }
+
+        [TestMethod]
+        public void GetEmployee_returns_expected_employee()
+        {
+            // Arrange
+            var row = Controller.Search("Wayne").Last();
+            var employeeId = row.Id;
+
+            // Act Kunde laden
+            var dto = Controller.GetEmployee(employeeId);
+            // Assert – prüfen ob Daten korrekt zurückkommen
+            Assert.IsNotNull(dto);
+            Assert.AreEqual("John", dto.FirstName);
+            Assert.AreEqual("Wayne", dto.LastName);
+            Assert.AreEqual(employeeId, dto.Id);
+            Assert.AreEqual("Dr.", dto.Title);
+        }
+
+        #endregion
+
+        #region Test Trainee Use Cases
+
+        [TestMethod]
+        public void CreateTrainee_generates_new_trainee()
+        {
+            var dto = new DtoTrainee
+            {
+                Salutation = "Frau",
+                FirstName = "Sarah",
+                LastName = "Müller",
+                DateOfBirth = new DateTime(2008, 5, 1),
+                Gender = "F",
+                SocialSecurityNumber = "756.7538.5284.04",
+                PhoneNumberPrivate = "0791234567",
+                PhoneNumberMobile = "0791234567",
+                PhoneNumberBuisness = "0441234567",
+                EmailPrivat = "sarah.mueller@test.local",
+                Status = true,
+                Nationality = "Schweiz",
+                Street = "Bahnhofstrasse",
+                StreetNumber = "1a",
+                ZipCode = "8000",
+                Place = "Zürich",
+                Type = "Trainee",
+                Department = "Verkauf",
+                StartDate = new DateTime(2024, 9, 1),
+                EndDate = new DateTime(2027, 9, 25),
+                Employment = 80,
+                Role = "KV",
+                TraineeYears = 3,
+            };
+
+            var (ok, msg) = Controller.CreateTrainee(dto);
+            Assert.IsTrue(ok, msg);
+
+            var list = Controller.Search("Müller");
+            Assert.IsTrue(list.Any(c => c.LastName == "Müller"));
+        }
+
+        [TestMethod]
+        public void UpdateTrainee_changes_data()
+        {
+            var firstCustomer = Controller.GetList().FirstOrDefault(c => c.Type == "Trainee");
+            Assert.IsNotNull(firstCustomer);
+
+            var dto = new DtoTrainee
+            {
+                Salutation = "Frau",
+                FirstName = "Sarah",
+                LastName = "Müller",
+                DateOfBirth = new DateTime(2008, 5, 1),
+                Gender = "F",
+                SocialSecurityNumber = "756.7538.5284.04",
+                PhoneNumberPrivate = "0790987654",
+                PhoneNumberMobile = "0791234567",
+                PhoneNumberBuisness = "0441234567",
+                EmailPrivat = "sarah.mueller@test.local",
+                Status = false,
+                Nationality = "Schweiz",
+                Street = "Bergenstrasse",
+                StreetNumber = "16",
+                ZipCode = "8000",
+                Place = "Zürich",
+                Type = "Trainee",
+                Department = "Verkauf",
+                StartDate = new DateTime(2024, 9, 1),
+                EndDate = new DateTime(2027, 9, 25),
+                Employment = 80,
+                Role = "KV",
+                TraineeYears = 3,
+            };
+
+            var (ok, msg) = Controller.UpdateTrainee(firstCustomer.Id, dto);
+            Assert.IsTrue(ok, msg);
+
+            var list = Controller.GetList();
+            var updated = list.FirstOrDefault(c => c.Id == firstCustomer.Id);
+            Assert.IsNotNull(updated);
+            Assert.AreEqual("Müller", updated.LastName);
+            Assert.AreEqual("Inaktiv", updated.Status);
+        }
+
+        [TestMethod]
+        public void GetTrainee_returns_expected_trainee()
+        {
+            // Arrange
+            var row = Controller.Search("Müller").Last();
+            var traineeId = row.Id;
+
+            // Act Kunde laden
+            var dto = Controller.GetTrainee(traineeId);
+            // Assert – prüfen ob Daten korrekt zurückkommen
+            Assert.IsNotNull(dto);
+            Assert.AreEqual("Sarah", dto.FirstName);
+            Assert.AreEqual("Müller", dto.LastName);
+            Assert.AreEqual(traineeId, dto.Id);
+            Assert.AreEqual("", dto.Title);
+        }
+
+        #endregion 
+
     }
+
 }

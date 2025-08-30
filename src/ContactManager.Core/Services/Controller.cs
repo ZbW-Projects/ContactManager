@@ -47,7 +47,6 @@ namespace ContactManager.Core.Services
 
 
         #region Generelle Use Cases
-
         public static List<DtoPersonRow> GetList()
         {
             // Mapping von Person zu DTOPersonRow
@@ -127,7 +126,6 @@ namespace ContactManager.Core.Services
         }
 
         #endregion
-
 
         #endregion
 
@@ -286,6 +284,11 @@ namespace ContactManager.Core.Services
 
         #region Use Cases für Employee
 
+        public static DtoEmployee GetEmployee(Guid id)
+        {
+            Employee contact = (Employee)_contacts[id];
+            return MapToDtoEmployee(contact);
+        }
         public static (bool ok, string message) CreateEmployee(DtoEmployee cmd)
         {
             try
@@ -309,6 +312,7 @@ namespace ContactManager.Core.Services
                     Status = cmd.Status,
                     Nationality = cmd.Nationality,
                     Street = cmd.Street,
+                    StreetNumber = cmd.StreetNumber,
                     ZipCode = cmd.ZipCode,
                     Place = cmd.Place,
                     Type = cmd.Type,
@@ -338,7 +342,7 @@ namespace ContactManager.Core.Services
                 return (false, $"Technischer Fehler beim Speichern: {ex.Message}");
             }
         }
-        public static (bool ok, string message) UpdateMitarbeiter(Guid id, DtoEmployee cmd)
+        public static (bool ok, string message) UpdateEmployee(Guid id, DtoEmployee cmd)
         {
             try
             {
@@ -389,10 +393,52 @@ namespace ContactManager.Core.Services
             }
         }
 
+        #region Mapper
+
+        private static DtoEmployee MapToDtoEmployee(Employee employee)
+        {
+            return new DtoEmployee
+            {
+                Id = employee.Id,
+                Salutation = employee.Salutation,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
+                DateOfBirth = employee.DateOfBirth,
+                Gender = employee.Gender,
+                Title = employee.Title,
+                SocialSecurityNumber = employee.SocialSecurityNumber,
+                PhoneNumberPrivate = employee.PhoneNumberPrivate,
+                PhoneNumberMobile = employee.PhoneNumberMobile,
+                PhoneNumberBuisness = employee.PhoneNumberBuisness,
+                EmailPrivat = employee.EmailPrivat,
+                Status = employee.Status,
+                Nationality = employee.Nationality,
+                Street = employee.Street,
+                StreetNumber = employee.StreetNumber,
+                ZipCode = employee.ZipCode,
+                Place = employee.Place,
+                Type = employee.Type,
+                EmployeeNumber = employee.EmployeeNumber,
+                Department = employee.Department,
+                StartDate = employee.StartDate,
+                EndDate = employee.EndDate,
+                Employment = employee.Employment,
+                Role = employee.Role,
+                CadreLevel = employee.CadreLevel
+            };
+        }
+
+        #endregion
+
         #endregion
 
         #region Use Cases für Trainee
 
+        public static DtoTrainee GetTrainee(Guid id)
+        {
+            Trainee contact = (Trainee)_contacts[id];
+            return MapToDtoTrainee(contact);
+        }
         public static (bool ok, string message) CreateTrainee(DtoTrainee cmd)
         {
             try
@@ -499,6 +545,45 @@ namespace ContactManager.Core.Services
             }
         }
 
+        #region Mapper
+
+        private static DtoTrainee MapToDtoTrainee(Trainee trainee)
+        {
+            return new DtoTrainee
+            {
+                Id = trainee.Id,
+                Salutation = trainee.Salutation,
+                FirstName = trainee.FirstName,
+                LastName = trainee.LastName,
+                DateOfBirth = trainee.DateOfBirth,
+                Gender = trainee.Gender,
+                Title = trainee.Title,
+                SocialSecurityNumber = trainee.SocialSecurityNumber,
+                PhoneNumberPrivate = trainee.PhoneNumberPrivate,
+                PhoneNumberMobile = trainee.PhoneNumberMobile,
+                PhoneNumberBuisness = trainee.PhoneNumberBuisness,
+                EmailPrivat = trainee.EmailPrivat,
+                Status = trainee.Status,
+                Nationality = trainee.Nationality,
+                Street = trainee.Street,
+                StreetNumber = trainee.StreetNumber,
+                ZipCode = trainee.ZipCode,
+                Place = trainee.Place,
+                Type = trainee.Type,
+                EmployeeNumber = trainee.EmployeeNumber,
+                Department = trainee.Department,
+                StartDate = trainee.StartDate,
+                EndDate = trainee.EndDate,
+                Employment = trainee.Employment,
+                Role = trainee.Role,
+                CadreLevel = trainee.CadreLevel,
+                TraineeYears = trainee.TraineeYears,
+                ActualTraineeYear = trainee.ActualTraineeYear
+            };
+        }
+
+        #endregion
+
         #endregion
     }
 
@@ -541,6 +626,7 @@ namespace ContactManager.Core.Services
         public bool Status { get; init; }
         public string Nationality { get; init; } = string.Empty;
         public string Street { get; init; } = string.Empty;
+        public string StreetNumber { get; init; } = string.Empty;
         public string ZipCode { get; init; } = string.Empty;
         public string Place { get; init; } = string.Empty;
         public string Type { get; init; } = string.Empty;
@@ -574,6 +660,7 @@ namespace ContactManager.Core.Services
         public bool Status { get; init; }
         public string Nationality { get; init; } = string.Empty;
         public string Street { get; init; } = string.Empty;
+        public string StreetNumber { get; init; } = string.Empty;
         public string ZipCode { get; init; } = string.Empty;
         public string Place { get; init; } = string.Empty;
         public string Type { get; init; } = string.Empty;
@@ -609,7 +696,7 @@ namespace ContactManager.Core.Services
         public string CompanyName { get; init; } = string.Empty;
         public char CustomerType { get; init; }
         public string CompanyContact { get; init; } = string.Empty;
-        public Protocol Messages { get; init; } = new();
+        public Protocol? Messages { get; init; }
     }
 
     #endregion
