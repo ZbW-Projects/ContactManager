@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContactManager.Test.Test.Model
+namespace ContactManager.Test.Model
 {
-    internal class Test
+    internal class Person
     {
     }
 }
