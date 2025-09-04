@@ -14,13 +14,25 @@ using System.Threading.Tasks;
 
 namespace ContactManager.Core.Model
 {
+    #region Name
+
+    public class Name
+    {
+        public static string Normalize(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return "";
+            return char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower();
+        }
+    }
+
+    #endregion 
 
     #region AHV
     public class AHV
     {
         public static bool IsValid(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return false;
+            if (string.IsNullOrWhiteSpace(value)) return true;
 
             var cleaned = Clean(value);
 
@@ -36,6 +48,7 @@ namespace ContactManager.Core.Model
 
         public static string Normalize(string value)
         {
+            if (string.IsNullOrWhiteSpace(value)) return "";
             var cleaned = Clean(value);
             return $"{cleaned.Substring(0, 3)}.{cleaned.Substring(3, 4)}.{cleaned.Substring(7, 4)}.{cleaned.Substring(11, 2)}";
         }
@@ -61,13 +74,12 @@ namespace ContactManager.Core.Model
 
     #endregion
 
-
     #region Phone
     public class Phone
     {
         public static bool IsValid(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return false;
+            if (string.IsNullOrWhiteSpace(value)) return true;
 
             var cleaned = Clean(value);
 
@@ -88,6 +100,8 @@ namespace ContactManager.Core.Model
 
         public static string Normalize(string value)
         {
+            if (string.IsNullOrWhiteSpace(value)) return "";
+
             var cleaned = Clean(value);
 
             // Output als +41 79 123 45 67
@@ -110,7 +124,6 @@ namespace ContactManager.Core.Model
     }
 
     #endregion
-
 
     #region Email
     public class Email

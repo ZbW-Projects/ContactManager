@@ -8,4 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ContactManager.Core\ContactManager.Core.csproj" />
+  </ItemGroup>
+
 </Project>

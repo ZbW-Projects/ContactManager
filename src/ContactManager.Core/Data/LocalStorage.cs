@@ -23,7 +23,7 @@ namespace ContactManager.Core.Data
         /*================================
          * Hauptdatenträger von Kontakten
          ==================================*/
-        private static Dictionary<Guid, Person> _contacts;
+        private static Dictionary<Guid, Person> _contacts = new Dictionary<Guid, Person>();
 
         /*===============================================================
          *
@@ -70,7 +70,7 @@ namespace ContactManager.Core.Data
         }
 
         // DELETE
-        public static void DeleteContact(Guid Id, Person contact)
+        public static void DeleteContact(Guid Id)
         {
             //1.Schritt
             _contacts.Remove(Id);
@@ -88,7 +88,7 @@ namespace ContactManager.Core.Data
          * ==========================================================================*/
         private static string ConvertToJSON(Dictionary<Guid, Person> contacts)
         {
-            return JsonSerializer.Serialize(contacts);
+            return JsonSerializer.Serialize(contacts, _serializeOptions);
         }
 
 
@@ -109,7 +109,7 @@ namespace ContactManager.Core.Data
             if (string.IsNullOrWhiteSpace(data)) return new Dictionary<Guid, Person>();
 
             // JSON in gespeicherte Variable zu eiem Dictionary umwandeln und ausgeben
-            return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data, _serializeOptions);
+            return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data, _serializeOptions) ?? new Dictionary<Guid, Person>();
         }
     }
 }

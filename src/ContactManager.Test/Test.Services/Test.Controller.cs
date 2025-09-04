@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace ContactManager.Test.Test.Services
+namespace ContactManager.Test.Services
 {
     [TestClass]
     [DoNotParallelize]

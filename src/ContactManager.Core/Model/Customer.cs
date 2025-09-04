@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ContactManager.Core.Model
@@ -11,18 +12,20 @@ namespace ContactManager.Core.Model
     {
         #region Eigenschaften
 
-        private string _companyName;
+        private string _companyName = "";
         private char _customerType;
-        private string _companyContact;
-        private Protocol _messages = new Protocol();
+        private string _companyContact = "";
 
         #endregion
 
-        public string CompanyName { get => _companyName; set => _companyName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
-        public char CustomerType { get => _customerType; set => _customerType = char.IsLetter(value) ? throw new ArgumentException("Der Wert muss ein Buchstabe sein.", nameof(value)) : char.ToUpper(value); }
-        public string CompanyContact { get => _companyContact; set => _companyContact = !Email.IsValid(value) ? throw new ArgumentException("Die Email ist nicht gültig.", nameof(value)) : value.Trim(); }
-        public Protocol Messages => _messages;
-        public void AddMessage(string content) => _messages.AddMessage(content);
+        // Vorübergehende Lösung (um EmailPrivat zu überschreiben!)
+        public override string EmailPrivat { get; set; } = string.Empty;
+        public string CompanyName { get => _companyName; set => _companyName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Firmenname darf nicht leer sein.") : Name.Normalize(value); }
+        public char CustomerType { get => _customerType; set => _customerType = !char.IsLetter(value) ? throw new ArgumentException("Der Kundentyp muss ein Buchstabe sein.", nameof(value)) : char.ToUpper(value); }
+        public string CompanyContact { get => _companyContact; set => _companyContact = !Email.IsValid(value) ? throw new ArgumentException("Die Geschäftsemail ist nicht gültig.", nameof(value)) : value.Trim(); }
+        [JsonInclude]
+        public Protocol Messages { get; private set; } = new();
+        public void AddMessage(string content, string owner) => Messages.Add(content, owner);
     }
 
 
@@ -36,18 +39,31 @@ namespace ContactManager.Core.Model
 
     public class Protocol
     {
-        private readonly List<Message> _messages = [];
+        [JsonInclude]
+        public List<Message> Items { get; private set; } = new();
 
-        public void AddMessage(string content)
+        public void Add(string content, string owner)
         {
-            _messages.Add(new Message(content));
+            var msg = new Message(content, owner, DateTime.UtcNow);
+            Items.Add(msg);
         }
-
     }
 
-    public class Message(string content)
+    public sealed class Message
     {
-        public DateTime TimeStamp { get; private set; } = DateTime.UtcNow;
-        public string Content { get; private set; } = content;
+        private string _owner = string.Empty;
+        [JsonConstructor]
+        public Message(string content, string owner, DateTime timeStamp)
+        {
+            Content = content;
+            Owner = owner;
+            TimeStamp = timeStamp;
+        }
+
+        public string Owner { get => _owner; set => _owner = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Owner muss vorhanden sein.") : Name.Normalize(value); }
+        [JsonInclude]
+        public DateTime TimeStamp { get; }
+        [JsonInclude]
+        public string Content { get; }
     }
 }

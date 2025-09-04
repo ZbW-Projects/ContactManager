@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContactManager.Core.Services.features;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +12,17 @@ namespace ContactManager.Core.Model
         #region Eigenschaften 
 
         private int _traineeYears;
-        private int _actualTraineeYear;
 
         #endregion
 
-        public int TraineeYears { get => _traineeYears; set => _traineeYears = value is >= 1 and <= 4 ? throw new ArgumentException("Der Wert ist ungültig.", nameof(value)) : value; }
+        public Trainee() { }
+        public Trainee(string prefix, int employeeNumber) : base(prefix, employeeNumber) { }
 
-        /*
-         * Beobachtung:
-         * Man könnte "ActualTraineeYear" als Getter komplett weglassen,
-         * die Methode "SetActualTraineeYear" in "ActualTraineeYear" unbenennen und
-         * den Wert auf int setzen
-         */
-        public int ActualTraineeYear => _actualTraineeYear;
-        public void SetActualTraineeYear(DateTime startDate, DateTime endDate = default) => _actualTraineeYear = DatesDiff.Year(startDate, endDate);
+        public override DateTime EndDate { get => _endDate; set => _endDate = value == default ? throw new ArgumentException("Das EndDatum muss einen Wert enthalten.", nameof(value)) : value; }
+        public override int CadreLevel { get => _cadreLevel; set => _cadreLevel = 0; }
+        public int TraineeYears { get => _traineeYears; set => _traineeYears = value < 0 || value > 4 ? throw new ArgumentException("Die Lehrjahre sind ungültig.", nameof(value)) : value; }
+        public int ActualTraineeYear => DatesDiff.Year(_startDate, _endDate);
+
     }
 
 
