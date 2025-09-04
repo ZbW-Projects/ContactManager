@@ -32,17 +32,16 @@ namespace ContactManager.View.Forms
             LblTitelL = new Label();
             LblGeburtsdatumL = new Label();
             TxtNationalitätL = new Label();
-            LblAdresseL = new Label();
+            LblStrasseL = new Label();
             LblPostleitzahlL = new Label();
             LblWohnortL = new Label();
             lblTelefongeschaeftL = new Label();
             LblTelefonprivatL = new Label();
             LblMobiltelefonnummerL = new Label();
-            LblEmailadresseL = new Label();
             CmbAnredeL = new ComboBox();
             TxtNachnameL = new TextBox();
             TxtWohnortL = new TextBox();
-            TxtAdresseL = new TextBox();
+            TxtStrasseL = new TextBox();
             TxtPostleitzahlL = new TextBox();
             TxtVornameL = new TextBox();
             TxtMobiltelefonnummerL = new TextBox();
@@ -54,26 +53,18 @@ namespace ContactManager.View.Forms
             lblEintritt = new Label();
             lblAustritt = new Label();
             lblFirmenkontakt = new Label();
-            lblRolle = new Label();
             lblKaderstufe = new Label();
             LblStatusL = new Label();
             btnSpeichern = new Button();
             txtFirmenkontakt = new TextBox();
             dtpAustritt = new DateTimePicker();
             dtpEintritt = new DateTimePicker();
-            cmbAbteilung = new ComboBox();
             CmbLehrjahreL = new ComboBox();
-            cmbRolle = new ComboBox();
             txtPersoenlichenotiz = new RichTextBox();
             lblPersoenlichenotiz = new Label();
-            LblAktuelleslehrjahrL = new Label();
-            CmdAktuellesLehrjahrL = new ComboBox();
             lblTyp = new Label();
             cmbTyp = new ComboBox();
-            lblAbteilung = new Label();
             LblAhvnummerL = new Label();
-            lblBeschaeftigungsgrad = new Label();
-            cmbBeschaeftigungsgrad = new ComboBox();
             cmbKaderstufe = new ComboBox();
             TxtAhvnummerL = new TextBox();
             txtGeschaeftsadresse = new TextBox();
@@ -96,20 +87,33 @@ namespace ContactManager.View.Forms
             textBox2 = new TextBox();
             label4 = new Label();
             tabMitarbeiter = new TabPage();
-            tabLehrling = new TabPage();
-            CmbStatusL = new ComboBox();
+            TabLehrling = new TabPage();
+            CbStatusL = new CheckBox();
             GrpBeschaeftigungsdatenL = new GroupBox();
+            LblBeschaeftigungsgradL = new Label();
+            CmbBeschaeftigungsgradL = new ComboBox();
+            lblRolle = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            cmbRolle = new ComboBox();
+            dateTimePicker3 = new DateTimePicker();
+            label6 = new Label();
+            label7 = new Label();
+            CmbAbteilungL = new ComboBox();
+            LblAbteilungL = new Label();
             LblLehrjahreL = new Label();
             GrpKontaktinformationenL = new GroupBox();
             GrpPersoenlichL = new GroupBox();
+            label5 = new Label();
+            TxtHausnummerL = new TextBox();
+            LblHausnummerL = new Label();
+            CmbTitelL = new ComboBox();
             LblVornameL = new Label();
             LblNachnameL = new Label();
-            TxtTitelL = new TextBox();
             BtnSpeichernL = new Button();
             PERSON.SuspendLayout();
             tabKunde.SuspendLayout();
             tabMitarbeiter.SuspendLayout();
-            tabLehrling.SuspendLayout();
+            TabLehrling.SuspendLayout();
             GrpBeschaeftigungsdatenL.SuspendLayout();
             GrpKontaktinformationenL.SuspendLayout();
             GrpPersoenlichL.SuspendLayout();
@@ -119,32 +123,29 @@ namespace ContactManager.View.Forms
             // 
             LblAnredeL.AutoSize = true;
             LblAnredeL.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LblAnredeL.Location = new Point(25, 36);
+            LblAnredeL.Location = new Point(23, 35);
             LblAnredeL.Name = "LblAnredeL";
             LblAnredeL.Size = new Size(50, 17);
             LblAnredeL.TabIndex = 1;
             LblAnredeL.Text = "Anrede";
-            LblAnredeL.Click += LblAnrede;
             // 
             // LblTitelL
             // 
             LblTitelL.AutoSize = true;
-            LblTitelL.Location = new Point(25, 191);
+            LblTitelL.Location = new Point(25, 67);
             LblTitelL.Name = "LblTitelL";
             LblTitelL.Size = new Size(30, 15);
             LblTitelL.TabIndex = 2;
             LblTitelL.Text = "Titel";
-            LblTitelL.Click += LblTitel;
             // 
             // LblGeburtsdatumL
             // 
             LblGeburtsdatumL.AutoSize = true;
-            LblGeburtsdatumL.Location = new Point(25, 133);
+            LblGeburtsdatumL.Location = new Point(24, 155);
             LblGeburtsdatumL.Name = "LblGeburtsdatumL";
             LblGeburtsdatumL.Size = new Size(83, 15);
             LblGeburtsdatumL.TabIndex = 6;
             LblGeburtsdatumL.Text = "Geburtsdatum";
-            LblGeburtsdatumL.Click += LblGeburtsdatum;
             // 
             // TxtNationalitätL
             // 
@@ -154,42 +155,38 @@ namespace ContactManager.View.Forms
             TxtNationalitätL.Size = new Size(69, 15);
             TxtNationalitätL.TabIndex = 7;
             TxtNationalitätL.Text = "Nationalität";
-            TxtNationalitätL.Click += LblNatonalität;
             // 
-            // LblAdresseL
+            // LblStrasseL
             // 
-            LblAdresseL.AutoSize = true;
-            LblAdresseL.Location = new Point(27, 279);
-            LblAdresseL.Name = "LblAdresseL";
-            LblAdresseL.Size = new Size(48, 15);
-            LblAdresseL.TabIndex = 8;
-            LblAdresseL.Text = "Adresse";
-            LblAdresseL.Click += LblAdresse;
+            LblStrasseL.AutoSize = true;
+            LblStrasseL.Location = new Point(25, 282);
+            LblStrasseL.Name = "LblStrasseL";
+            LblStrasseL.Size = new Size(43, 15);
+            LblStrasseL.TabIndex = 8;
+            LblStrasseL.Text = "Strasse";
             // 
             // LblPostleitzahlL
             // 
             LblPostleitzahlL.AutoSize = true;
-            LblPostleitzahlL.Location = new Point(25, 337);
+            LblPostleitzahlL.Location = new Point(25, 354);
             LblPostleitzahlL.Name = "LblPostleitzahlL";
             LblPostleitzahlL.Size = new Size(67, 15);
             LblPostleitzahlL.TabIndex = 9;
             LblPostleitzahlL.Text = "Postleitzahl";
-            LblPostleitzahlL.Click += LblPostpleitzah;
             // 
             // LblWohnortL
             // 
             LblWohnortL.AutoSize = true;
-            LblWohnortL.Location = new Point(25, 305);
+            LblWohnortL.Location = new Point(25, 328);
             LblWohnortL.Name = "LblWohnortL";
             LblWohnortL.Size = new Size(54, 15);
             LblWohnortL.TabIndex = 10;
             LblWohnortL.Text = "Wohnort";
-            LblWohnortL.Click += LblWohnort;
             // 
             // lblTelefongeschaeftL
             // 
             lblTelefongeschaeftL.AutoSize = true;
-            lblTelefongeschaeftL.Location = new Point(14, 68);
+            lblTelefongeschaeftL.Location = new Point(14, 44);
             lblTelefongeschaeftL.Name = "lblTelefongeschaeftL";
             lblTelefongeschaeftL.Size = new Size(95, 15);
             lblTelefongeschaeftL.TabIndex = 12;
@@ -198,114 +195,92 @@ namespace ContactManager.View.Forms
             // LblTelefonprivatL
             // 
             LblTelefonprivatL.AutoSize = true;
-            LblTelefonprivatL.Location = new Point(14, 39);
+            LblTelefonprivatL.Location = new Point(24, 390);
             LblTelefonprivatL.Name = "LblTelefonprivatL";
             LblTelefonprivatL.Size = new Size(79, 15);
             LblTelefonprivatL.TabIndex = 13;
             LblTelefonprivatL.Text = "Telefon Privat";
-            LblTelefonprivatL.Click += LblTelefonprivatL_Click;
             // 
             // LblMobiltelefonnummerL
             // 
             LblMobiltelefonnummerL.AutoSize = true;
-            LblMobiltelefonnummerL.Location = new Point(14, 97);
+            LblMobiltelefonnummerL.Location = new Point(23, 418);
             LblMobiltelefonnummerL.Name = "LblMobiltelefonnummerL";
             LblMobiltelefonnummerL.Size = new Size(121, 15);
             LblMobiltelefonnummerL.TabIndex = 14;
             LblMobiltelefonnummerL.Text = "Mobiltelefonnummer";
-            LblMobiltelefonnummerL.Click += LblMobiltelefonnummerL_Click;
-            // 
-            // LblEmailadresseL
-            // 
-            LblEmailadresseL.AutoSize = true;
-            LblEmailadresseL.Location = new Point(14, 126);
-            LblEmailadresseL.Name = "LblEmailadresseL";
-            LblEmailadresseL.Size = new Size(85, 15);
-            LblEmailadresseL.TabIndex = 15;
-            LblEmailadresseL.Text = "E-Mail Adresse";
-            LblEmailadresseL.Click += LblEmailadresseL_Click;
             // 
             // CmbAnredeL
             // 
             CmbAnredeL.FormattingEnabled = true;
-            CmbAnredeL.Items.AddRange(new object[] { "Divers", "Frau ", "Herr", "Keine Angabe" });
-            CmbAnredeL.Location = new Point(146, 35);
+            CmbAnredeL.Items.AddRange(new object[] { "Divers", "Frau ", "Herr", "(Keine Angabe)" });
+            CmbAnredeL.Location = new Point(146, 34);
             CmbAnredeL.Name = "CmbAnredeL";
             CmbAnredeL.Size = new Size(121, 23);
             CmbAnredeL.TabIndex = 16;
-            CmbAnredeL.SelectedIndexChanged += CmbAnredeL_SelectedIndexChanged;
             // 
             // TxtNachnameL
             // 
-            TxtNachnameL.Location = new Point(146, 95);
+            TxtNachnameL.Location = new Point(144, 125);
             TxtNachnameL.Name = "TxtNachnameL";
             TxtNachnameL.Size = new Size(121, 23);
             TxtNachnameL.TabIndex = 17;
-            TxtNachnameL.TextChanged += TxtNachnameL_TextChanged;
             // 
             // TxtWohnortL
             // 
-            TxtWohnortL.Location = new Point(146, 305);
+            TxtWohnortL.Location = new Point(146, 328);
             TxtWohnortL.Name = "TxtWohnortL";
             TxtWohnortL.Size = new Size(121, 23);
             TxtWohnortL.TabIndex = 19;
-            TxtWohnortL.TextChanged += TxtWohnortL_TextChanged;
             // 
-            // TxtAdresseL
+            // TxtStrasseL
             // 
-            TxtAdresseL.Location = new Point(146, 276);
-            TxtAdresseL.Name = "TxtAdresseL";
-            TxtAdresseL.Size = new Size(121, 23);
-            TxtAdresseL.TabIndex = 21;
-            TxtAdresseL.TextChanged += TxtAdresseL_TextChanged;
+            TxtStrasseL.Location = new Point(146, 279);
+            TxtStrasseL.Name = "TxtStrasseL";
+            TxtStrasseL.Size = new Size(121, 23);
+            TxtStrasseL.TabIndex = 21;
             // 
             // TxtPostleitzahlL
             // 
-            TxtPostleitzahlL.Location = new Point(146, 334);
+            TxtPostleitzahlL.Location = new Point(146, 356);
             TxtPostleitzahlL.Name = "TxtPostleitzahlL";
             TxtPostleitzahlL.Size = new Size(121, 23);
             TxtPostleitzahlL.TabIndex = 22;
-            TxtPostleitzahlL.TextChanged += TxtPostleitzahlL_TextChanged;
             // 
             // TxtVornameL
             // 
-            TxtVornameL.Location = new Point(146, 64);
+            TxtVornameL.Location = new Point(146, 91);
             TxtVornameL.Name = "TxtVornameL";
             TxtVornameL.Size = new Size(121, 23);
             TxtVornameL.TabIndex = 24;
-            TxtVornameL.TextChanged += TxtVornameL_TextChanged;
             // 
             // TxtMobiltelefonnummerL
             // 
-            TxtMobiltelefonnummerL.Location = new Point(141, 94);
+            TxtMobiltelefonnummerL.Location = new Point(150, 418);
             TxtMobiltelefonnummerL.Name = "TxtMobiltelefonnummerL";
             TxtMobiltelefonnummerL.Size = new Size(121, 23);
             TxtMobiltelefonnummerL.TabIndex = 25;
-            TxtMobiltelefonnummerL.TextChanged += TxtMobiltelefonnummerL_TextChanged;
             // 
             // TxtGeschaeftL
             // 
-            TxtGeschaeftL.Location = new Point(141, 65);
+            TxtGeschaeftL.Location = new Point(141, 39);
             TxtGeschaeftL.Name = "TxtGeschaeftL";
             TxtGeschaeftL.Size = new Size(121, 23);
             TxtGeschaeftL.TabIndex = 26;
-            TxtGeschaeftL.TextChanged += TxtGeschaeftL_TextChanged;
             // 
             // TxtTelefonprivatL
             // 
-            TxtTelefonprivatL.Location = new Point(141, 36);
+            TxtTelefonprivatL.Location = new Point(144, 392);
             TxtTelefonprivatL.Name = "TxtTelefonprivatL";
             TxtTelefonprivatL.Size = new Size(121, 23);
             TxtTelefonprivatL.TabIndex = 27;
-            TxtTelefonprivatL.TextChanged += TxtTelefonprivatL_TextChanged;
             // 
             // TxtEmailL
             // 
-            TxtEmailL.Location = new Point(141, 123);
+            TxtEmailL.Location = new Point(144, 445);
             TxtEmailL.Name = "TxtEmailL";
             TxtEmailL.Size = new Size(121, 23);
             TxtEmailL.TabIndex = 28;
-            TxtEmailL.TextChanged += TxtEmailL_TextChanged;
             // 
             // lblFirmenname
             // 
@@ -315,7 +290,6 @@ namespace ContactManager.View.Forms
             lblFirmenname.Size = new Size(74, 15);
             lblFirmenname.TabIndex = 31;
             lblFirmenname.Text = "Firmenname";
-            lblFirmenname.Click += label17_Click;
             // 
             // lblGeschaeftsadresse
             // 
@@ -353,15 +327,6 @@ namespace ContactManager.View.Forms
             lblFirmenkontakt.TabIndex = 35;
             lblFirmenkontakt.Text = "Firmenkontakt";
             // 
-            // lblRolle
-            // 
-            lblRolle.AutoSize = true;
-            lblRolle.Location = new Point(57, 84);
-            lblRolle.Name = "lblRolle";
-            lblRolle.Size = new Size(33, 15);
-            lblRolle.TabIndex = 36;
-            lblRolle.Text = "Rolle";
-            // 
             // lblKaderstufe
             // 
             lblKaderstufe.AutoSize = true;
@@ -374,12 +339,11 @@ namespace ContactManager.View.Forms
             // LblStatusL
             // 
             LblStatusL.AutoSize = true;
-            LblStatusL.Location = new Point(346, 378);
+            LblStatusL.Location = new Point(347, 418);
             LblStatusL.Name = "LblStatusL";
             LblStatusL.Size = new Size(45, 15);
             LblStatusL.TabIndex = 38;
             LblStatusL.Text = "Status :";
-            LblStatusL.Click += LblStatusL_Click;
             // 
             // btnSpeichern
             // 
@@ -411,33 +375,14 @@ namespace ContactManager.View.Forms
             dtpEintritt.Size = new Size(199, 23);
             dtpEintritt.TabIndex = 44;
             // 
-            // cmbAbteilung
-            // 
-            cmbAbteilung.FormattingEnabled = true;
-            cmbAbteilung.Items.AddRange(new object[] { "IT", "Finanzen", "HR", "Verkauf", "Produktion", "Verwaltung" });
-            cmbAbteilung.Location = new Point(184, 110);
-            cmbAbteilung.Name = "cmbAbteilung";
-            cmbAbteilung.Size = new Size(121, 23);
-            cmbAbteilung.TabIndex = 46;
-            // 
             // CmbLehrjahreL
             // 
             CmbLehrjahreL.FormattingEnabled = true;
-            CmbLehrjahreL.Items.AddRange(new object[] { "1. Lehrjahre", "2. Lehrjahre", "3. Lehrjahre", "4. Lehrjahre" });
+            CmbLehrjahreL.Items.AddRange(new object[] { "1", "2", "3", "4" });
             CmbLehrjahreL.Location = new Point(141, 37);
             CmbLehrjahreL.Name = "CmbLehrjahreL";
             CmbLehrjahreL.Size = new Size(121, 23);
             CmbLehrjahreL.TabIndex = 47;
-            CmbLehrjahreL.SelectedIndexChanged += CmbLehrjahreL_SelectedIndexChanged;
-            // 
-            // cmbRolle
-            // 
-            cmbRolle.FormattingEnabled = true;
-            cmbRolle.Items.AddRange(new object[] { "System Engineer", "Entwickler", "Projektleiter", "Kaufmännische/r Angestellte/r", "Support" });
-            cmbRolle.Location = new Point(184, 81);
-            cmbRolle.Name = "cmbRolle";
-            cmbRolle.Size = new Size(121, 23);
-            cmbRolle.TabIndex = 48;
             // 
             // txtPersoenlichenotiz
             // 
@@ -446,7 +391,6 @@ namespace ContactManager.View.Forms
             txtPersoenlichenotiz.Size = new Size(230, 84);
             txtPersoenlichenotiz.TabIndex = 49;
             txtPersoenlichenotiz.Text = "";
-            txtPersoenlichenotiz.TextChanged += richTextBox1_TextChanged;
             // 
             // lblPersoenlichenotiz
             // 
@@ -457,25 +401,6 @@ namespace ContactManager.View.Forms
             lblPersoenlichenotiz.Size = new Size(104, 15);
             lblPersoenlichenotiz.TabIndex = 50;
             lblPersoenlichenotiz.Text = "Persönliche Notiz";
-            // 
-            // LblAktuelleslehrjahrL
-            // 
-            LblAktuelleslehrjahrL.AutoSize = true;
-            LblAktuelleslehrjahrL.Location = new Point(14, 79);
-            LblAktuelleslehrjahrL.Name = "LblAktuelleslehrjahrL";
-            LblAktuelleslehrjahrL.Size = new Size(101, 15);
-            LblAktuelleslehrjahrL.TabIndex = 54;
-            LblAktuelleslehrjahrL.Text = "Aktuelles Lehrjahr";
-            LblAktuelleslehrjahrL.Click += label27_Click;
-            // 
-            // CmdAktuellesLehrjahrL
-            // 
-            CmdAktuellesLehrjahrL.Items.AddRange(new object[] { "1. Lehrjahr", "2. Lehrjahr", "3. Lehrjahr", "4. Lehrjahr" });
-            CmdAktuellesLehrjahrL.Location = new Point(141, 76);
-            CmdAktuellesLehrjahrL.Name = "CmdAktuellesLehrjahrL";
-            CmdAktuellesLehrjahrL.Size = new Size(121, 23);
-            CmdAktuellesLehrjahrL.TabIndex = 93;
-            CmdAktuellesLehrjahrL.SelectedIndexChanged += CmdAktuellesLehrjahrL_SelectedIndexChanged;
             // 
             // lblTyp
             // 
@@ -494,16 +419,6 @@ namespace ContactManager.View.Forms
             cmbTyp.Name = "cmbTyp";
             cmbTyp.Size = new Size(121, 23);
             cmbTyp.TabIndex = 57;
-            cmbTyp.SelectedIndexChanged += comboBox9_SelectedIndexChanged;
-            // 
-            // lblAbteilung
-            // 
-            lblAbteilung.AutoSize = true;
-            lblAbteilung.Location = new Point(57, 113);
-            lblAbteilung.Name = "lblAbteilung";
-            lblAbteilung.Size = new Size(59, 15);
-            lblAbteilung.TabIndex = 58;
-            lblAbteilung.Text = "Abteilung";
             // 
             // LblAhvnummerL
             // 
@@ -513,25 +428,6 @@ namespace ContactManager.View.Forms
             LblAhvnummerL.Size = new Size(84, 15);
             LblAhvnummerL.TabIndex = 59;
             LblAhvnummerL.Text = "AHV-Nummer";
-            LblAhvnummerL.Click += LblAhvnummerL_Click;
-            // 
-            // lblBeschaeftigungsgrad
-            // 
-            lblBeschaeftigungsgrad.AutoSize = true;
-            lblBeschaeftigungsgrad.Location = new Point(57, 142);
-            lblBeschaeftigungsgrad.Name = "lblBeschaeftigungsgrad";
-            lblBeschaeftigungsgrad.Size = new Size(112, 15);
-            lblBeschaeftigungsgrad.TabIndex = 60;
-            lblBeschaeftigungsgrad.Text = "Beschäftigungsgrad";
-            // 
-            // cmbBeschaeftigungsgrad
-            // 
-            cmbBeschaeftigungsgrad.FormattingEnabled = true;
-            cmbBeschaeftigungsgrad.Items.AddRange(new object[] { "100 %", "80 %", "60 %", "40 %", "20%" });
-            cmbBeschaeftigungsgrad.Location = new Point(184, 139);
-            cmbBeschaeftigungsgrad.Name = "cmbBeschaeftigungsgrad";
-            cmbBeschaeftigungsgrad.Size = new Size(121, 23);
-            cmbBeschaeftigungsgrad.TabIndex = 61;
             // 
             // cmbKaderstufe
             // 
@@ -548,7 +444,6 @@ namespace ContactManager.View.Forms
             TxtAhvnummerL.Name = "TxtAhvnummerL";
             TxtAhvnummerL.Size = new Size(121, 23);
             TxtAhvnummerL.TabIndex = 63;
-            TxtAhvnummerL.TextChanged += TxtAhvnummerL_TextChanged;
             // 
             // txtGeschaeftsadresse
             // 
@@ -586,32 +481,29 @@ namespace ContactManager.View.Forms
             // 
             CmbNationalitätL.AutoCompleteCustomSource.AddRange(new string[] { "Schweiz", "", "", "Deutschland", "", "", "Liechtenstein", "", "", "Österreich", "", "", "Frankreich", "", "", "Italien", "", "", "Spanien", "", "", "Portugal", "", "", "Belgien", "", "", "Niederlande", "", "", "Luxemburg", "", "", "Dänemark", "", "", "Norwegen", "", "", "Schweden", "", "", "Finnland", "", "", "Island", "", "", "Polen", "", "", "Tschechien", "", "", "Slowakei", "", "", "Ungarn", "", "", "Slowenien", "", "", "Kroatien", "", "", "Griechenland", "", "", "Bulgarien", "", "", "Rumänien", "", "", "Estland", "", "", "Lettland", "", "", "Litauen", "", "", "Irland", "", "", "Vereinigtes Königreich", "", "", "USA", "", "", "Kanada", "", "", "Mexiko", "", "", "Brasilien", "", "", "Argentinien", "", "", "Australien", "", "", "Neuseeland", "", "", "China", "", "", "Japan", "", "", "Südkorea", "", "", "Indien", "", "", "Südafrika", "", "", "Ägypten", "", "", "Marokko", "", "", "Türkei" });
             CmbNationalitätL.FormattingEnabled = true;
-            CmbNationalitätL.Items.AddRange(new object[] { "Dr.", "Prof." });
-            CmbNationalitätL.Location = new Point(146, 247);
+            CmbNationalitätL.Items.AddRange(new object[] { "Schweiz", "Deutschland", "Liechtenstein", "Österreich", "Frankreich", "Italien", "Spanien", "Portugal", "Belgien", "Niederlande", "Luxemburg", "Dänemark", "Norwegen", "Schweden", "Finnland", "Island", "Polen", "Tschechien", "Slowakei", "Ungarn", "Slowenien", "Kroatien", "Griechenland", "Bulgarien", "Rumänien", "Estland", "Lettland", "Litauen", "Irland", "Vereinigtes Königreich", "USA", "Kanada", "Mexiko", "Brasilien", "Argentinien", "Australien", "Neuseeland", "China", "Japan", "Südkorea", "Indien", "Südafrika", "Ägypten", "Marokko", "Türkei" });
+            CmbNationalitätL.Location = new Point(146, 250);
             CmbNationalitätL.Name = "CmbNationalitätL";
             CmbNationalitätL.Size = new Size(121, 23);
             CmbNationalitätL.TabIndex = 68;
-            CmbNationalitätL.SelectedIndexChanged += CmbNationalitätL_SelectedIndexChanged;
             // 
             // LblGeschlechtL
             // 
             LblGeschlechtL.AutoSize = true;
-            LblGeschlechtL.Location = new Point(25, 162);
+            LblGeschlechtL.Location = new Point(29, 189);
             LblGeschlechtL.Name = "LblGeschlechtL";
             LblGeschlechtL.Size = new Size(65, 15);
             LblGeschlechtL.TabIndex = 69;
             LblGeschlechtL.Text = "Geschlecht";
-            LblGeschlechtL.Click += LblGeshlecht;
             // 
             // CmbGeschlechtL
             // 
             CmbGeschlechtL.FormattingEnabled = true;
-            CmbGeschlechtL.Items.AddRange(new object[] { "Männlich", "Weiblich", "Divers ", "Keine Angabe" });
-            CmbGeschlechtL.Location = new Point(146, 159);
+            CmbGeschlechtL.Items.AddRange(new object[] { "Männlich", "Weiblich", "Divers ", "(Keine Angabe)" });
+            CmbGeschlechtL.Location = new Point(146, 189);
             CmbGeschlechtL.Name = "CmbGeschlechtL";
             CmbGeschlechtL.Size = new Size(121, 23);
             CmbGeschlechtL.TabIndex = 70;
-            CmbGeschlechtL.SelectedIndexChanged += CmbGeschlechtL_SelectedIndexChanged;
             // 
             // lblFirmaKunde
             // 
@@ -622,25 +514,23 @@ namespace ContactManager.View.Forms
             lblFirmaKunde.Size = new Size(85, 15);
             lblFirmaKunde.TabIndex = 71;
             lblFirmaKunde.Text = "Firma / Kunde";
-            lblFirmaKunde.Click += label33_Click;
             // 
             // DtpGeburtsdatumL
             // 
-            DtpGeburtsdatumL.Location = new Point(146, 127);
+            DtpGeburtsdatumL.Location = new Point(146, 160);
             DtpGeburtsdatumL.Name = "DtpGeburtsdatumL";
             DtpGeburtsdatumL.Size = new Size(119, 23);
             DtpGeburtsdatumL.TabIndex = 25;
-            DtpGeburtsdatumL.ValueChanged += DtpGeburtsdatumL_ValueChanged;
             // 
             // PERSON
             // 
             PERSON.Controls.Add(tabKunde);
             PERSON.Controls.Add(tabMitarbeiter);
-            PERSON.Controls.Add(tabLehrling);
+            PERSON.Controls.Add(TabLehrling);
             PERSON.Location = new Point(12, 12);
             PERSON.Name = "PERSON";
             PERSON.SelectedIndex = 0;
-            PERSON.Size = new Size(638, 449);
+            PERSON.Size = new Size(781, 590);
             PERSON.TabIndex = 76;
             // 
             // tabKunde
@@ -666,7 +556,7 @@ namespace ContactManager.View.Forms
             tabKunde.Location = new Point(4, 24);
             tabKunde.Name = "tabKunde";
             tabKunde.Padding = new Padding(3);
-            tabKunde.Size = new Size(630, 421);
+            tabKunde.Size = new Size(773, 562);
             tabKunde.TabIndex = 0;
             tabKunde.Text = "Kunde";
             tabKunde.UseVisualStyleBackColor = true;
@@ -741,13 +631,9 @@ namespace ContactManager.View.Forms
             // 
             // tabMitarbeiter
             // 
-            tabMitarbeiter.Controls.Add(lblBeschaeftigungsgrad);
-            tabMitarbeiter.Controls.Add(lblRolle);
             tabMitarbeiter.Controls.Add(lblStatus);
             tabMitarbeiter.Controls.Add(lblKaderstufe);
             tabMitarbeiter.Controls.Add(cmbStatus);
-            tabMitarbeiter.Controls.Add(cmbAbteilung);
-            tabMitarbeiter.Controls.Add(cmbRolle);
             tabMitarbeiter.Controls.Add(dtpEintritt);
             tabMitarbeiter.Controls.Add(lblTyp);
             tabMitarbeiter.Controls.Add(dtpAustritt);
@@ -755,56 +641,146 @@ namespace ContactManager.View.Forms
             tabMitarbeiter.Controls.Add(lblAustritt);
             tabMitarbeiter.Controls.Add(cmbKaderstufe);
             tabMitarbeiter.Controls.Add(lblEintritt);
-            tabMitarbeiter.Controls.Add(lblAbteilung);
-            tabMitarbeiter.Controls.Add(cmbBeschaeftigungsgrad);
             tabMitarbeiter.Location = new Point(4, 24);
             tabMitarbeiter.Name = "tabMitarbeiter";
             tabMitarbeiter.Padding = new Padding(3);
-            tabMitarbeiter.Size = new Size(630, 421);
+            tabMitarbeiter.Size = new Size(773, 562);
             tabMitarbeiter.TabIndex = 1;
             tabMitarbeiter.Text = "Mitarbeiter";
             tabMitarbeiter.UseVisualStyleBackColor = true;
             // 
-            // tabLehrling
+            // TabLehrling
             // 
-            tabLehrling.Controls.Add(CmbStatusL);
-            tabLehrling.Controls.Add(LblStatusL);
-            tabLehrling.Controls.Add(GrpBeschaeftigungsdatenL);
-            tabLehrling.Controls.Add(GrpKontaktinformationenL);
-            tabLehrling.Controls.Add(GrpPersoenlichL);
-            tabLehrling.Controls.Add(BtnSpeichernL);
-            tabLehrling.Location = new Point(4, 24);
-            tabLehrling.Name = "tabLehrling";
-            tabLehrling.Padding = new Padding(3);
-            tabLehrling.Size = new Size(630, 421);
-            tabLehrling.TabIndex = 2;
-            tabLehrling.Text = "Lehrling";
-            tabLehrling.UseVisualStyleBackColor = true;
-            tabLehrling.Click += tabLehrling_Click;
+            TabLehrling.Controls.Add(CbStatusL);
+            TabLehrling.Controls.Add(LblStatusL);
+            TabLehrling.Controls.Add(GrpBeschaeftigungsdatenL);
+            TabLehrling.Controls.Add(GrpKontaktinformationenL);
+            TabLehrling.Controls.Add(GrpPersoenlichL);
+            TabLehrling.Controls.Add(BtnSpeichernL);
+            TabLehrling.Location = new Point(4, 24);
+            TabLehrling.Name = "TabLehrling";
+            TabLehrling.Padding = new Padding(3);
+            TabLehrling.Size = new Size(773, 562);
+            TabLehrling.TabIndex = 2;
+            TabLehrling.Text = "Lehrling";
+            TabLehrling.UseVisualStyleBackColor = true;
             // 
-            // CmbStatusL
+            // CbStatusL
             // 
-            CmbStatusL.FormattingEnabled = true;
-            CmbStatusL.Items.AddRange(new object[] { "Aktiv", "Inaktiv" });
-            CmbStatusL.Location = new Point(413, 375);
-            CmbStatusL.Name = "CmbStatusL";
-            CmbStatusL.Size = new Size(102, 23);
-            CmbStatusL.TabIndex = 91;
-            CmbStatusL.SelectedIndexChanged += CmbStatusL_SelectedIndexChanged;
+            CbStatusL.AutoSize = true;
+            CbStatusL.Location = new Point(408, 417);
+            CbStatusL.Name = "CbStatusL";
+            CbStatusL.Size = new Size(53, 19);
+            CbStatusL.TabIndex = 92;
+            CbStatusL.Text = "Aktiv";
+            CbStatusL.UseVisualStyleBackColor = true;
             // 
             // GrpBeschaeftigungsdatenL
             // 
+            GrpBeschaeftigungsdatenL.Controls.Add(LblBeschaeftigungsgradL);
+            GrpBeschaeftigungsdatenL.Controls.Add(CmbBeschaeftigungsgradL);
+            GrpBeschaeftigungsdatenL.Controls.Add(lblRolle);
+            GrpBeschaeftigungsdatenL.Controls.Add(dateTimePicker1);
+            GrpBeschaeftigungsdatenL.Controls.Add(cmbRolle);
+            GrpBeschaeftigungsdatenL.Controls.Add(dateTimePicker3);
+            GrpBeschaeftigungsdatenL.Controls.Add(label6);
+            GrpBeschaeftigungsdatenL.Controls.Add(label7);
+            GrpBeschaeftigungsdatenL.Controls.Add(CmbAbteilungL);
+            GrpBeschaeftigungsdatenL.Controls.Add(LblAbteilungL);
             GrpBeschaeftigungsdatenL.Controls.Add(LblLehrjahreL);
             GrpBeschaeftigungsdatenL.Controls.Add(CmbLehrjahreL);
-            GrpBeschaeftigungsdatenL.Controls.Add(LblAktuelleslehrjahrL);
-            GrpBeschaeftigungsdatenL.Controls.Add(CmdAktuellesLehrjahrL);
-            GrpBeschaeftigungsdatenL.Location = new Point(332, 232);
+            GrpBeschaeftigungsdatenL.Location = new Point(332, 153);
             GrpBeschaeftigungsdatenL.Name = "GrpBeschaeftigungsdatenL";
-            GrpBeschaeftigungsdatenL.Size = new Size(280, 115);
+            GrpBeschaeftigungsdatenL.Size = new Size(280, 255);
             GrpBeschaeftigungsdatenL.TabIndex = 90;
             GrpBeschaeftigungsdatenL.TabStop = false;
             GrpBeschaeftigungsdatenL.Text = "Beschäftigungsdaten";
-            GrpBeschaeftigungsdatenL.Enter += GrpBeschaeftigungsdatenL_Enter;
+            // 
+            // LblBeschaeftigungsgradL
+            // 
+            LblBeschaeftigungsgradL.AutoSize = true;
+            LblBeschaeftigungsgradL.Location = new Point(14, 143);
+            LblBeschaeftigungsgradL.Name = "LblBeschaeftigungsgradL";
+            LblBeschaeftigungsgradL.Size = new Size(112, 15);
+            LblBeschaeftigungsgradL.TabIndex = 93;
+            LblBeschaeftigungsgradL.Text = "Beschäftigungsgrad";
+            // 
+            // CmbBeschaeftigungsgradL
+            // 
+            CmbBeschaeftigungsgradL.FormattingEnabled = true;
+            CmbBeschaeftigungsgradL.Items.AddRange(new object[] { "100", "80", "60", "40", "20" });
+            CmbBeschaeftigungsgradL.Location = new Point(141, 140);
+            CmbBeschaeftigungsgradL.Name = "CmbBeschaeftigungsgradL";
+            CmbBeschaeftigungsgradL.Size = new Size(121, 23);
+            CmbBeschaeftigungsgradL.TabIndex = 94;
+            // 
+            // lblRolle
+            // 
+            lblRolle.AutoSize = true;
+            lblRolle.Location = new Point(14, 109);
+            lblRolle.Name = "lblRolle";
+            lblRolle.Size = new Size(33, 15);
+            lblRolle.TabIndex = 100;
+            lblRolle.Text = "Rolle";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(66, 181);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(199, 23);
+            dateTimePicker1.TabIndex = 99;
+            // 
+            // cmbRolle
+            // 
+            cmbRolle.FormattingEnabled = true;
+            cmbRolle.Items.AddRange(new object[] { "System Engineer", "Entwickler", "Projektleiter", "Kaufmännische/r Angestellte/r", "Support" });
+            cmbRolle.Location = new Point(141, 106);
+            cmbRolle.Name = "cmbRolle";
+            cmbRolle.Size = new Size(121, 23);
+            cmbRolle.TabIndex = 101;
+            // 
+            // dateTimePicker3
+            // 
+            dateTimePicker3.Location = new Point(66, 216);
+            dateTimePicker3.Name = "dateTimePicker3";
+            dateTimePicker3.Size = new Size(199, 23);
+            dateTimePicker3.TabIndex = 98;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(14, 222);
+            label6.Name = "label6";
+            label6.Size = new Size(46, 15);
+            label6.TabIndex = 97;
+            label6.Text = "Austritt";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(14, 187);
+            label7.Name = "label7";
+            label7.Size = new Size(42, 15);
+            label7.TabIndex = 96;
+            label7.Text = "Eintritt";
+            // 
+            // CmbAbteilungL
+            // 
+            CmbAbteilungL.FormattingEnabled = true;
+            CmbAbteilungL.Items.AddRange(new object[] { "IT", "Finanzen", "HR", "Verkauf", "Produktion", "Verwaltung" });
+            CmbAbteilungL.Location = new Point(141, 77);
+            CmbAbteilungL.Name = "CmbAbteilungL";
+            CmbAbteilungL.Size = new Size(121, 23);
+            CmbAbteilungL.TabIndex = 94;
+            // 
+            // LblAbteilungL
+            // 
+            LblAbteilungL.AutoSize = true;
+            LblAbteilungL.Location = new Point(14, 80);
+            LblAbteilungL.Name = "LblAbteilungL";
+            LblAbteilungL.Size = new Size(59, 15);
+            LblAbteilungL.TabIndex = 95;
+            LblAbteilungL.Text = "Abteilung";
             // 
             // LblLehrjahreL
             // 
@@ -814,29 +790,30 @@ namespace ContactManager.View.Forms
             LblLehrjahreL.Size = new Size(56, 15);
             LblLehrjahreL.TabIndex = 92;
             LblLehrjahreL.Text = "Lehrjahre";
-            LblLehrjahreL.Click += LblLehrjahreL_Click;
             // 
             // GrpKontaktinformationenL
             // 
-            GrpKontaktinformationenL.Controls.Add(LblTelefonprivatL);
-            GrpKontaktinformationenL.Controls.Add(TxtMobiltelefonnummerL);
             GrpKontaktinformationenL.Controls.Add(TxtGeschaeftL);
-            GrpKontaktinformationenL.Controls.Add(LblEmailadresseL);
-            GrpKontaktinformationenL.Controls.Add(TxtTelefonprivatL);
-            GrpKontaktinformationenL.Controls.Add(LblMobiltelefonnummerL);
-            GrpKontaktinformationenL.Controls.Add(TxtEmailL);
             GrpKontaktinformationenL.Controls.Add(lblTelefongeschaeftL);
             GrpKontaktinformationenL.Location = new Point(332, 34);
             GrpKontaktinformationenL.Name = "GrpKontaktinformationenL";
-            GrpKontaktinformationenL.Size = new Size(280, 163);
+            GrpKontaktinformationenL.Size = new Size(280, 107);
             GrpKontaktinformationenL.TabIndex = 89;
             GrpKontaktinformationenL.TabStop = false;
             GrpKontaktinformationenL.Text = "Kontaktinformationen";
-            GrpKontaktinformationenL.Enter += GrpKontaktinformationenL_Enter;
             // 
             // GrpPersoenlichL
             // 
+            GrpPersoenlichL.Controls.Add(label5);
+            GrpPersoenlichL.Controls.Add(TxtHausnummerL);
+            GrpPersoenlichL.Controls.Add(TxtEmailL);
+            GrpPersoenlichL.Controls.Add(LblTelefonprivatL);
+            GrpPersoenlichL.Controls.Add(TxtMobiltelefonnummerL);
+            GrpPersoenlichL.Controls.Add(LblHausnummerL);
+            GrpPersoenlichL.Controls.Add(TxtTelefonprivatL);
+            GrpPersoenlichL.Controls.Add(CmbTitelL);
             GrpPersoenlichL.Controls.Add(LblAnredeL);
+            GrpPersoenlichL.Controls.Add(LblMobiltelefonnummerL);
             GrpPersoenlichL.Controls.Add(DtpGeburtsdatumL);
             GrpPersoenlichL.Controls.Add(CmbAnredeL);
             GrpPersoenlichL.Controls.Add(CmbNationalitätL);
@@ -849,68 +826,90 @@ namespace ContactManager.View.Forms
             GrpPersoenlichL.Controls.Add(LblTitelL);
             GrpPersoenlichL.Controls.Add(LblNachnameL);
             GrpPersoenlichL.Controls.Add(TxtNachnameL);
-            GrpPersoenlichL.Controls.Add(TxtTitelL);
             GrpPersoenlichL.Controls.Add(LblGeburtsdatumL);
             GrpPersoenlichL.Controls.Add(TxtNationalitätL);
-            GrpPersoenlichL.Controls.Add(LblAdresseL);
-            GrpPersoenlichL.Controls.Add(TxtAdresseL);
+            GrpPersoenlichL.Controls.Add(LblStrasseL);
+            GrpPersoenlichL.Controls.Add(TxtStrasseL);
             GrpPersoenlichL.Controls.Add(LblWohnortL);
             GrpPersoenlichL.Controls.Add(TxtWohnortL);
             GrpPersoenlichL.Controls.Add(LblPostleitzahlL);
             GrpPersoenlichL.Controls.Add(TxtPostleitzahlL);
             GrpPersoenlichL.Location = new Point(18, 27);
             GrpPersoenlichL.Name = "GrpPersoenlichL";
-            GrpPersoenlichL.Size = new Size(290, 376);
+            GrpPersoenlichL.Size = new Size(290, 510);
             GrpPersoenlichL.TabIndex = 88;
             GrpPersoenlichL.TabStop = false;
             GrpPersoenlichL.Text = "Persönliche Angaben";
-            GrpPersoenlichL.Enter += GrpPersoenlichL_Enter;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(25, 448);
+            label5.Name = "label5";
+            label5.Size = new Size(85, 15);
+            label5.TabIndex = 29;
+            label5.Text = "E-Mail Adresse";
+            // 
+            // TxtHausnummerL
+            // 
+            TxtHausnummerL.Location = new Point(146, 305);
+            TxtHausnummerL.Name = "TxtHausnummerL";
+            TxtHausnummerL.Size = new Size(119, 23);
+            TxtHausnummerL.TabIndex = 84;
+            // 
+            // LblHausnummerL
+            // 
+            LblHausnummerL.AutoSize = true;
+            LblHausnummerL.Location = new Point(25, 305);
+            LblHausnummerL.Name = "LblHausnummerL";
+            LblHausnummerL.Size = new Size(80, 15);
+            LblHausnummerL.TabIndex = 83;
+            LblHausnummerL.Text = "Hausnummer";
+            // 
+            // CmbTitelL
+            // 
+            CmbTitelL.FormattingEnabled = true;
+            CmbTitelL.Items.AddRange(new object[] { "Dr.", "Prof.", "Herr", "Frau", "Mrs.", "Mr. " });
+            CmbTitelL.Location = new Point(146, 67);
+            CmbTitelL.Name = "CmbTitelL";
+            CmbTitelL.Size = new Size(121, 23);
+            CmbTitelL.TabIndex = 82;
             // 
             // LblVornameL
             // 
             LblVornameL.AutoSize = true;
             LblVornameL.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LblVornameL.Location = new Point(25, 67);
+            LblVornameL.Location = new Point(25, 92);
             LblVornameL.Name = "LblVornameL";
             LblVornameL.Size = new Size(60, 17);
             LblVornameL.TabIndex = 80;
             LblVornameL.Text = "Vorname";
-            LblVornameL.Click += LblVornameL_Click;
             // 
             // LblNachnameL
             // 
             LblNachnameL.AutoSize = true;
             LblNachnameL.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LblNachnameL.Location = new Point(25, 97);
+            LblNachnameL.Location = new Point(24, 116);
             LblNachnameL.Name = "LblNachnameL";
             LblNachnameL.Size = new Size(70, 17);
             LblNachnameL.TabIndex = 81;
             LblNachnameL.Text = "Nachname";
-            LblNachnameL.Click += LblNachnameL_Click;
-            // 
-            // TxtTitelL
-            // 
-            TxtTitelL.Location = new Point(146, 188);
-            TxtTitelL.Name = "TxtTitelL";
-            TxtTitelL.Size = new Size(121, 23);
-            TxtTitelL.TabIndex = 84;
-            TxtTitelL.TextChanged += TxtTitelL_TextChanged;
             // 
             // BtnSpeichernL
             // 
-            BtnSpeichernL.Location = new Point(535, 373);
+            BtnSpeichernL.Location = new Point(520, 414);
             BtnSpeichernL.Name = "BtnSpeichernL";
             BtnSpeichernL.Size = new Size(77, 30);
             BtnSpeichernL.TabIndex = 79;
             BtnSpeichernL.Text = "Speichern";
             BtnSpeichernL.UseVisualStyleBackColor = true;
-            BtnSpeichernL.Click += btnSpeichernL_Click;
+            BtnSpeichernL.Click += BtnSpeichernL_Click;
             // 
             // Details
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(660, 467);
+            ClientSize = new Size(1147, 721);
             Controls.Add(PERSON);
             Name = "Details";
             Text = "Details";
@@ -919,8 +918,8 @@ namespace ContactManager.View.Forms
             tabKunde.PerformLayout();
             tabMitarbeiter.ResumeLayout(false);
             tabMitarbeiter.PerformLayout();
-            tabLehrling.ResumeLayout(false);
-            tabLehrling.PerformLayout();
+            TabLehrling.ResumeLayout(false);
+            TabLehrling.PerformLayout();
             GrpBeschaeftigungsdatenL.ResumeLayout(false);
             GrpBeschaeftigungsdatenL.PerformLayout();
             GrpKontaktinformationenL.ResumeLayout(false);
@@ -935,18 +934,17 @@ namespace ContactManager.View.Forms
         private Label LblTitelL;
         private Label LblGeburtsdatumL;
         private Label TxtNationalitätL;
-        private Label LblAdresseL;
+        private Label LblStrasseL;
         private Label LblPostleitzahlL;
         private Label LblWohnortL;
         private Label lblTelefongeschaeftL;
         private Label LblTelefonprivatL;
         private Label LblMobiltelefonnummerL;
-        private Label LblEmailadresseL;
         private ComboBox CmbAnredeL;
         private TextBox TxtNachnameL;
         private TextBox TxtWohnortL;
  
-        private TextBox TxtAdresseL;
+        private TextBox TxtStrasseL;
         private TextBox TxtPostleitzahlL;
         private TextBox TxtVornameL;
         private TextBox TxtMobiltelefonnummerL;
@@ -958,26 +956,18 @@ namespace ContactManager.View.Forms
         private Label lblEintritt;
         private Label lblAustritt;
         private Label lblFirmenkontakt;
-        private Label lblRolle;
         private Label lblKaderstufe;
         private Label LblStatusL;
         private Button btnSpeichern;
         private TextBox txtFirmenkontakt;
         private DateTimePicker dtpAustritt;
         private DateTimePicker dtpEintritt;
-        private ComboBox cmbAbteilung;
         private ComboBox CmbLehrjahreL;
-        private ComboBox cmbRolle;
         private RichTextBox txtPersoenlichenotiz;
         private Label lblPersoenlichenotiz;
-        private Label LblAktuelleslehrjahrL;
-        private ComboBox CmdAktuellesLehrjahrL;
         private Label lblTyp;
         private ComboBox cmbTyp;
-        private Label lblAbteilung;
         private Label LblAhvnummerL;
-        private Label lblBeschaeftigungsgrad;
-        private ComboBox cmbBeschaeftigungsgrad;
         private ComboBox cmbKaderstufe;
         private TextBox TxtAhvnummerL;
         private TextBox txtGeschaeftsadresse;
@@ -992,7 +982,7 @@ namespace ContactManager.View.Forms
         private TabControl PERSON;
         private TabPage tabKunde;
         private TabPage tabMitarbeiter;
-        private TabPage tabLehrling;
+        private TabPage TabLehrling;
         private DateTimePicker dateTimePicker2;
         private Label label1;
         private TextBox textBox1;
@@ -1002,13 +992,26 @@ namespace ContactManager.View.Forms
         private TextBox textBox2;
         private Label label4;
         private Label LblVornameL;
-        private TextBox TxtTitelL;
         private Label LblNachnameL;
         private Button BtnSpeichernL;
         private GroupBox GrpKontaktinformationenL;
         private GroupBox GrpPersoenlichL;
         private Label LblLehrjahreL;
-        private ComboBox CmbStatusL;
         private GroupBox GrpBeschaeftigungsdatenL;
+        private ComboBox CmbTitelL;
+        private TextBox TxtHausnummerL;
+        private Label LblHausnummerL;
+        private Label label5;
+        private CheckBox CbStatusL;
+        private ComboBox CmbAbteilungL;
+        private Label LblAbteilungL;
+        private Label lblRolle;
+        private DateTimePicker dateTimePicker1;
+        private ComboBox cmbRolle;
+        private DateTimePicker dateTimePicker3;
+        private Label label6;
+        private Label label7;
+        private Label LblBeschaeftigungsgradL;
+        private ComboBox CmbBeschaeftigungsgradL;
     }
 }
