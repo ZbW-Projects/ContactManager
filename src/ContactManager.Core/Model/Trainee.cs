@@ -21,11 +21,9 @@ namespace ContactManager.Core.Model
         public override DateTime EndDate { get => _endDate; set => _endDate = value == default ? throw new ArgumentException("Das EndDatum muss einen Wert enthalten.", nameof(value)) : value; }
         public override int CadreLevel { get => _cadreLevel; set => _cadreLevel = 0; }
         public int TraineeYears { get => _traineeYears; set => _traineeYears = value < 0 || value > 4 ? throw new ArgumentException("Die Lehrjahre sind ungültig.", nameof(value)) : value; }
-        public int ActualTraineeYear => DatesDiff.Year(_startDate, _endDate);
+        public int ActualTraineeYear => DatesDiff.Year(_startDate, _endDate, 1);
 
     }
-
-
 
 
     /*===================================================================
@@ -37,14 +35,21 @@ namespace ContactManager.Core.Model
 
     public class DatesDiff
     {
-        public static int Year(DateTime startDate, DateTime endDate = default)
+        public static int Year(DateTime startDate, DateTime endDate = default, int offSet = 0)
         {
-            int year = DateTime.Today.Year - startDate.Year;
+            int tenure = DateTime.Today.Year - startDate.Year + offSet;
+            DateTime today = DateTime.Today;
 
-            if (endDate == default) endDate = DateTime.Today;
-            if (DateTime.Today < startDate) return 0;
-            if (DateTime.Today >= endDate) return endDate.Year - startDate.Year;
-            return year == 0 ? 1 : year;
+            if (endDate == default)
+            {
+                if (startDate > today) return 0;
+            }
+            else
+            {
+                if (endDate < today) return endDate.Year - startDate.Year;
+            }
+
+                return tenure;
         }
     }
 }

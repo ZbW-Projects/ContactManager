@@ -67,8 +67,9 @@ namespace ContactManager.Tests.Core.Model
             var t = new Trainee();
             // Zugriff auf protected Felder _startDate/_endDate geht nur über Basisklasse Employee
             // hier simulieren wir über Properties
+            t.StartDate = start;
             t.EndDate = end;
-            var actual = DatesDiff.Year(start, end);
+            var actual = DatesDiff.Year(start, end, 1);
 
             Assert.AreEqual(actual, t.ActualTraineeYear);
         }
@@ -81,7 +82,7 @@ namespace ContactManager.Tests.Core.Model
         public void Year_TodayBeforeStart_Returns0()
         {
             var start = DateTime.Today.AddDays(1);
-            var result = DatesDiff.Year(start);
+            var result = DatesDiff.Year(start, offSet: 1);
             Assert.AreEqual(0, result);
         }
 
@@ -90,7 +91,7 @@ namespace ContactManager.Tests.Core.Model
         {
             var start = new DateTime(2020, 1, 1);
             var end = new DateTime(2022, 1, 1);
-            var result = DatesDiff.Year(start, end);
+            var result = DatesDiff.Year(start, end, 1);
             Assert.AreEqual(2, result);
         }
 
@@ -98,16 +99,24 @@ namespace ContactManager.Tests.Core.Model
         public void Year_SameYear_Returns1()
         {
             var start = DateTime.Today.AddMonths(-2);
-            var result = DatesDiff.Year(start);
+            var result = DatesDiff.Year(start, offSet: 1);
             Assert.AreEqual(1, result);
         }
 
+
+        //Beobachtung:
+        // Dieser Test wurde ein wenig angepasst.
+        // Es ist ein Counter für die geleisteten Jahre, 
+        // der im Fall eines fehlenden Enddatums wie eine Art
+        // unbefristeter Vertrag funktioniert. 
+        // In der Trainee-Umgebung ist das nicht üblich.
+
         [TestMethod]
-        public void Year_DefaultEnd_UsesToday()
+        public void Year_EndDateDefault_CountsYears()
         {
             var start = new DateTime(DateTime.Today.Year - 5, 1, 1);
-            var result = DatesDiff.Year(start);
-            Assert.AreEqual(5, result);
+            var result = DatesDiff.Year(start, offSet: 1);
+            Assert.AreEqual(6, result);
         }
     }
 }
