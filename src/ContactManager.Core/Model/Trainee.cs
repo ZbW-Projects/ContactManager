@@ -49,7 +49,7 @@ namespace ContactManager.Core.Model
                 if (endDate < today) return endDate.Year - startDate.Year;
             }
 
-                return tenure;
+            return tenure;
         }
     }
 }
