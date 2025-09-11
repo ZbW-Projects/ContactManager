@@ -1,7 +1,7 @@
 ﻿using ContactManager.Core.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ContactManager.Tests.Core.Model
+namespace ContactManager.Test.Core.Model
 {
     [TestClass]
     public class NameHelperTests

@@ -133,7 +133,7 @@ namespace ContactManager.View.Forms
 
                 //Adresse + Kontakt
                 Street = TxtStrasseK.Text,
-                StreetNumber = TxtHausnummerK.Text,    
+                StreetNumber = TxtHausnummerK.Text,
                 ZipCode = TxtPostleitzahlK.Text,
                 Place = TxtWohnortK.Text,
                 PhoneNumberBuisness = TxtGeschaeftK.Text,

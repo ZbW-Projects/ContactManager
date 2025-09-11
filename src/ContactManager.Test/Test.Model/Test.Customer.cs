@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ContactManager.Tests.Core.Model
+namespace ContactManager.Test.Core.Model
 {
     [TestClass]
     public class CustomerTests
