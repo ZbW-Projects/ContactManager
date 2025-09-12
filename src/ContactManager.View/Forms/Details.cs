@@ -157,7 +157,7 @@ namespace ContactManager.View.Forms
 
                 //Firma
                 CompanyName = TxtFirmennameK.Text,
-                CompanyContact = TxtFirmenkontaktK.Text,
+                CompanyContact = TxtGeschaeftK.Text,
 
                 //Administratives
                 // CustomerType = customerType,             
@@ -168,6 +168,7 @@ namespace ContactManager.View.Forms
 
             };
         }
+
         // -------------------------------------------------------------------------
         // Editieren
         // -------------------------------------------------------------------------
