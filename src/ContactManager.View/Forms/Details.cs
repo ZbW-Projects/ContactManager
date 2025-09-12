@@ -3,17 +3,41 @@ using ContactManager.Core.Model;
 using ContactManager.Core.Services;
 using ContactManager.View.Forms.Components;
 using System;
+using System.IO;
+using System.Reflection.Emit;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ContactManager.View.Forms
 {
     public partial class Details : Form
     {
 
+
+        //-----------------------------------
+        // Zwei Szenarios UIs
+        //-----------------------------------
+
+        //-----------------------------------
+        // Szenario 1 Erstellen von Kontakten 
+        //-----------------------------------
         public Details()
         {
             InitializeComponent();
-            Controller.SpinData();
+            //Controller.SpinData();
+            CreateContactUISettings();
+        }
+
+        //------------------------------------
+        // Szenario 2 Bearbeiten von Kontakten
+        //------------------------------------
+        public Details(Guid id, string type)
+        {
+            InitializeComponent();
+            // Controller.SpinData();
+            BearbeitenContactUISettings(type);
+            // Kontakten abrufen 
+            GetContactData(id, type);
         }
 
         // ---------------------------------------------------------------------
@@ -23,6 +47,32 @@ namespace ContactManager.View.Forms
         // ---------------------------------------------------------------------
         // Erstellen
         // ---------------------------------------------------------------------
+
+        private void CreateContactUISettings()
+        {
+
+            // ---------------------------------------------------------------------
+            // Werte: Lehrling
+            // ---------------------------------------------------------------------
+
+            // ---------------------------------------------------------------------
+            // Werte: Mitarbeiter
+            // ---------------------------------------------------------------------
+
+            // ---------------------------------------------------------------------
+            // Werte: Kunde
+            // ---------------------------------------------------------------------
+            Protokoll.Visible = false;
+            Notiz.Visible = false;
+            KundeBearbeiten.Visible = false;
+
+        }
+
+
+        //----------------------------------------------------------------------
+        // Events
+        //----------------------------------------------------------------------
+
 
         // ---------------------------------------------------------------------
         // Werte: Lehrling
@@ -162,7 +212,7 @@ namespace ContactManager.View.Forms
                     Status = CmbStatusK.Checked,
 
                     // Meta
-                    Type = TabKunde.Text,
+                    Type = Customer.Text,
                 };
                 var (ok, msg) = Controller.CreateCustomer(customer);
 
@@ -176,13 +226,76 @@ namespace ContactManager.View.Forms
 
         }
 
-        // -------------------------------------------------------------------------
+
+        // ---------------------------------------------------------------------
         // Editieren
-        // -------------------------------------------------------------------------
+        // ---------------------------------------------------------------------
+
+        private void BearbeitenContactUISettings(string type)
+        {
+            BtnSpeichernK.Visible = false;
+            if (type == "Kunde")
+            {
+                PERSON.SelectedIndex = 0; // Kunden
+                PERSON.TabPages.Remove(TabMitarbeiter);
+                PERSON.TabPages.Remove(TabLehrling);
+            }
+            if (type == "Mitarbeiter") PERSON.SelectedIndex = 1; // Mitarbeiter
+            if (type == "Lehrling") PERSON.SelectedIndex = 2; // Lehrling
+        }
+
+        //----------------------------------------------------------------------
+        // Kontakten abrufen
+        //----------------------------------------------------------------------
+
+        private void GetContactData(Guid id, string type)
+        {
+            if (type == "Kunde")
+            {
+                var customer = Controller.GetCustomer(id);
+                //Persönliche Angaben
+                CmbAnredeK.Text = customer.Salutation;
+                CmbTitelK.Text = customer.Title;
+                TxtVornameK.Text = customer.FirstName;
+                TxtNachnameK.Text = customer.LastName;
+                //Adresse + Kontakt
+                TxtStrasseK.Text = customer.Street;
+                TxtHausnummerK.Text = customer.StreetNumber;
+                TxtPostleitzahlK.Text = customer.ZipCode;
+                TxtWohnortK.Text = customer.Place;
+                TxtTelefoneK.Text = customer.PhoneNumberBuisness;
+                //Firma
+                TxtFirmennameK.Text = customer.CompanyName;
+                TxtGeschaeftK.Text = customer.CompanyContact;
+                //Administratives
+                CmbKundentypK.Text = Convert.ToString(customer.CustomerType);
+                CmbStatusK.Checked = customer.Status;
+                // Privilege Stufe
+                Customer.Text = customer.Type;
+            }
+        }
+
+        //----------------------------------------------------------------------
+        // Events
+        //----------------------------------------------------------------------
+
 
         // ---------------------------------------------------------------------
-        // Werte: Lehrling
+        // Werte: Lehrling   
         // ---------------------------------------------------------------------
+
+
+        // ---------------------------------------------------------------------
+        // Werte: Mitarbeiter
+        // ---------------------------------------------------------------------
+
+        // ---------------------------------------------------------------------
+        // Werte: Kunde
+        // ---------------------------------------------------------------------
+
+
+
+
+
     }
-
 }

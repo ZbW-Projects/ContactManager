@@ -63,8 +63,9 @@ namespace ContactManager.View.Forms
             CmbGeschlechtL = new ComboBox();
             DtpGeburtsdatumL = new DateTimePicker();
             PERSON = new TabControl();
-            TabKunde = new TabPage();
-            groupBox5 = new GroupBox();
+            Customer = new TabPage();
+            KundeBearbeiten = new Button();
+            Protokoll = new GroupBox();
             ProtokollListeK = new RichTextBox();
             Administrativ = new GroupBox();
             CmbKundentypK = new ComboBox();
@@ -170,8 +171,8 @@ namespace ContactManager.View.Forms
             LblNachnameL = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
             PERSON.SuspendLayout();
-            TabKunde.SuspendLayout();
-            groupBox5.SuspendLayout();
+            Customer.SuspendLayout();
+            Protokoll.SuspendLayout();
             Administrativ.SuspendLayout();
             Notiz.SuspendLayout();
             GrpFirmaK.SuspendLayout();
@@ -494,7 +495,7 @@ namespace ContactManager.View.Forms
             // 
             // PERSON
             // 
-            PERSON.Controls.Add(TabKunde);
+            PERSON.Controls.Add(Customer);
             PERSON.Controls.Add(TabMitarbeiter);
             PERSON.Controls.Add(TabLehrling);
             PERSON.Location = new Point(13, 26);
@@ -504,40 +505,52 @@ namespace ContactManager.View.Forms
             PERSON.Size = new Size(1068, 980);
             PERSON.TabIndex = 76;
             // 
-            // TabKunde
+            // Customer
             // 
-            TabKunde.Controls.Add(groupBox5);
-            TabKunde.Controls.Add(Administrativ);
-            TabKunde.Controls.Add(Notiz);
-            TabKunde.Controls.Add(GrpFirmaK);
-            TabKunde.Controls.Add(groupBox4);
-            TabKunde.Controls.Add(BtnSpeichernK);
-            TabKunde.Location = new Point(4, 34);
-            TabKunde.Margin = new Padding(4, 5, 4, 5);
-            TabKunde.Name = "TabKunde";
-            TabKunde.Padding = new Padding(4, 5, 4, 5);
-            TabKunde.Size = new Size(1060, 942);
-            TabKunde.TabIndex = 0;
-            TabKunde.Text = "Kunde";
-            TabKunde.UseVisualStyleBackColor = true;
+            Customer.Controls.Add(KundeBearbeiten);
+            Customer.Controls.Add(Protokoll);
+            Customer.Controls.Add(Administrativ);
+            Customer.Controls.Add(Notiz);
+            Customer.Controls.Add(GrpFirmaK);
+            Customer.Controls.Add(groupBox4);
+            Customer.Controls.Add(BtnSpeichernK);
+            Customer.Location = new Point(4, 34);
+            Customer.Margin = new Padding(4, 5, 4, 5);
+            Customer.Name = "Customer";
+            Customer.Padding = new Padding(4, 5, 4, 5);
+            Customer.Size = new Size(1060, 942);
+            Customer.TabIndex = 0;
+            Customer.Text = "Kunde";
+            Customer.UseVisualStyleBackColor = true;
             // 
-            // groupBox5
+            // KundeBearbeiten
             // 
-            groupBox5.Controls.Add(ProtokollListeK);
-            groupBox5.Location = new Point(33, 366);
-            groupBox5.Margin = new Padding(4, 5, 4, 5);
-            groupBox5.Name = "groupBox5";
-            groupBox5.Padding = new Padding(4, 5, 4, 5);
-            groupBox5.Size = new Size(477, 296);
-            groupBox5.TabIndex = 103;
-            groupBox5.TabStop = false;
-            groupBox5.Text = "Protokoll";
+            KundeBearbeiten.Location = new Point(805, 870);
+            KundeBearbeiten.Margin = new Padding(4, 5, 4, 5);
+            KundeBearbeiten.Name = "KundeBearbeiten";
+            KundeBearbeiten.Size = new Size(110, 50);
+            KundeBearbeiten.TabIndex = 104;
+            KundeBearbeiten.Text = "Bearbeiten";
+            KundeBearbeiten.UseVisualStyleBackColor = true;
+            // 
+            // Protokoll
+            // 
+            Protokoll.Controls.Add(ProtokollListeK);
+            Protokoll.Location = new Point(33, 366);
+            Protokoll.Margin = new Padding(4, 5, 4, 5);
+            Protokoll.Name = "Protokoll";
+            Protokoll.Padding = new Padding(4, 5, 4, 5);
+            Protokoll.Size = new Size(477, 296);
+            Protokoll.TabIndex = 103;
+            Protokoll.TabStop = false;
+            Protokoll.Text = "Protokoll";
             // 
             // ProtokollListeK
             // 
             ProtokollListeK.Location = new Point(9, 45);
             ProtokollListeK.Margin = new Padding(4, 5, 4, 5);
             ProtokollListeK.Name = "ProtokollListeK";
+            ProtokollListeK.ReadOnly = true;
             ProtokollListeK.Size = new Size(460, 241);
             ProtokollListeK.TabIndex = 101;
             ProtokollListeK.Text = "";
@@ -1683,8 +1696,8 @@ namespace ContactManager.View.Forms
             Name = "Details";
             Text = "Details";
             PERSON.ResumeLayout(false);
-            TabKunde.ResumeLayout(false);
-            groupBox5.ResumeLayout(false);
+            Customer.ResumeLayout(false);
+            Protokoll.ResumeLayout(false);
             Administrativ.ResumeLayout(false);
             Administrativ.PerformLayout();
             Notiz.ResumeLayout(false);
@@ -1746,7 +1759,7 @@ namespace ContactManager.View.Forms
         private ComboBox CmbGeschlechtL;
         private DateTimePicker DtpGeburtsdatumL;
         private TabControl PERSON;
-        private TabPage TabKunde;
+        private TabPage Customer;
         private TabPage TabMitarbeiter;
         private TabPage TabLehrling;
         private Label LblVornameL;
@@ -1848,9 +1861,10 @@ namespace ContactManager.View.Forms
         private Label label34;
         private TextBox TxtOwnerK;
         private Label label35;
-        private GroupBox groupBox5;
+        private GroupBox Protokoll;
         private RichTextBox ProtokollListeK;
         private TextBox TxtTelefoneK;
         private Label label37;
+        private Button KundeBearbeiten;
     }
 }

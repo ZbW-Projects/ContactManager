@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ContactManager.Core.Services;
+using ContactManager.View.Forms.Components;
 
 namespace ContactManager.View.Forms
 {
@@ -27,6 +28,8 @@ namespace ContactManager.View.Forms
         {
             ReloadGrid();  // Starte Datenladung
         }
+
+        #region Visuelles Design der Tabelle
         private void ConfigureGrid()
         {
             grdContacts.AutoGenerateColumns = false;
@@ -70,6 +73,8 @@ namespace ContactManager.View.Forms
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             });
 
+            // Meta Daten
+
             grdContacts.Columns.Add(new DataGridViewTextBoxColumn
             {
                 HeaderText = "Id",
@@ -77,9 +82,11 @@ namespace ContactManager.View.Forms
                 Visible = false
             });
 
-
             grdContacts.DataSource = _binding;
         }
+        #endregion
+
+        #region Events für die Tabelle (Zeilen)
         private void WireEvents()
         {
             this.Load += Contacts_Load;
@@ -91,6 +98,8 @@ namespace ContactManager.View.Forms
             //Doppelklick: Detail öffnen
             grdContacts.CellDoubleClick += (s, e) => OpenSelected();
         }
+
+        #endregion
 
         #region Aktionen (Use Cases Aufrufe und UI Updates)
         private void ReloadGrid()
@@ -113,8 +122,12 @@ namespace ContactManager.View.Forms
             if (grdContacts.CurrentRow?.DataBoundItem is DtoPersonRow row)
             {
                 // Hier wäre möglich Details-Form öffnen
-                var detailsForm = new Details(/* row.Id falls benötigt übergeben*/);
+                var detailsForm = new Details(row.Id, row.Type);
                 detailsForm.ShowDialog();
+            }
+            else
+            {
+                InputBox.Error("Die Daten enthalten einen Fehler oder sind unvollständig.");
             }
         }
 
