@@ -67,7 +67,7 @@ namespace ContactManager.View.Forms
             groupBox5 = new GroupBox();
             ProtokollListeK = new RichTextBox();
             Administrativ = new GroupBox();
-            comboBox1 = new ComboBox();
+            CmbKundentypK = new ComboBox();
             label34 = new Label();
             CmbStatusK = new CheckBox();
             label43 = new Label();
@@ -85,6 +85,8 @@ namespace ContactManager.View.Forms
             label32 = new Label();
             TxtPostleitzahlK = new TextBox();
             groupBox4 = new GroupBox();
+            TxtTelefoneK = new TextBox();
+            label37 = new Label();
             CmbTitelK = new ComboBox();
             label1 = new Label();
             CmbAnredeK = new ComboBox();
@@ -109,7 +111,7 @@ namespace ContactManager.View.Forms
             label12 = new Label();
             label13 = new Label();
             CmbKaderstufenM = new ComboBox();
-            button1 = new Button();
+            BtnErstelleMitarbeiter = new Button();
             groupBox2 = new GroupBox();
             label15 = new Label();
             label16 = new Label();
@@ -167,8 +169,6 @@ namespace ContactManager.View.Forms
             LblVornameL = new Label();
             LblNachnameL = new Label();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            label37 = new Label();
-            TxtemailK = new TextBox();
             PERSON.SuspendLayout();
             TabKunde.SuspendLayout();
             groupBox5.SuspendLayout();
@@ -544,7 +544,7 @@ namespace ContactManager.View.Forms
             // 
             // Administrativ
             // 
-            Administrativ.Controls.Add(comboBox1);
+            Administrativ.Controls.Add(CmbKundentypK);
             Administrativ.Controls.Add(label34);
             Administrativ.Controls.Add(CmbStatusK);
             Administrativ.Controls.Add(label43);
@@ -557,15 +557,15 @@ namespace ContactManager.View.Forms
             Administrativ.TabStop = false;
             Administrativ.Text = "Administrativ";
             // 
-            // comboBox1
+            // CmbKundentypK
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "A", "B", "C", "D", "E" });
-            comboBox1.Location = new Point(223, 104);
-            comboBox1.Margin = new Padding(4, 5, 4, 5);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(230, 33);
-            comboBox1.TabIndex = 12;
+            CmbKundentypK.FormattingEnabled = true;
+            CmbKundentypK.Items.AddRange(new object[] { "A", "B", "C", "D", "E" });
+            CmbKundentypK.Location = new Point(223, 104);
+            CmbKundentypK.Margin = new Padding(4, 5, 4, 5);
+            CmbKundentypK.Name = "CmbKundentypK";
+            CmbKundentypK.Size = new Size(230, 33);
+            CmbKundentypK.TabIndex = 12;
             // 
             // label34
             // 
@@ -738,7 +738,7 @@ namespace ContactManager.View.Forms
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(TxtemailK);
+            groupBox4.Controls.Add(TxtTelefoneK);
             groupBox4.Controls.Add(label37);
             groupBox4.Controls.Add(CmbTitelK);
             groupBox4.Controls.Add(label1);
@@ -756,6 +756,24 @@ namespace ContactManager.View.Forms
             groupBox4.TabIndex = 93;
             groupBox4.TabStop = false;
             groupBox4.Text = "Persönliche Angaben";
+            // 
+            // TxtTelefoneK
+            // 
+            TxtTelefoneK.Location = new Point(206, 258);
+            TxtTelefoneK.Margin = new Padding(4, 5, 4, 5);
+            TxtTelefoneK.Name = "TxtTelefoneK";
+            TxtTelefoneK.Size = new Size(230, 31);
+            TxtTelefoneK.TabIndex = 90;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(9, 261);
+            label37.Margin = new Padding(4, 0, 4, 0);
+            label37.Name = "label37";
+            label37.Size = new Size(155, 25);
+            label37.TabIndex = 90;
+            label37.Text = "Geschäftsnummer";
             // 
             // CmbTitelK
             // 
@@ -839,7 +857,7 @@ namespace ContactManager.View.Forms
             // TabMitarbeiter
             // 
             TabMitarbeiter.Controls.Add(groupBox1);
-            TabMitarbeiter.Controls.Add(button1);
+            TabMitarbeiter.Controls.Add(BtnErstelleMitarbeiter);
             TabMitarbeiter.Controls.Add(groupBox2);
             TabMitarbeiter.Controls.Add(groupBox3);
             TabMitarbeiter.Location = new Point(4, 34);
@@ -1013,15 +1031,16 @@ namespace ContactManager.View.Forms
             CmbKaderstufenM.Size = new Size(171, 33);
             CmbKaderstufenM.TabIndex = 16;
             // 
-            // button1
+            // BtnErstelleMitarbeiter
             // 
-            button1.Location = new Point(926, 867);
-            button1.Margin = new Padding(4, 5, 4, 5);
-            button1.Name = "button1";
-            button1.Size = new Size(110, 50);
-            button1.TabIndex = 23;
-            button1.Text = "Speichern";
-            button1.UseVisualStyleBackColor = true;
+            BtnErstelleMitarbeiter.Location = new Point(926, 867);
+            BtnErstelleMitarbeiter.Margin = new Padding(4, 5, 4, 5);
+            BtnErstelleMitarbeiter.Name = "BtnErstelleMitarbeiter";
+            BtnErstelleMitarbeiter.Size = new Size(110, 50);
+            BtnErstelleMitarbeiter.TabIndex = 23;
+            BtnErstelleMitarbeiter.Text = "Speichern";
+            BtnErstelleMitarbeiter.UseVisualStyleBackColor = true;
+            BtnErstelleMitarbeiter.Click += BtnErstelleMitarbeiter_Click_1;
             // 
             // groupBox2
             // 
@@ -1654,24 +1673,6 @@ namespace ContactManager.View.Forms
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
-            // label37
-            // 
-            label37.AutoSize = true;
-            label37.Location = new Point(9, 261);
-            label37.Margin = new Padding(4, 0, 4, 0);
-            label37.Name = "label37";
-            label37.Size = new Size(61, 25);
-            label37.TabIndex = 90;
-            label37.Text = "E-Mail";
-            // 
-            // TxtemailK
-            // 
-            TxtemailK.Location = new Point(206, 258);
-            TxtemailK.Margin = new Padding(4, 5, 4, 5);
-            TxtemailK.Name = "TxtemailK";
-            TxtemailK.Size = new Size(230, 31);
-            TxtemailK.TabIndex = 90;
-            // 
             // Details
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -1808,7 +1809,7 @@ namespace ContactManager.View.Forms
         private Label label12;
         private Label label13;
         private ComboBox CmbKaderstufenM;
-        private Button button1;
+        private Button BtnErstelleMitarbeiter;
         private GroupBox groupBox2;
         private Label label15;
         private Label label16;
@@ -1843,13 +1844,13 @@ namespace ContactManager.View.Forms
         private TextBox TxtNachnameM;
         private Label label28;
         private Label label29;
-        private ComboBox comboBox1;
+        private ComboBox CmbKundentypK;
         private Label label34;
         private TextBox TxtOwnerK;
         private Label label35;
         private GroupBox groupBox5;
         private RichTextBox ProtokollListeK;
-        private TextBox TxtemailK;
+        private TextBox TxtTelefoneK;
         private Label label37;
     }
 }

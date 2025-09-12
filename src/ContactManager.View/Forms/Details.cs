@@ -1,8 +1,9 @@
 
-using System;
-using System.Windows.Forms;
+using ContactManager.Core.Model;
 using ContactManager.Core.Services;
 using ContactManager.View.Forms.Components;
+using System;
+using System.Windows.Forms;
 
 namespace ContactManager.View.Forms
 {
@@ -14,9 +15,6 @@ namespace ContactManager.View.Forms
             InitializeComponent();
             Controller.SpinData();
         }
-
-
-
 
         // ---------------------------------------------------------------------
         // Aktionen
@@ -78,7 +76,7 @@ namespace ContactManager.View.Forms
         // Werte: Mitarbeiter
         // ---------------------------------------------------------------------
 
-        private void CmdSpeichernM_Click(object sender, EventArgs e)
+        private void BtnErstelleMitarbeiter_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -137,36 +135,45 @@ namespace ContactManager.View.Forms
         // ---------------------------------------------------------------------
         private void BtnSpeichernK_Click_1(object sender, EventArgs e)
         {
-            var customer = new DtoCustomer
+            try
             {
+                var customer = new DtoCustomer
+                {
+                    //Persönliche Angaben
+                    Salutation = CmbAnredeK.Text,
+                    Title = CmbTitelK.Text,
+                    FirstName = TxtVornameK.Text,
+                    LastName = TxtNachnameK.Text,
 
 
-                //Persönliche Angaben
-                Salutation = CmbAnredeK.Text,
-                Title = CmbTitelK.Text,
-                FirstName = TxtVornameK.Text,
-                LastName = TxtNachnameK.Text,
+                    //Adresse + Kontakt
+                    Street = TxtStrasseK.Text,
+                    StreetNumber = TxtHausnummerK.Text,
+                    ZipCode = TxtPostleitzahlK.Text,
+                    Place = TxtWohnortK.Text,
+                    PhoneNumberBuisness = TxtTelefoneK.Text,
 
+                    //Firma
+                    CompanyName = TxtFirmennameK.Text,
+                    CompanyContact = TxtGeschaeftK.Text,
 
-                //Adresse + Kontakt
-                Street = TxtStrasseK.Text,
-                StreetNumber = TxtHausnummerK.Text,
-                ZipCode = TxtPostleitzahlK.Text,
-                Place = TxtWohnortK.Text,
-                PhoneNumberBuisness = TxtGeschaeftK.Text,
+                    //Administratives
+                    CustomerType = Convert.ToChar(CmbKundentypK.Text),
+                    Status = CmbStatusK.Checked,
 
-                //Firma
-                CompanyName = TxtFirmennameK.Text,
-                CompanyContact = TxtGeschaeftK.Text,
+                    // Meta
+                    Type = TabKunde.Text,
+                };
+                var (ok, msg) = Controller.CreateCustomer(customer);
 
-                //Administratives
-                // CustomerType = customerType,             
-                Status = CmbStatusK.Checked,
+                // MessageBox
+                if (!ok) InputBox.Error(msg);
+                else InputBox.Info(msg);
+            }
+            catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
+            catch (FormatException ex) { InputBox.Warning(ex.Message); }
+            catch (Exception ex) { InputBox.Error(ex.Message); }
 
-                // Meta
-                Type = TabKunde.Text,
-
-            };
         }
 
         // -------------------------------------------------------------------------
