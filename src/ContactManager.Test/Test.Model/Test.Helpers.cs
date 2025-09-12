@@ -77,7 +77,8 @@ namespace ContactManager.Test.Core.Model
         [TestMethod]
         public void IsValid_SwissInternationalAndNational_ReturnsTrue()
         {
-            Assert.IsTrue(Phone.IsValid("+41791234567")); // +41 79 ...
+            Assert.IsTrue(Phone.IsValid("+41 79 123 45 67")); // +41 79 ...
+            Assert.IsTrue(Phone.IsValid("+41791234567"));
             Assert.IsTrue(Phone.IsValid("0791234567"));   // 0 79 ...
         }
 

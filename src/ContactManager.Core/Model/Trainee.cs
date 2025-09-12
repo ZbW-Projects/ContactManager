@@ -18,9 +18,9 @@ namespace ContactManager.Core.Model
         public Trainee() { }
         public Trainee(string prefix, int employeeNumber) : base(prefix, employeeNumber) { }
 
-        public override DateTime EndDate { get => _endDate; set => _endDate = value == default ? throw new ArgumentException("Das EndDatum muss einen Wert enthalten.", nameof(value)) : value; }
+        public override DateTime EndDate { get => _endDate; set => _endDate = value == default ? throw new ArgumentException("Das EndDatum muss einen Wert enthalten.") : value; }
         public override int CadreLevel { get => _cadreLevel; set => _cadreLevel = 0; }
-        public int TraineeYears { get => _traineeYears; set => _traineeYears = value < 0 || value > 4 ? throw new ArgumentException("Die Lehrjahre sind ungültig.", nameof(value)) : value; }
+        public int TraineeYears { get => _traineeYears; set => _traineeYears = value < 0 || value > 4 ? throw new ArgumentException("Die Lehrjahre sind ungültig.") : value; }
         public int ActualTraineeYear => DatesDiff.Year(_startDate, _endDate, 1);
 
     }

@@ -588,7 +588,6 @@ namespace ContactManager.Core.Services
     }
 
 
-
     /*=======================================================
      * 
      * Die Data Transfer Objects
