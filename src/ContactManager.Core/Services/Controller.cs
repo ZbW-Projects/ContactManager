@@ -143,22 +143,32 @@ namespace ContactManager.Core.Services
                 // Es wird versucht Customer zu instanziieren
                 Person customer = new Customer
                 {
-                    Salutation = cmd.Salutation,
-                    FirstName = cmd.FirstName,
+                    // ── Persönliche Angaben (links) ───────────────────────────────
+                    Salutation = cmd.Salutation,   // Anrede
+                    Title = cmd.Title,        // Titel
+                    FirstName = cmd.FirstName,    // Vorname
                     LastName = cmd.LastName,
-                    Title = cmd.Title,
-                    PhoneNumberBuisness = cmd.PhoneNumberBuisness,
-                    Status = cmd.Status,
-                    Street = cmd.Street,
-                    StreetNumber = cmd.StreetNumber,
-                    ZipCode = cmd.ZipCode,
-                    Place = cmd.Place,
-                    Type = cmd.Type,
-                    CompanyName = cmd.CompanyName,
-                    CustomerType = cmd.CustomerType,
-                    CompanyContact = cmd.CompanyContact
+                    PhoneNumberBuisness = cmd.PhoneNumberBuisness,// Nachname
+                                                 // BusinessNumber = cmd.BusinessNumber, 
+                                                 //   -> "Geschäftsnummer" ist in der GUI, aber NICHT im Model/DTO vorhanden.
 
-                };
+                    // ── Kontakt + Firma (rechts, oben) ────────────────────────────
+                    CompanyName = cmd.CompanyName,     // Firmenname
+                    Street = cmd.Street,          // Strasse
+                    StreetNumber = cmd.StreetNumber,    // Nummer
+                    ZipCode = cmd.ZipCode,         // Postleitzahl
+                    Place = cmd.Place,           // Wohnort
+                    CompanyContact = cmd.CompanyContact,  // Firmenkontakt / Ansprechperson
+                                                          // CompanyEmail = cmd.CompanyEmail,
+                                                          //   -> "Firmaemail" ist aktuell NICHT im Model/DTO. Nur entkommentieren, wenn Property existiert
+                    // ── Administrativ (rechts, unten) ─────────────────────────────
+                    Status = cmd.Status,        // Status (Aktiv)
+                    CustomerType = cmd.CustomerType,  // Kundentyp
+                    Type = cmd.Type,          // Typ (Model hat es, in der GUI fehlt das Feld aktuell)
+
+                  
+                
+            };
 
                 // Daten persistieren 
                 LocalStorage.StoreContact(customer.Id, customer);

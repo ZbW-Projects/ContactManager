@@ -1,82 +1,218 @@
-
 using ContactManager.Core.Model;
 using ContactManager.Core.Services;
 using ContactManager.View.Forms.Components;
 using System;
+using System.Data;
 using System.IO;
+using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ContactManager.View.Forms
 {
+    /// Details-Form zur Erstellung und Bearbeitung von Kontakten (Kunde, Mitarbeiter, Lehrling).
+
     public partial class Details : Form
     {
+        #region Konstruktoren (Start)
 
+        /// Szenario 1: Kontakt erstellen.
 
-        //-----------------------------------
-        // Zwei Szenarios UIs
-        //-----------------------------------
-
-        //-----------------------------------
-        // Szenario 1 Erstellen von Kontakten 
-        //-----------------------------------
         public Details()
         {
             InitializeComponent();
-            //Controller.SpinData();
+            // Controller.SpinData();
             CreateContactUISettings();
         }
 
-        //------------------------------------
-        // Szenario 2 Bearbeiten von Kontakten
-        //------------------------------------
+
+        /// Szenario 2: Kontakt bearbeiten.
+        /// <param name="id">Kontakt-Id</param>
+        /// <param name="type">Kontakt-Typ ("Kunde" | "Mitarbeiter" | "Lehrling")</param>
         public Details(Guid id, string type)
         {
             InitializeComponent();
             // Controller.SpinData();
             BearbeitenContactUISettings(type);
-            // Kontakten abrufen 
-            GetContactData(id, type);
+            GetContactDataL(id, type);
+            GetContactDataM(id, type);
+            GetContactDataK(id, type);
         }
 
-        // ---------------------------------------------------------------------
-        // Aktionen
-        // ---------------------------------------------------------------------
+        #endregion Konstruktoren (End)
 
-        // ---------------------------------------------------------------------
-        // Erstellen
-        // ---------------------------------------------------------------------
+        #region UI-Setup (Start)
 
         private void CreateContactUISettings()
         {
-
-            // ---------------------------------------------------------------------
-            // Werte: Lehrling
-            // ---------------------------------------------------------------------
-
-            // ---------------------------------------------------------------------
-            // Werte: Mitarbeiter
-            // ---------------------------------------------------------------------
-
-            // ---------------------------------------------------------------------
-            // Werte: Kunde
-            // ---------------------------------------------------------------------
+            // Kunde-spezifische Bereiche beim Erstellen ausblenden
             Protokoll.Visible = false;
             Notiz.Visible = false;
-            KundeBearbeiten.Visible = false;
-
+            // Fehler KundeBearbeiten.Visible = false;
         }
 
+        private void BearbeitenContactUISettings(string type)
+        {
+            CmdSpeichernK.Visible = false;
 
-        //----------------------------------------------------------------------
-        // Events
-        //----------------------------------------------------------------------
+            if (type == "Kunde")
+            {
+                PERSON.SelectedIndex = 0; // Kunde
+                PERSON.TabPages.Remove(TabEmployee);
+                PERSON.TabPages.Remove(TabLehrling);
+            }
+            if (type == "Mitarbeiter") PERSON.SelectedIndex = 1; // Mitarbeiter
+            if (type == "Lehrling") PERSON.SelectedIndex = 2;    // Lehrling
+        }
+
+        #endregion UI-Setup (End)
+
+        #region Events: Load Kunde (Start)
+
+        /// Laedt Kontakt-Daten in die UI.
+
+        private void GetContactDataK(Guid id, string type)
+        {
+            if (type == "Kunde")
+            {
+                var customer = Controller.GetCustomer(id);
+
+                // Persoenliche Angaben
+                CmbSalutationK.Text = customer.Salutation;
+                CmbTitleK.Text = customer.Title;
+                TxtFirstnameK.Text = customer.FirstName;
+                TxtLastNameK.Text = customer.LastName;
+                TxtPhoneNumberBuisnessK.Text = customer.PhoneNumberBuisness;
+
+                // Firma + Kontakt
+                TxtCompanyNameK.Text = customer.CompanyName;
+                TxtCompanycontactK.Text = customer.CompanyContact;
+                TxtStreetK.Text = customer.Street;
+                TxtStreetNumberK.Text = customer.StreetNumber;
+                TxtZipcodeK.Text = customer.ZipCode;
+                TxtPlaceK.Text = customer.Place;
+
+                // Administratives
+                CmbStatusK.Checked = customer.Status;
+                CmbCustomerTypeK.Text = Convert.ToString(customer.CustomerType);
+
+                // Privileg/Typ
+                TabKunde.Text = customer.Type;
+
+                //Protokoll
+                // ProtokollListeK
+
+                //Notiz
+                //TxtNoteK
+                // TxtOwnerK
+                //BtnNotizSpeichernK
+            }
+        }
+
+        #endregion Events: Load Kunde (Start)
+
+        #region Events: Load Mitarbeiter (Start)
+
+        /// Laedt Kontakt-Daten in die UI.
+
+        private void GetContactDataM(Guid id, string type)
+        {
+            if (type == "Mitarbeiter")
+            {
+
+                var employee = Controller.GetEmployee(id);
+
+                // Persönliche Angaben
+                CmbSalutationM.Text = employee.Salutation;
+                CmbTitleM.Text = employee.Title;
+                TxtFirstNameM.Text = employee.FirstName;
+                TxtLastNameM.Text = employee.LastName;
+                DtpDateOfBirthM.Value = employee.DateOfBirth;
+                CmbGenderM.Text = employee.Gender;
+                TxtSocialSecurityNumberM.Text = employee.SocialSecurityNumber;
+                CmbNationalityM.Text = employee.Nationality;
+
+                // Adresse + Kontakt 
+                TxtStreetM.Text = employee.Street;
+                TxtStreetNumberM.Text = employee.StreetNumber;
+                TxtZipCodeM.Text = employee.ZipCode;
+                TxtPlaceM.Text = employee.Place;
+                TxtEmailPrivatM.Text = employee.EmailPrivat;
+                TxtPhoneNumberPrivateM.Text = employee.PhoneNumberPrivate;
+                TxtPhoneNumberMobileM.Text = employee.PhoneNumberMobile;
+                TxtPhoneNumberBusinessM.Text = employee.PhoneNumberBuisness;
+
+                // Beschäftigungsdaten 
+                CmbCadreLevelM.Text = Convert.ToString(employee.CadreLevel);
+                CmbDepartmentM.Text = employee.Department;
+                CmbRoleM.Text = employee.Role;
+                CmbEmploymentM.Text = Convert.ToString(employee.Employment);
+
+                DtpStartDateM.Value = employee.StartDate;
+                DtpEndDateM.Value = employee.EndDate;
+
+                CbStatusM.Checked = employee.Status;
+                TabEmployee.Text = employee.Type;
 
 
-        // ---------------------------------------------------------------------
-        // Werte: Lehrling
-        // ---------------------------------------------------------------------
+            }
+        }
+
+        #endregion Events: Load Mitarbeiter (Start)
+
+        #region Events: Load Trainee (Start)
+
+        /// Laedt Kontakt-Daten in die UI.
+
+        private void GetContactDataL(Guid id, string type)
+        {
+            if (type == "Lehrling")
+            {
+                var trainee = Controller.GetEmployee(id);
+
+                // Personal Information
+                CmbSalutationL.Text = trainee.Salutation;
+                TxtFirstNameL.Text = trainee.FirstName;
+                TxtLastNameL.Text = trainee.LastName;
+                DtpDateOfBirthL.Value = trainee.DateOfBirth;
+                CmbGenderL.Text = trainee.Gender;
+                TxtSocialSecurityNumberL.Text = trainee.SocialSecurityNumber;
+                CmbNationalityL.Text = trainee.Nationality;
+              
+                // Address & Contact
+                TxtStreetL.Text = trainee.Street;
+                TxtStreetNumberL.Text = trainee.StreetNumber;
+                TxtZipCodeL.Text = trainee.ZipCode;
+                TxtCityL.Text = trainee.Place;
+                TxtPhonePrivateL.Text = trainee.PhoneNumberPrivate;
+                TxtPhoneMobileL.Text = trainee.PhoneNumberMobile;
+                TxtEmailL.Text = trainee.EmailPrivat;
+
+                // Administrative
+                CbStatusL.Checked = trainee.Status;
+
+                // Education / Employment
+                CmbDepartmentL.Text = trainee.Department;
+                CmbRoleL.Text = trainee.Role;
+                CmbEmploymentRateL.Text = Convert.ToString(trainee.Employment);
+
+                // Entry / Exit
+                DtpStartDateL.Value = trainee.StartDate;
+                DtpEndDateL.Value = trainee.EndDate;
+
+                // Privileg/Typ
+                TabLehrling.Text = trainee.Type;
+
+            }
+        }
+
+        #endregion Events: Load Trainee (Start)
+
+        #region Events: Create Lehrling (Start)
+
+        /// Speichert einen Lehrling.
 
         private void BtnSpeichernL_Click(object sender, EventArgs e)
         {
@@ -84,36 +220,34 @@ namespace ContactManager.View.Forms
             {
                 var trainee = new DtoTrainee
                 {
+                    Salutation = CmbSalutationL.Text,
+                    FirstName = TxtFirstNameL.Text,
+                    LastName = TxtLastNameL.Text,
+                    DateOfBirth = DtpDateOfBirthL.Value,
+                    Gender = CmbGenderL.Text,
+                    SocialSecurityNumber = TxtSocialSecurityNumberL.Text,
+                    PhoneNumberPrivate = TxtPhonePrivateL.Text,
+                    PhoneNumberMobile = TxtPhoneMobileL.Text,
 
-                    Salutation = CmbAnredeL.Text,
-                    FirstName = TxtVornameL.Text,
-                    LastName = TxtNachnameL.Text,
-                    DateOfBirth = DtpGeburtsdatumL.Value,
-                    Gender = CmbGeschlechtL.Text,
-                    SocialSecurityNumber = TxtAhvnummerL.Text,
-                    PhoneNumberPrivate = TxtTelefonprivatL.Text,
-                    PhoneNumberMobile = TxtMobiltelefonnummerL.Text,
-                    PhoneNumberBuisness = TxtGeschaeftL.Text,
                     EmailPrivat = TxtEmailL.Text,
                     Status = CbStatusL.Checked,
-                    Nationality = CmbNationalitätL.Text,
-                    Street = TxtStrasseL.Text,
-                    StreetNumber = TxtHausnummerL.Text,
-                    ZipCode = TxtPostleitzahlL.Text,
-                    Place = TxtWohnortL.Text,
+                    Nationality = CmbNationalityL.Text,
+                    Street = TxtStreetL.Text,
+                    StreetNumber = TxtStreetNumberL.Text,
+                    ZipCode = TxtZipCodeL.Text,
+                    Place = TxtCityL.Text,
                     Type = TabLehrling.Text,
-                    Department = CmbAbteilungL.Text,
-                    StartDate = DtpEintrittL.Value,
-                    EndDate = DtpAustrittL.Value,
-                    Employment = int.Parse(CmbBeschaeftigungsgradL.Text),
-                    Role = cmbRolle.Text,
+                    Department = CmbDepartmentL.Text,
+                    StartDate = DtpStartDateL.Value,
+                    EndDate = DtpEndDateL.Value,
+                    Employment = int.Parse(CmbEmploymentRateL.Text),
+                    Role = CmbRoleL.Text,
                     CadreLevel = 0,
                     TraineeYears = int.Parse(CmbLehrjahreL.Text),
                 };
 
                 var (ok, msg) = Controller.CreateTrainee(trainee);
 
-                //MessageBox
                 if (!ok) InputBox.Error(msg);
                 else InputBox.Info(msg);
             }
@@ -122,9 +256,11 @@ namespace ContactManager.View.Forms
             catch (Exception ex) { InputBox.Error(ex.Message); }
         }
 
-        // ---------------------------------------------------------------------
-        // Werte: Mitarbeiter
-        // ---------------------------------------------------------------------
+        #endregion Events: Create Lehrling (End)
+
+        #region Events: Create Mitarbeiter (Start)
+
+        /// Speichert einen Mitarbeiter.
 
         private void BtnErstelleMitarbeiter_Click_1(object sender, EventArgs e)
         {
@@ -132,46 +268,42 @@ namespace ContactManager.View.Forms
             {
                 var employee = new DtoEmployee
                 {
+                    // Persoenliche Angaben
+                    Salutation = CmbSalutationM.Text,
+                    Title = CmbTitleM.Text,
+                    FirstName = TxtFirstNameM.Text,
+                    LastName = TxtLastNameM.Text,
+                    DateOfBirth = DtpDateOfBirthM.Value,
+                    Gender = CmbGenderM.Text,
+                    SocialSecurityNumber = TxtSocialSecurityNumberM.Text,
+                    Nationality = CmbNationalityM.Text,
 
+                    // Adresse + Kontakt
+                    Street = TxtStreetM.Text,
+                    StreetNumber = TxtStreetNumberM.Text,
+                    ZipCode = TxtZipCodeM.Text,
+                    Place = TxtPlaceM.Text,
+                    EmailPrivat = TxtEmailPrivatM.Text,
+                    PhoneNumberPrivate = TxtPhoneNumberPrivateM.Text,
+                    PhoneNumberMobile = TxtPhoneNumberMobileM.Text,
+                    PhoneNumberBuisness = TxtPhoneNumberBusinessM.Text,
 
-                    //Persönliche Angaben
-                    Salutation = CmbAnredeM.Text,
-                    Title = CmbTitelM.Text,
-                    FirstName = TxtVornameM.Text,
-                    LastName = TxtNachnameM.Text,
-                    DateOfBirth = DtpGeburtsdatumM.Value,
-                    Gender = CmbGeschlechtM.Text,
-                    SocialSecurityNumber = TxtAhvnummerM.Text,
-                    Nationality = CmbNationalitätM.Text,
-
-                    //Adresse + Kontakt
-                    Street = TxtStrasseM.Text,
-                    StreetNumber = TxtHausnummerM.Text,
-                    ZipCode = TxtPostleitzahlM.Text,
-                    Place = TxtWohnortM.Text,
-                    EmailPrivat = TxtEmailM.Text,
-                    PhoneNumberPrivate = TxtTelefonprivatM.Text,
-                    PhoneNumberMobile = TxtMobiltelefonnummerM.Text,
-                    PhoneNumberBuisness = TxtGeschaeftM.Text,
-
-                    //Beschäftigungsdaten
-                    CadreLevel = int.Parse(CmbKaderstufenM.Text),
-                    Department = CmbAbteilungM.Text,
-                    Role = CmbRolleM.Text,
-                    Employment = int.Parse(CmbBeschaeftigungsgradM.Text),
-
-                    StartDate = DtpEintrittM.Value,
-                    EndDate = DtpAustrittM.Value,
+                    // Beschaeftigungsdaten
+                    CadreLevel = int.Parse(CmbCadreLevelM.Text),
+                    Department = CmbDepartmentM.Text,
+                    Role = CmbRoleM.Text,
+                    Employment = int.Parse(CmbEmploymentM.Text),
+                    StartDate = DtpStartDateM.Value,
+                    EndDate = DtpEndDateM.Value,
 
                     Status = CbStatusM.Checked,
 
                     // Meta
-                    Type = TabMitarbeiter.Text,
+                    Type = TabEmployee.Text,
                 };
 
                 var (ok, msg) = Controller.CreateEmployee(employee);
 
-                // MessageBox
                 if (!ok) InputBox.Error(msg);
                 else InputBox.Info(msg);
             }
@@ -180,122 +312,84 @@ namespace ContactManager.View.Forms
             catch (Exception ex) { InputBox.Error(ex.Message); }
         }
 
-        // ---------------------------------------------------------------------
-        // Werte: Kunde
-        // ---------------------------------------------------------------------
+        #endregion Events: Create Mitarbeiter (End)
+
+        #region Events: Create Kunde (Start)
+
+
+        /// Speichert einen Kunden.
+
         private void BtnSpeichernK_Click_1(object sender, EventArgs e)
         {
             try
             {
                 var customer = new DtoCustomer
                 {
-                    //Persönliche Angaben
-                    Salutation = CmbAnredeK.Text,
-                    Title = CmbTitelK.Text,
-                    FirstName = TxtVornameK.Text,
-                    LastName = TxtNachnameK.Text,
+                    // Persoenliche Angaben
+                    Salutation = CmbSalutationK.Text,
+                    Title = CmbTitleK.Text,
+                    FirstName = TxtFirstnameK.Text,
+                    LastName = TxtLastNameK.Text,
 
+                    // Adresse + Kontakt
+                    Street = TxtStreetK.Text,
+                    StreetNumber = TxtStreetNumberK.Text,
+                    ZipCode = TxtZipcodeK.Text,
+                    Place = TxtPlaceK.Text,
+                    PhoneNumberBuisness = TxtPhoneNumberBuisnessK.Text,
 
-                    //Adresse + Kontakt
-                    Street = TxtStrasseK.Text,
-                    StreetNumber = TxtHausnummerK.Text,
-                    ZipCode = TxtPostleitzahlK.Text,
-                    Place = TxtWohnortK.Text,
-                    PhoneNumberBuisness = TxtTelefoneK.Text,
+                    // Firma
+                    CompanyName = TxtCompanyNameK.Text,
+                    CompanyContact = TxtCompanycontactK.Text,
 
-                    //Firma
-                    CompanyName = TxtFirmennameK.Text,
-                    CompanyContact = TxtGeschaeftK.Text,
-
-                    //Administratives
-                    CustomerType = Convert.ToChar(CmbKundentypK.Text),
+                    // Administratives
+                    CustomerType = Convert.ToChar(CmbCustomerTypeK.Text),
                     Status = CmbStatusK.Checked,
 
                     // Meta
-                    Type = Customer.Text,
+                    Type = TabKunde.Text,
                 };
+
                 var (ok, msg) = Controller.CreateCustomer(customer);
 
-                // MessageBox
                 if (!ok) InputBox.Error(msg);
                 else InputBox.Info(msg);
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
             catch (Exception ex) { InputBox.Error(ex.Message); }
-
         }
 
+        #endregion Events: Create Kunde (End)
 
-        // ---------------------------------------------------------------------
-        // Editieren
-        // ---------------------------------------------------------------------
-
-        private void BearbeitenContactUISettings(string type)
+        private void TxtMobiltelefonnummerL_TextChanged(object sender, EventArgs e)
         {
-            BtnSpeichernK.Visible = false;
-            if (type == "Kunde")
-            {
-                PERSON.SelectedIndex = 0; // Kunden
-                PERSON.TabPages.Remove(TabMitarbeiter);
-                PERSON.TabPages.Remove(TabLehrling);
-            }
-            if (type == "Mitarbeiter") PERSON.SelectedIndex = 1; // Mitarbeiter
-            if (type == "Lehrling") PERSON.SelectedIndex = 2; // Lehrling
+
         }
 
-        //----------------------------------------------------------------------
-        // Kontakten abrufen
-        //----------------------------------------------------------------------
-
-        private void GetContactData(Guid id, string type)
+        private void GrpFirmaK_Enter(object sender, EventArgs e)
         {
-            if (type == "Kunde")
-            {
-                var customer = Controller.GetCustomer(id);
-                //Persönliche Angaben
-                CmbAnredeK.Text = customer.Salutation;
-                CmbTitelK.Text = customer.Title;
-                TxtVornameK.Text = customer.FirstName;
-                TxtNachnameK.Text = customer.LastName;
-                //Adresse + Kontakt
-                TxtStrasseK.Text = customer.Street;
-                TxtHausnummerK.Text = customer.StreetNumber;
-                TxtPostleitzahlK.Text = customer.ZipCode;
-                TxtWohnortK.Text = customer.Place;
-                TxtTelefoneK.Text = customer.PhoneNumberBuisness;
-                //Firma
-                TxtFirmennameK.Text = customer.CompanyName;
-                TxtGeschaeftK.Text = customer.CompanyContact;
-                //Administratives
-                CmbKundentypK.Text = Convert.ToString(customer.CustomerType);
-                CmbStatusK.Checked = customer.Status;
-                // Privilege Stufe
-                Customer.Text = customer.Type;
-            }
+
         }
 
-        //----------------------------------------------------------------------
-        // Events
-        //----------------------------------------------------------------------
+        private void TxtOwnerK_TextChanged(object sender, EventArgs e)
+        {
 
+        }
 
-        // ---------------------------------------------------------------------
-        // Werte: Lehrling   
-        // ---------------------------------------------------------------------
+        private void Customer_Click(object sender, EventArgs e)
+        {
 
+        }
 
-        // ---------------------------------------------------------------------
-        // Werte: Mitarbeiter
-        // ---------------------------------------------------------------------
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
-        // ---------------------------------------------------------------------
-        // Werte: Kunde
-        // ---------------------------------------------------------------------
+        }
 
+        private void CmbAnredeL_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-
-
-
+        }
     }
 }
