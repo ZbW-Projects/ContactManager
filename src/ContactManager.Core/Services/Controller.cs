@@ -149,8 +149,8 @@ namespace ContactManager.Core.Services
                     FirstName = cmd.FirstName,    // Vorname
                     LastName = cmd.LastName,
                     PhoneNumberBuisness = cmd.PhoneNumberBuisness,// Nachname
-                                                 // BusinessNumber = cmd.BusinessNumber, 
-                                                 //   -> "Geschäftsnummer" ist in der GUI, aber NICHT im Model/DTO vorhanden.
+                                                                  // BusinessNumber = cmd.BusinessNumber, 
+                                                                  //   -> "Geschäftsnummer" ist in der GUI, aber NICHT im Model/DTO vorhanden.
 
                     // ── Kontakt + Firma (rechts, oben) ────────────────────────────
                     CompanyName = cmd.CompanyName,     // Firmenname
@@ -161,14 +161,14 @@ namespace ContactManager.Core.Services
                     CompanyContact = cmd.CompanyContact,  // Firmenkontakt / Ansprechperson
                                                           // CompanyEmail = cmd.CompanyEmail,
                                                           //   -> "Firmaemail" ist aktuell NICHT im Model/DTO. Nur entkommentieren, wenn Property existiert
-                    // ── Administrativ (rechts, unten) ─────────────────────────────
+                                                          // ── Administrativ (rechts, unten) ─────────────────────────────
                     Status = cmd.Status,        // Status (Aktiv)
                     CustomerType = cmd.CustomerType,  // Kundentyp
                     Type = cmd.Type,          // Typ (Model hat es, in der GUI fehlt das Feld aktuell)
 
-                  
-                
-            };
+
+
+                };
 
                 // Daten persistieren 
                 LocalStorage.StoreContact(customer.Id, customer);
@@ -374,6 +374,7 @@ namespace ContactManager.Core.Services
                 employee.Status = cmd.Status;
                 employee.Nationality = cmd.Nationality;
                 employee.Street = cmd.Street;
+                employee.StreetNumber = cmd.StreetNumber;
                 employee.ZipCode = cmd.ZipCode;
                 employee.Place = cmd.Place;
                 employee.Type = cmd.Type;
@@ -472,6 +473,7 @@ namespace ContactManager.Core.Services
                     Status = cmd.Status,
                     Nationality = cmd.Nationality,
                     Street = cmd.Street,
+                    StreetNumber = cmd.StreetNumber,
                     ZipCode = cmd.ZipCode,
                     Place = cmd.Place,
                     Type = cmd.Type,
@@ -524,6 +526,7 @@ namespace ContactManager.Core.Services
                 trainee.Status = cmd.Status;
                 trainee.Nationality = cmd.Nationality;
                 trainee.Street = cmd.Street;
+                trainee.StreetNumber = cmd.StreetNumber;
                 trainee.ZipCode = cmd.ZipCode;
                 trainee.Place = cmd.Place;
                 trainee.Type = cmd.Type;
