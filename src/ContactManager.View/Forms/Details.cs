@@ -1,4 +1,3 @@
-using ContactManager.Core.Model;
 using ContactManager.Core.Services;
 using ContactManager.View.Forms.Components;
 using System;
@@ -20,6 +19,8 @@ namespace ContactManager.View.Forms
         #region Eigenschaften
 
         private Guid _idContact;
+        public event EventHandler? Saved;
+
         #endregion
 
         #region Konstruktoren
@@ -64,7 +65,7 @@ namespace ContactManager.View.Forms
 
         #region Event Händler
 
-        #region Events: Create Lehrling (Start)
+        #region Events: Create Lehrling
 
         /// Speichert einen Lehrling.
 
@@ -103,16 +104,21 @@ namespace ContactManager.View.Forms
                 var (ok, msg) = Controller.CreateTrainee(trainee);
 
                 if (!ok) InputBox.Error(msg);
-                else InputBox.Info(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    ClearInputs(this);
+                    this.DialogResult = DialogResult.OK;
+                }
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
             catch (Exception ex) { InputBox.Error(ex.Message); }
         }
 
-        #endregion Events: Create Lehrling (End)
+        #endregion
 
-        #region Events: Create Mitarbeiter (Start)
+        #region Events: Create Mitarbeiter
 
         /// Speichert einen Mitarbeiter.
 
@@ -159,14 +165,19 @@ namespace ContactManager.View.Forms
                 var (ok, msg) = Controller.CreateEmployee(employee);
 
                 if (!ok) InputBox.Error(msg);
-                else InputBox.Info(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    ClearInputs(this);
+                    this.DialogResult = DialogResult.OK;
+                }
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
             catch (Exception ex) { InputBox.Error(ex.Message); }
         }
 
-        #endregion Events: Create Mitarbeiter (End)
+        #endregion
 
         #region Events: Create Kunde
         private void BtnSpeichernK_Click_1(object sender, EventArgs e)
@@ -203,7 +214,11 @@ namespace ContactManager.View.Forms
                 var (ok, msg) = Controller.CreateCustomer(customer);
 
                 if (!ok) InputBox.Error(msg);
-                else InputBox.Info(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    ClearInputs(this);
+                }
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
@@ -211,6 +226,30 @@ namespace ContactManager.View.Forms
         }
 
         #endregion Events: Create Kunde 
+
+        #endregion
+
+        #region Helper Clear Methode
+
+        private void ClearInputs(Control parent)
+        {
+            foreach (Control c in parent.Controls)
+            {
+                if (c is System.Windows.Forms.TextBox tb)
+                    tb.Clear();
+                else if (c is System.Windows.Forms.ComboBox cb)
+                    cb.SelectedIndex = -1;
+                else if (c is CheckBox chk)
+                    chk.Checked = false;
+                else if (c is DateTimePicker dtp)
+                    dtp.Value = DateTime.Now;
+
+                // Falls es verschachtelte Container gibt (GroupBox, Panel, etc.)
+                if (c.HasChildren)
+                    ClearInputs(c);
+            }
+        }
+
 
         #endregion
 
@@ -222,9 +261,22 @@ namespace ContactManager.View.Forms
         private void BearbeitenContactUISettings(string type)
         {
             CmdSpeichernK.Visible = false;
+            CmdSpeichernM.Visible = false;
+            BtnSpeichernL.Visible = false;
 
-            if (type == "Mitarbeiter") PERSON.SelectedIndex = 1; // Mitarbeiter
-            if (type == "Lehrling") PERSON.SelectedIndex = 2;    // Lehrling
+            if (type == "Mitarbeiter")
+            {
+                PERSON.SelectedIndex = 1; // Mitarbeiter
+                PERSON.TabPages.Remove(TabKunde);
+                PERSON.TabPages.Remove(TabLehrling);
+            }
+
+            if (type == "Lehrling")
+            {
+                PERSON.SelectedIndex = 2;    // Lehrling
+                PERSON.TabPages.Remove(TabEmployee);
+                PERSON.TabPages.Remove(TabKunde);
+            }
 
             if (type == "Kunde")
             {
@@ -416,7 +468,12 @@ namespace ContactManager.View.Forms
                 var (ok, msg) = Controller.UpdateCustomer(_idContact, customer);
 
                 if (!ok) InputBox.Error(msg);
-                else InputBox.Info(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    this.Close();
+                }
+
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
@@ -469,7 +526,11 @@ namespace ContactManager.View.Forms
                 var (ok, msg) = Controller.UpdateEmployee(_idContact, employee);
 
                 if (!ok) InputBox.Error(msg);
-                else InputBox.Info(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    this.Close();
+                }
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
@@ -514,12 +575,15 @@ namespace ContactManager.View.Forms
                 var (ok, msg) = Controller.UpdateTrainee(_idContact, trainee);
 
                 if (!ok) InputBox.Error(msg);
-                else InputBox.Info(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    this.Close();
+                }
             }
             catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
             catch (Exception ex) { InputBox.Error(ex.Message); }
-
         }
 
         #endregion

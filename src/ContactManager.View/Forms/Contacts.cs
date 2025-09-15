@@ -1,16 +1,6 @@
-using ContactManager.Core.Data;
-using ContactManager.View.Forms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using ContactManager.Core.Services;
 using ContactManager.View.Forms.Components;
+using System.ComponentModel;
 
 namespace ContactManager.View.Forms
 {
@@ -104,10 +94,11 @@ namespace ContactManager.View.Forms
         #region Aktionen (Use Cases Aufrufe und UI Updates)
         private void ReloadGrid()
         {
-            // UseCase anbindung
-            var rows = Controller.GetList();
-            _binding.DataSource = rows;
+            var rows = Controller.GetList().ToList();
+            _binding.DataSource = new BindingList<DtoPersonRow>(rows);
+            _binding.ResetBindings(false);
             grdContacts.ClearSelection();
+            grdContacts.Refresh();
         }
         private void DoSearch()
         {
@@ -119,29 +110,26 @@ namespace ContactManager.View.Forms
         }
         private void OpenSelected()
         {
-            if (grdContacts.CurrentRow?.DataBoundItem is DtoPersonRow row)
-            {
-                // Hier wäre möglich Details-Form öffnen
-                var detailsForm = new Details(row.Id, row.Type);
-                detailsForm.ShowDialog();
-            }
-            else
-            {
-                InputBox.Error("Die Daten enthalten einen Fehler oder sind unvollständig.");
-            }
+            if (grdContacts.CurrentRow?.DataBoundItem is not DtoPersonRow row)
+            { InputBox.Error("Die Daten enthalten einen Fehler oder sind unvollständig."); return; }
+
+            using var detailsForm = new Details(row.Id, row.Type);
+            detailsForm.ShowDialog(this);
+            ReloadGrid();
         }
 
         #endregion
 
         #region Window Designer generiertes code
 
-        //Öffnet das Detail-Form
+        //Öffnet das Detail-Form für Neue Kontakte
         private void btnSearch1_Click(object sender, EventArgs e)
         {
             // Instanz vom Form "Details" erstellen
             Details detailsForm = new Details();
             // Modal öffnen
-            detailsForm.ShowDialog();
+            detailsForm.ShowDialog(this);
+            ReloadGrid();
         }
 
         //Grid Zellklick triggert Methode OpenSelected
@@ -159,8 +147,27 @@ namespace ContactManager.View.Forms
         //Aktion (Wenn ausgewählt löschen)
         private void btnloeschen_Click(object sender, EventArgs e)
         {
-            //TODO: Delete Use Case aktivieren
-            // Controller.DeleteContact
+            if (grdContacts.CurrentRow?.DataBoundItem is not DtoPersonRow row)
+            {
+                InputBox.Warning("Bitte zuerst einen Kontakt auswählen.");
+                return;
+            }
+
+            var name = $"{row.FirstName} {row.LastName}";
+            var ask = MessageBox.Show(
+                $"Kontakt {name} ({row.Type}) wirklich löschen?",
+                "Löschen bestätigen",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (ask != DialogResult.Yes) return;
+
+            // KISS: ein Controller-Call, der intern je nach Type löscht
+            var (ok, msg) = Controller.DeleteContact(row.Id);
+
+            if (!ok) { InputBox.Error(msg); return; }
+
+            InputBox.Info("Kontakt wurde gelöscht.");
+            ReloadGrid();
         }
 
         #endregion
