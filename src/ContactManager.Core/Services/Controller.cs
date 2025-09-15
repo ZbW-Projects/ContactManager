@@ -140,34 +140,22 @@ namespace ContactManager.Core.Services
         {
             try
             {
-                // Es wird versucht Customer zu instanziieren
                 Person customer = new Customer
                 {
-                    // ── Persönliche Angaben (links) ───────────────────────────────
-                    Salutation = cmd.Salutation,   // Anrede
-                    Title = cmd.Title,        // Titel
-                    FirstName = cmd.FirstName,    // Vorname
+                    Salutation = cmd.Salutation,
+                    Title = cmd.Title,
+                    FirstName = cmd.FirstName,
                     LastName = cmd.LastName,
-                    PhoneNumberBuisness = cmd.PhoneNumberBuisness,// Nachname
-                                                                  // BusinessNumber = cmd.BusinessNumber, 
-                                                                  //   -> "Geschäftsnummer" ist in der GUI, aber NICHT im Model/DTO vorhanden.
-
-                    // ── Kontakt + Firma (rechts, oben) ────────────────────────────
-                    CompanyName = cmd.CompanyName,     // Firmenname
-                    Street = cmd.Street,          // Strasse
-                    StreetNumber = cmd.StreetNumber,    // Nummer
-                    ZipCode = cmd.ZipCode,         // Postleitzahl
-                    Place = cmd.Place,           // Wohnort
-                    CompanyContact = cmd.CompanyContact,  // Firmenkontakt / Ansprechperson
-                                                          // CompanyEmail = cmd.CompanyEmail,
-                                                          //   -> "Firmaemail" ist aktuell NICHT im Model/DTO. Nur entkommentieren, wenn Property existiert
-                                                          // ── Administrativ (rechts, unten) ─────────────────────────────
-                    Status = cmd.Status,        // Status (Aktiv)
-                    CustomerType = cmd.CustomerType,  // Kundentyp
-                    Type = cmd.Type,          // Typ (Model hat es, in der GUI fehlt das Feld aktuell)
-
-
-
+                    PhoneNumberBuisness = cmd.PhoneNumberBuisness,
+                    CompanyName = cmd.CompanyName,
+                    Street = cmd.Street,
+                    StreetNumber = cmd.StreetNumber,
+                    ZipCode = cmd.ZipCode,
+                    Place = cmd.Place,
+                    CompanyContact = cmd.CompanyContact,
+                    Status = cmd.Status,
+                    CustomerType = cmd.CustomerType,
+                    Type = cmd.Type,
                 };
 
                 // Daten persistieren 
