@@ -640,6 +640,7 @@ namespace ContactManager.View.Forms
             BtnNotizSpeichernK.TabIndex = 15;
             BtnNotizSpeichernK.Text = "Speichern";
             BtnNotizSpeichernK.UseVisualStyleBackColor = true;
+            BtnNotizSpeichernK.Click += BtnNotizSpeichernK_Click;
             // 
             // GrpFirmaK
             // 

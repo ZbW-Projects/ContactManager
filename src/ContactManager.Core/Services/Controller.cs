@@ -251,6 +251,11 @@ namespace ContactManager.Core.Services
             }
 
         }
+        public static List<DtoMessage> GetMessages(Protocol messages)
+        {
+            List<Message> items = messages.Items;
+            return MapToProtocolItems(items);
+        }
 
         #region Mapper
         private static DtoCustomer MapToDtoCustomer(Customer customer)
@@ -274,6 +279,18 @@ namespace ContactManager.Core.Services
                 CompanyContact = customer.CompanyContact,
                 Messages = customer.Messages,
             };
+        }
+
+        private static List<DtoMessage> MapToProtocolItems(List<Message> messages)
+        {
+            return messages
+                .Select(msg => new DtoMessage
+                {
+                    Owner = msg.Owner,
+                    TimeStamp = msg.TimeStamp,
+                    Content = msg.Content
+                })
+                .ToList();
         }
 
         #endregion
@@ -698,6 +715,17 @@ namespace ContactManager.Core.Services
         public string CompanyContact { get; init; } = string.Empty;
         public Protocol? Messages { get; init; }
     }
+
+    #region DTOMessage
+
+    public sealed class DtoMessage
+    {
+        public string Owner { get; init; } = string.Empty;
+        public DateTime TimeStamp { get; init; }
+        public string Content { get; init; } = string.Empty;
+    }
+
+    #endregion 
 
     #endregion
 

@@ -19,7 +19,6 @@ namespace ContactManager.View.Forms
         #region Eigenschaften
 
         private Guid _idContact;
-        public event EventHandler? Saved;
 
         #endregion
 
@@ -42,7 +41,7 @@ namespace ContactManager.View.Forms
 
         #endregion Konstruktoren
 
-        #region Szenario 1
+        #region Szenario 1:
 
         #region UI-Setup
         private void CreateContactUISettings()
@@ -324,12 +323,9 @@ namespace ContactManager.View.Forms
                 TabKunde.Text = customer.Type;
 
                 //Protokoll
-                // ProtokollListeK
-
-                //Notiz
-                //TxtNoteK
-                // TxtOwnerK
-                //BtnNotizSpeichernK
+                var protocol = customer?.Messages ?? new();
+                var messages = Controller.GetMessages(protocol);
+                DisplayMessages(messages, ProtokollListeK);
             }
 
             #endregion
@@ -440,28 +436,19 @@ namespace ContactManager.View.Forms
             {
                 var customer = new DtoCustomer
                 {
-                    // Persoenliche Angaben
                     Salutation = CmbSalutationK.Text,
                     Title = CmbTitleK.Text,
                     FirstName = TxtFirstnameK.Text,
                     LastName = TxtLastNameK.Text,
-
-                    // Adresse + Kontakt
                     Street = TxtStreetK.Text,
                     StreetNumber = TxtStreetNumberK.Text,
                     ZipCode = TxtZipcodeK.Text,
                     Place = TxtPlaceK.Text,
                     PhoneNumberBuisness = TxtPhoneNumberBuisnessK.Text,
-
-                    // Firma
                     CompanyName = TxtCompanyNameK.Text,
                     CompanyContact = TxtCompanycontactK.Text,
-
-                    // Administratives
                     CustomerType = Convert.ToChar(CmbCustomerTypeK.Text),
                     Status = CmbStatusK.Checked,
-
-                    // Meta
                     Type = TabKunde.Text,
                 };
 
@@ -591,12 +578,80 @@ namespace ContactManager.View.Forms
         #endregion
 
         #region Protokoll Daten
+        private void BtnNotizSpeichernK_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var (ok, msg) = Controller.AddCustomerNote(_idContact, TxtNoteK.Text, TxtOwnerK.Text);
+
+                if (!ok) InputBox.Error(msg);
+                else
+                {
+                    InputBox.Info(msg);
+                    // Nur dIe Protokolleingaben Leeren
+                    TxtNoteK.Text = string.Empty;
+                    TxtOwnerK.Text = string.Empty;
+
+                    //Protokoll
+                    var customer = Controller.GetCustomer(_idContact);
+                    var protocol = customer?.Messages ?? new();
+                    var messages = Controller.GetMessages(protocol);
+                    DisplayMessages(messages, ProtokollListeK);
+
+                }
+            }
+            catch (ArgumentException ex) { InputBox.Warning(ex.Message); }
+            catch (FormatException ex) { InputBox.Warning(ex.Message); }
+            catch (Exception ex) { InputBox.Error(ex.Message); }
+        }
+
+        #region Helper Methode um Messages in Kunden Anzeigen
+
+        private void DisplayMessages(List<DtoMessage> messages, RichTextBox richTextBox)
+        {
+            richTextBox.Clear();
+
+            for (int i = messages.Count - 1; i >= 0; i--)
+            {
+                var msg = messages[i];
+                // ZeitStempel formatieren
+                string formattedTime = msg.TimeStamp.ToString("dd.MM.yyyy 'um' HH:mm 'Uhr'");
+
+                // Oberer Rahmen
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+                richTextBox.AppendText("==================================\n");
+
+                // Owner
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Bold);
+                richTextBox.AppendText($"Owner => ");
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+                richTextBox.AppendText($"{msg.Owner}\n");
+
+                // Zeitstempel fett
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Bold);
+                richTextBox.AppendText("Zeitstempel => ");
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+                richTextBox.AppendText($"{formattedTime}\n");
+                // Trenner
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+                richTextBox.AppendText("-------------------------------------------\n");
+
+                // Content normal
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+                richTextBox.AppendText($"{msg.Content}\n");
+
+                // Unterer Rahmen
+                richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
+                richTextBox.AppendText("==================================\n\n");
+            }
+        }
+
+        #endregion 
 
         #endregion
 
         #endregion
 
         #endregion
-
     }
 }
