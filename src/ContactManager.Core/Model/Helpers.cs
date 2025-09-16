@@ -18,7 +18,7 @@ namespace ContactManager.Core.Model
 
     public class Name
     {
-        public static string Normalize(string value)
+        public static string Normalize(string? value)
         {
             if (string.IsNullOrWhiteSpace(value)) return "";
             return char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower();
@@ -30,7 +30,7 @@ namespace ContactManager.Core.Model
     #region AHV
     public class AHV
     {
-        public static bool IsValid(string value)
+        public static bool IsValid(string? value)
         {
             if (string.IsNullOrWhiteSpace(value)) return true;
 
@@ -46,7 +46,7 @@ namespace ContactManager.Core.Model
             return true;
         }
 
-        public static string Normalize(string value)
+        public static string Normalize(string? value)
         {
             if (string.IsNullOrWhiteSpace(value)) return "";
             var cleaned = Clean(value);
@@ -77,7 +77,7 @@ namespace ContactManager.Core.Model
     #region Phone
     public class Phone
     {
-        public static bool IsValid(string value)
+        public static bool IsValid(string? value)
         {
             if (string.IsNullOrWhiteSpace(value)) return true;
 
@@ -98,7 +98,7 @@ namespace ContactManager.Core.Model
             return true;
         }
 
-        public static string Normalize(string value)
+        public static string Normalize(string? value)
         {
             if (string.IsNullOrWhiteSpace(value)) return "";
 
@@ -128,7 +128,7 @@ namespace ContactManager.Core.Model
     #region Email
     public class Email
     {
-        public static bool IsValid(string value)
+        public static bool IsValid(string? value)
         {
             if (string.IsNullOrWhiteSpace(value)) return false;
 
