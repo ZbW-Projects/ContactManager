@@ -2,10 +2,9 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'beta*'
-    branches:
-      - release
+
+    branches: [ release ]
+    tags: [ 'beta*' ]
 
 jobs:
   build-publish:
