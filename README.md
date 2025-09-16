@@ -47,10 +47,10 @@ Joël Rohner ( Unit Testing / Testing )</br>
 #### Entwicklung
 **Branch:** `dev` </br>
 **Workflow:** [![build-and-test](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml) </br>
-**Dokumentation:** [Development](docs/assets/Development.md)
+**Dokumentation:** [Development](docs/Development.md)
 
 #### Prototyp
 **Branch:** `release` </br>
 **Workflow:** [![Release](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml) </br>
-**Dokumentation:** [Release](docs/assets/Release.md)
+**Dokumentation:** [Release](docs/Release.md)
 
