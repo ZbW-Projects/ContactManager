@@ -2,14 +2,12 @@ name: Release / Beta
 
 on:
   push:
-    branches: [ "release", "release/**" ]
     tags:
       - 'beta*'
-      - 'v*'
   workflow_dispatch:
     inputs:
       version:
-        description: 'Tag/Version (z.B. beta1.0 oder v1.0.0)'
+        description: 'Tag/Version (z.B. beta1.0)'
         required: false
         default: ''
 
@@ -33,7 +31,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '9.0.x'
 
       - name: Restore (app only)
         run: dotnet restore ${{ env.APP_PROJECT }}
