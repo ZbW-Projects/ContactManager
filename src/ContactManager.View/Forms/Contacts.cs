@@ -14,7 +14,7 @@ namespace ContactManager.View.Forms
             ConfigureGrid();
             WireEvents();
         }
-        private void Contacts_Load(object sender, EventArgs e)
+        private void Contacts_Load(object? sender, EventArgs e)
         {
             ReloadGrid();  // Starte Datenladung
         }
@@ -102,7 +102,7 @@ namespace ContactManager.View.Forms
         }
         private void DoSearch()
         {
-            var term = txtSearch.Text?.Trim();
+            var term = txtSearch.Text?.Trim() ?? string.Empty;
             // UseCase Search
             var rows = Controller.Search(term);
             _binding.DataSource = rows;

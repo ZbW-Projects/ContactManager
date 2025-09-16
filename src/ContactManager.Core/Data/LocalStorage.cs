@@ -94,7 +94,12 @@ namespace ContactManager.Core.Data
 
         private static void SaveLocally(string payload)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(_storagePath));
+            var dir = Path.GetDirectoryName(_storagePath);
+            if (!string.IsNullOrEmpty(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
             File.WriteAllText(_storagePath, payload);
         }
 

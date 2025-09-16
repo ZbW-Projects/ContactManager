@@ -19,7 +19,13 @@ namespace ContactManager.Core.Services.features
             Directory.CreateDirectory(_dir);
             if (!File.Exists(_path)) return new Payload { counter = 0 };
             var json = File.ReadAllText(_path);
-            return JsonSerializer.Deserialize<Payload>(json);
+
+            var payload = JsonSerializer.Deserialize<Payload>(json);
+
+            if (payload is null)
+                throw new InvalidDataException($"Invalid payload in '{_path}'.");
+
+            return payload;
         }
 
         private static void Save(Payload p)

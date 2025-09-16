@@ -108,7 +108,7 @@ namespace ContactManager.Core.Model
             if (cleaned?.StartsWith('+') == true) return $"{cleaned.Substring(0, 3)} {cleaned.Substring(3, 2)} {cleaned.Substring(5, 3)} {cleaned.Substring(8, 2)} {cleaned.Substring(10, 2)}";
 
             // Output als 079 123 45 67
-            return $"{cleaned.Substring(0, 3)} {cleaned.Substring(3, 3)} {cleaned.Substring(6, 2)} {cleaned.Substring(8, 2)}";
+            return $"{cleaned?.Substring(0, 3)} {cleaned?.Substring(3, 3)} {cleaned?.Substring(6, 2)} {cleaned?.Substring(8, 2)}";
         }
 
         private static bool HasValidPhoneNumber(string phoneNumber)
