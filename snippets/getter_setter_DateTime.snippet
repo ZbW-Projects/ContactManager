@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>GetterSetterDateTime</Title>
+    <Shortcut>gsd</Shortcut>
+    <Description>Property with guarded getter/setter for DateTime</Description>
+    <Author>Eduard Anderegg</Author>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>name</ID>
+        <Default>ChangeMe</Default>
+      </Literal>
+      <Literal>
+        <ID>field</ID>
+        <Default>_changeMe</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="csharp"><![CDATA[
+    public DateTime $name$ { get => $field$; set => $field$ =  value == default ? throw new ArgumentException("Das Datum muss einen Wert enthalten.", nameof(value)) : value; }
+$end$]]>
+    </Code>
+  </Snippet>
+</CodeSnippet>
