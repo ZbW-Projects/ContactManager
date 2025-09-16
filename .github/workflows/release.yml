@@ -4,12 +4,8 @@ on:
   push:
     tags:
       - 'beta*'
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Tag/Version (z.B. beta1.0)'
-        required: false
-        default: ''
+    branches:
+      - release
 
 jobs:
   build-publish:
