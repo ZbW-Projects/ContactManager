@@ -15,7 +15,6 @@ namespace ContactManager.View.Forms
 
     public partial class Details : Form
     {
-
         #region Eigenschaften
 
         private Guid _idContact;
@@ -53,11 +52,16 @@ namespace ContactManager.View.Forms
 
             //Mitarbeiter
             BtnBearbeitenM.Visible = false;
+            LblMitarbeiterNummerM.Visible = false;
+            TxtMitarbeiterNummerM.Visible = false;
 
             //Lehrling
             BtnBearbeitenL.Visible = false;
             LblTraineeYearsL.Visible = false;
             TxtTraineeYearsL.Visible = false;
+            LblMitarbeiterNummerL.Visible = false;
+            TxtMitarbeiterNummerL.Visible = false;
+
         }
 
         #endregion
@@ -338,6 +342,7 @@ namespace ContactManager.View.Forms
                 var employee = Controller.GetEmployee(id);
 
                 // Persönliche Angaben
+                TxtMitarbeiterNummerM.Text = employee.EmployeeNumber;
                 CmbSalutationM.Text = employee.Salutation;
                 CmbTitleM.Text = employee.Title;
                 TxtFirstNameM.Text = employee.FirstName;
@@ -382,6 +387,7 @@ namespace ContactManager.View.Forms
                 var trainee = Controller.GetTrainee(id);
 
                 // Personal Information
+                TxtMitarbeiterNummerL.Text = trainee.EmployeeNumber;
                 CmbSalutationL.Text = trainee.Salutation;
                 TxtFirstNameL.Text = trainee.FirstName;
                 TxtLastNameL.Text = trainee.LastName;
@@ -425,8 +431,6 @@ namespace ContactManager.View.Forms
         }
 
         #endregion
-
-        #region Kontakt Ändern
 
         #region Event: Kunde Ändern
 
@@ -575,8 +579,6 @@ namespace ContactManager.View.Forms
 
         #endregion
 
-        #endregion
-
         #region Protokoll Daten
         private void BtnNotizSpeichernK_Click(object sender, EventArgs e)
         {
@@ -604,6 +606,10 @@ namespace ContactManager.View.Forms
             catch (FormatException ex) { InputBox.Warning(ex.Message); }
             catch (Exception ex) { InputBox.Error(ex.Message); }
         }
+
+        #endregion
+
+        #endregion
 
         #region Helper Methode um Messages in Kunden Anzeigen
 
@@ -646,11 +652,7 @@ namespace ContactManager.View.Forms
             }
         }
 
-        #endregion 
-
-        #endregion
-
-        #endregion
+        #endregion  
 
         #endregion
     }
