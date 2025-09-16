@@ -20,20 +20,20 @@ jobs:
       - name: Checkout exact tag
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0            
-          ref: ${{ github.ref }}       
+          fetch-depth: 0
+          ref: ${{ github.ref }}
 
       - name: Verify tag is created from release
-        shell: bash
+        shell: pwsh
         run: |
-          set -euo pipefail
           git fetch origin release --depth=1
-          TAG_COMMIT="$(git rev-parse "${GITHUB_REF}")"
-          RELEASE_TIP="$(git rev-parse origin/release)"
-          if ! git merge-base --is-ancestor "$RELEASE_TIP" "$TAG_COMMIT"; then
-            echo "❌ Tag ${GITHUB_REF#refs/tags/} is not based on 'release'. Aborting."
+          $tagCommit = git rev-parse "${env:GITHUB_REF}"
+          $releaseTip = git rev-parse "origin/release"
+          git merge-base --is-ancestor $releaseTip $tagCommit
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Tag $(${env:GITHUB_REF} -replace 'refs/tags/','') is NOT based on 'release'. Aborting."
             exit 1
-          fi
+          }
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -67,7 +67,7 @@ jobs:
           if (Test-Path LICENSE)   { Copy-Item LICENSE   artifacts/out/ -Force }
           Compress-Archive -Path artifacts/out/* -DestinationPath "artifacts/${{ env.PRODUCT_NAME }}.zip" -Force
           $exe = Get-ChildItem artifacts/publish -Filter *.exe | Sort-Object Length -Descending | Select-Object -First 1
-          if ($exe) { Copy-Item $exe.FullName "artifacts/${{ env.PRODUCT_NAME }}.exe" -Force } else { Write-Host "⚠️ No EXE found." }
+          if ($exe) { Copy-Item $exe.FullName "artifacts/${{ env.PRODUCT_NAME }}.exe" -Force }
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
