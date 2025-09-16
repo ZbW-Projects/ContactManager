@@ -26,7 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-tags: true
+          fetch-depth: 0
+          ref: ${{ github.ref }}
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
