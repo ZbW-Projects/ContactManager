@@ -1,10 +1,9 @@
-name: Release
+﻿name: Release
 
 on:
   push:
-
-    branches: [ release ]
-    tags: [ 'beta*' ]
+    tags:
+      - 'beta*'
 
 jobs:
   build-publish:
@@ -12,85 +11,72 @@ jobs:
     permissions:
       contents: write
     env:
+      PRODUCT_NAME: ContactManager
+      APP_PROJECT: src/ContactManager.View/ContactManager.View.csproj
       CONFIGURATION: Release
       RUNTIME: win-x64
-      APP_PROJECT: src/ContactManager.View/ContactManager.View.csproj
-      PRODUCT_NAME: ContactManager
 
     steps:
-      - name: Checkout
+      - name: Checkout exact tag
         uses: actions/checkout@v4
         with:
-          fetch-tags: true
+          fetch-depth: 0            
+          ref: ${{ github.ref }}       
+
+      - name: Verify tag is created from release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin release --depth=1
+          TAG_COMMIT="$(git rev-parse "${GITHUB_REF}")"
+          RELEASE_TIP="$(git rev-parse origin/release)"
+          if ! git merge-base --is-ancestor "$RELEASE_TIP" "$TAG_COMMIT"; then
+            echo "❌ Tag ${GITHUB_REF#refs/tags/} is not based on 'release'. Aborting."
+            exit 1
+          fi
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore (app only)
-        run: dotnet restore ${{ env.APP_PROJECT }}
+      - name: Restore
+        run: dotnet restore "${{ env.APP_PROJECT }}"
 
-      - name: Build (app only)
-        run: dotnet build ${{ env.APP_PROJECT }} --configuration ${{ env.CONFIGURATION }} --no-restore
+      - name: Build
+        run: dotnet build "${{ env.APP_PROJECT }}" --configuration "${{ env.CONFIGURATION }}" --no-restore
 
-      # Self-contained Single-File EXE
-      - name: Publish (Self-contained EXE)
+      - name: Publish (self-contained single-file)
         run: >
           dotnet publish "${{ env.APP_PROJECT }}"
-          -c ${{ env.CONFIGURATION }}
-          -r ${{ env.RUNTIME }}
+          -c "${{ env.CONFIGURATION }}"
+          -r "${{ env.RUNTIME }}"
           --self-contained true
           -p:PublishSingleFile=true
           -p:IncludeNativeLibrariesForSelfExtract=true
           -p:PublishTrimmed=false
           -o "artifacts/publish"
 
-      - name: Pack ZIP (inkl. EXE, README, docs)
+      - name: Package ZIP + EXE
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path artifacts/out | Out-Null
-          Copy-Item -Path artifacts/publish/* -Destination artifacts/out -Recurse -Force
+          Copy-Item artifacts/publish/* artifacts/out -Recurse -Force
           if (Test-Path README.md) { Copy-Item README.md artifacts/out/README.md -Force }
-          if (Test-Path docs) { Copy-Item docs artifacts/out/docs -Recurse -Force }
-          if (Test-Path LICENSE) { Copy-Item LICENSE artifacts/out/ -Force }
-          $zipName = "${{ env.PRODUCT_NAME }}.zip"
-          Compress-Archive -Path artifacts/out/* -DestinationPath "artifacts/$zipName" -Force
+          if (Test-Path docs)      { Copy-Item docs      artifacts/out/docs -Recurse -Force }
+          if (Test-Path LICENSE)   { Copy-Item LICENSE   artifacts/out/ -Force }
+          Compress-Archive -Path artifacts/out/* -DestinationPath "artifacts/${{ env.PRODUCT_NAME }}.zip" -Force
           $exe = Get-ChildItem artifacts/publish -Filter *.exe | Sort-Object Length -Descending | Select-Object -First 1
-          if ($exe) { Copy-Item $exe.FullName "artifacts/${{ env.PRODUCT_NAME }}.exe" -Force }
-
-      - name: Compute Version Tag
-        id: vtag
-        shell: pwsh
-        run: |
-          $inputTag = "${{ github.event.inputs.version }}"
-          if ([string]::IsNullOrWhiteSpace($inputTag)) {
-            if ("${{ github.ref }}" -like "refs/tags/*") {
-              $tag = "${{ github.ref }}".Replace("refs/tags/","")
-            } else {
-              $date = Get-Date -Format "yyyyMMdd"
-              $tag = "beta-$date"
-            }
-          } else {
-            $tag = $inputTag
-          }
-          "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
-
-      - name: Rename assets with version
-        shell: pwsh
-        run: |
-          Rename-Item "artifacts/${{ env.PRODUCT_NAME }}.zip"  "artifacts/${{ env.PRODUCT_NAME }}-${{ steps.vtag.outputs.tag }}.zip"  -Force
-          Rename-Item "artifacts/${{ env.PRODUCT_NAME }}.exe"  "artifacts/${{ env.PRODUCT_NAME }}-${{ steps.vtag.outputs.tag }}.exe"  -Force
+          if ($exe) { Copy-Item $exe.FullName "artifacts/${{ env.PRODUCT_NAME }}.exe" -Force } else { Write-Host "⚠️ No EXE found." }
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.vtag.outputs.tag }}
-          name: ${{ env.PRODUCT_NAME }} ${{ steps.vtag.outputs.tag }}
-          prerelease: ${{ startsWith(steps.vtag.outputs.tag, 'beta') || contains(steps.vtag.outputs.tag, 'beta') }}
-          draft: false
+          tag_name: ${{ github.ref_name }}
+          name: ${{ env.PRODUCT_NAME }} ${{ github.ref_name }}
+          prerelease: true
           files: |
-            artifacts/${{ env.PRODUCT_NAME }}-${{ steps.vtag.outputs.tag }}.zip
-            artifacts/${{ env.PRODUCT_NAME }}-${{ steps.vtag.outputs.tag }}.exe
+            artifacts/${{ env.PRODUCT_NAME }}.zip
+            artifacts/${{ env.PRODUCT_NAME }}.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
