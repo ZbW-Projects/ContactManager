@@ -106,7 +106,7 @@ namespace ContactManager.View.Forms
 
                 var (ok, msg) = Controller.CreateTrainee(trainee);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
@@ -167,7 +167,7 @@ namespace ContactManager.View.Forms
 
                 var (ok, msg) = Controller.CreateEmployee(employee);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
@@ -216,7 +216,7 @@ namespace ContactManager.View.Forms
 
                 var (ok, msg) = Controller.CreateCustomer(customer);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
@@ -228,7 +228,7 @@ namespace ContactManager.View.Forms
             catch (Exception ex) { InputBox.Error(ex.Message); }
         }
 
-        #endregion Events: Create Kunde 
+        #endregion
 
         #endregion
 
@@ -458,7 +458,7 @@ namespace ContactManager.View.Forms
 
                 var (ok, msg) = Controller.UpdateCustomer(_idContact, customer);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
@@ -516,7 +516,7 @@ namespace ContactManager.View.Forms
 
                 var (ok, msg) = Controller.UpdateEmployee(_idContact, employee);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
@@ -565,7 +565,7 @@ namespace ContactManager.View.Forms
 
                 var (ok, msg) = Controller.UpdateTrainee(_idContact, trainee);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
@@ -586,7 +586,7 @@ namespace ContactManager.View.Forms
             {
                 var (ok, msg) = Controller.AddCustomerNote(_idContact, TxtNoteK.Text, TxtOwnerK.Text);
 
-                if (!ok) InputBox.Error(msg);
+                if (!ok) InputBox.Warning(msg);
                 else
                 {
                     InputBox.Info(msg);
