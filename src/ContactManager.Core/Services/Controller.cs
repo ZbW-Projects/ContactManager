@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ContactManager.Core.Services
@@ -40,8 +41,10 @@ namespace ContactManager.Core.Services
          *
          * Use Cases der Anwendung
          * 
-         * Data Transfer Objects (DTOs), sowie die 
-         * entsprechenden Mappings und Fromatierungen befinden sich unten
+         * Data Transfer Objects (DTOs), sowie 
+         * Fromatierungen befinden sich unten
+         * 
+         * Mappers jeweils bei den Use Cases
          * 
          * ===================================================*/
 
@@ -109,20 +112,31 @@ namespace ContactManager.Core.Services
             // Formatierung zu string für den Contains
             string dateOfBirth = UiFormat.Date(contact.DateOfBirth);
             string status = UiFormat.BoolToStatus(contact.Status);
+            string buisnessPhone = UiFormat.Phone(contact.PhoneNumberBuisness);
+            string fullName = UiFormat.FullName(contact.FirstName, contact.LastName);
 
             return Contains(contact.FirstName, term)
                 || Contains(contact.LastName, term)
+                || Contains(fullName, term)
                 || Contains(dateOfBirth, term)
-                || Contains(status, term)
-                || Contains(contact.PhoneNumberBuisness, term)
+                || Equals(status, term)
+                || Contains(buisnessPhone, term)
                 || Contains(contact.Type, term);
 
         }
 
+        // Equals erwartet 1 zu 1 den gesuchten Wert
+        // Contains nicht, Contains gibt schon true retour bei Teilstringen ! 
         private static bool Contains(string property, string term)
         {
             var cmp = StringComparison.OrdinalIgnoreCase;
-            return property.Contains(term, cmp);
+            return property.Contains(term.Trim(), cmp);
+        }
+
+        private static bool Equals(string property, string term)
+        {
+            var cmp = StringComparison.OrdinalIgnoreCase;
+            return string.Equals(property, term.Trim(), cmp);
         }
 
         #endregion
@@ -741,7 +755,7 @@ namespace ContactManager.Core.Services
     {
         private static readonly CultureInfo DeCh = CultureInfo.GetCultureInfo("de-CH");
 
-        public static string Name(string? first, string? last)
+        public static string FullName(string? first, string? last)
             => $"{(first ?? "").Trim()} {(last ?? "").Trim()}".Trim();
 
         public static string Date(DateTime value)
@@ -751,8 +765,11 @@ namespace ContactManager.Core.Services
         public static string BoolToStatus(bool active)
             => active ? "Aktiv" : "Inaktiv";
 
-        public static string Type(string? t)
-            => string.IsNullOrWhiteSpace(t) ? "Unbekannt" : t;
+        public static string Type(string? type)
+            => string.IsNullOrWhiteSpace(type) ? "Unbekannt" : type;
+
+        public static string Phone(string? phone)
+            => string.IsNullOrWhiteSpace(phone) ? string.Empty : Regex.Replace(phone, @"\D+", "");
     }
     #endregion
 

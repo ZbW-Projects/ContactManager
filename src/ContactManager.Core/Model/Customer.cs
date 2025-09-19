@@ -19,6 +19,7 @@ namespace ContactManager.Core.Model
         #endregion
 
         // Vorübergehende Lösung (um EmailPrivat zu überschreiben!)
+        // ( Gibts bestimmt eine Elegantere Lösung )
         public override string EmailPrivat { get; set; } = string.Empty;
         public string CompanyName { get => _companyName; set => _companyName = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Firmenname darf nicht leer sein.") : Name.Normalize(value); }
         public char CustomerType { get => _customerType; set => _customerType = !char.IsLetter(value) ? throw new ArgumentException("Der Kundentyp muss ein Buchstabe sein.") : char.ToUpper(value); }
@@ -34,6 +35,7 @@ namespace ContactManager.Core.Model
      * Kontakte / Gespräche zum Kunden werden protokolliert, Da ein Kunde mehrere Notizen haben kann, wurde eine Klasse "Protokol"
      * erstellt, die eine Liste als Datenstrucktur behält und entsprechende Methoden für ListenManipulation
      * bereitstellt, wie im Moment nur Einfügen "AddMessage".
+     * ( Protokol ist wahrscheinlich überflüssig ?! )
      * 
      * ================================================================================================*/
 
@@ -60,7 +62,7 @@ namespace ContactManager.Core.Model
             TimeStamp = timeStamp;
         }
 
-        public string Owner { get => _owner; set => _owner = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Owner muss vorhanden sein.") : Name.Normalize(value); }
+        public string Owner { get => _owner; set => _owner = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Owner muss vorhanden sein.") : value.Trim(); }
         [JsonInclude]
         public DateTime TimeStamp { get; }
         [JsonInclude]

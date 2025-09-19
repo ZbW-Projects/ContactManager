@@ -16,8 +16,8 @@
 
 ### System Code & Bugs
 
-- [ ] Gross und Kleinschreibung soll in der Regel bei der Klasse `Message` => Eigenschaft `Owner` entfernt werden. ( Normalisierung anpassen )
-- [ ] Den Bug in der Suchfunktion mit `Aktiv / Inaktiv` beheben, sodass nur "entweder / oder" angezeigt wird.
-- [ ] Ausreichende In-Line Dokumentation des Quellcodes (alle public Klassen/Methoden/Properties etc.).
-- [ ] Passende Namen für Klassen, Methoden, Properties usw.
+- [X] Gross und Kleinschreibung soll in der Regel bei der Klasse `Message` => Eigenschaft `Owner` entfernt werden. ( Normalisierung anpassen )
+- [X] Den Bug in der Suchfunktion mit `Aktiv / Inaktiv` beheben, sodass nur "entweder / oder" angezeigt wird.
+- [X] Ausreichende In-Line Dokumentation des Quellcodes (alle public Klassen/Methoden/Properties etc.).
+- [X] Passende Namen für Klassen, Methoden, Properties usw.
 

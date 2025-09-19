@@ -78,8 +78,8 @@ namespace ContactManager.Core.Model
         public virtual string EmailPrivat { get => _emailPrivat; set => _emailPrivat = !Email.IsValid(value) ? throw new ArgumentException("Die Email ist nicht gültig.") : value.Trim(); }
         public bool Status { get => _status; set => _status = value; }
         public string Nationality { get => _nationality; set => _nationality = Name.Normalize(value); }
-        public string Street { get => _street; set => _street = value; }
-        public string StreetNumber { get => _streetNumber; set => _streetNumber = value; }
+        public string Street { get => _street; set => _street = value.Trim(); }
+        public string StreetNumber { get => _streetNumber; set => _streetNumber = value.Trim(); }
         public string ZipCode { get => _zipCode; set => _zipCode = value.ToUpper(); }
         public string Place { get => _place; set => _place = Name.Normalize(value); }
         public string Type { get => _type; set => _type = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Typ muss vorhanden sein.") : Name.Normalize(value); }

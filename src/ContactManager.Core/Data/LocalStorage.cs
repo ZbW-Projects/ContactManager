@@ -20,10 +20,13 @@ namespace ContactManager.Core.Data
             WriteIndented = true
         };
 
+
         /*================================
          * Hauptdatenträger von Kontakten
          ==================================*/
         private static Dictionary<Guid, Person> _contacts = new Dictionary<Guid, Person>();
+
+
 
         /*===============================================================
          *
@@ -31,11 +34,28 @@ namespace ContactManager.Core.Data
          * 
          ===============================================================*/
 
-        /*================================
-         * Accesor auf Kontakte "READ"
-         ===============================*/
+        #region Accesor auf Kontakte | READ
         public static Dictionary<Guid, Person> Contacts => _contacts;
         public static Dictionary<Guid, Person> SetContacts() => _contacts = FetchData();
+
+        #endregion
+
+        #region Helper ( Wandelt JSON zu den Entsprechenden Contacte Objekte )
+        private static Dictionary<Guid, Person> FetchData()
+        {
+            // Sicherstellen das Ordner Sotorage existiert
+            Directory.CreateDirectory(_storageDir);
+            if (!File.Exists(_storagePath)) return new Dictionary<Guid, Person>();
+
+            // Von lokalen Datenträger JSON auslesen und in einer Variable speichern
+            string data = File.ReadAllText(_storagePath);
+            if (string.IsNullOrWhiteSpace(data)) return new Dictionary<Guid, Person>();
+
+            // JSON in gespeicherte Variable zu eiem Dictionary umwandeln und ausgeben
+            return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data, _serializeOptions) ?? new Dictionary<Guid, Person>();
+        }
+
+        #endregion
 
         /*===============================
          * "Manipulatoren" CREATE, UPDATE, DELETE 
@@ -47,7 +67,7 @@ namespace ContactManager.Core.Data
          * 
          * ==============================*/
 
-        // CREATE
+        #region CREATE 
         public static void StoreContact(Guid Id, Person contact)
         {
             // 1. Schirtt
@@ -58,7 +78,9 @@ namespace ContactManager.Core.Data
             SaveLocally(payload);
         }
 
-        // UPDATE
+        #endregion
+
+        #region UPDATE
         public static void UpdateContact(Guid Id, Person contact)
         {
             //1.Schritt
@@ -69,7 +91,9 @@ namespace ContactManager.Core.Data
             SaveLocally(payload);
         }
 
-        // DELETE
+        #endregion
+
+        #region DELETE
         public static void DeleteContact(Guid Id)
         {
             //1.Schritt
@@ -80,18 +104,13 @@ namespace ContactManager.Core.Data
             SaveLocally(payload);
         }
 
+        #endregion
 
-        /*========================================================================
-         * 
-         * Helper-Methoden, um Daten im JSON-Format umzuwandeln und lokal speichern
-         * 
-         * ==========================================================================*/
+        #region Helper ( um Daten im JSON-Format umzuwandeln und zu speichern )
         private static string ConvertToJSON(Dictionary<Guid, Person> contacts)
         {
             return JsonSerializer.Serialize(contacts, _serializeOptions);
         }
-
-
         private static void SaveLocally(string payload)
         {
             var dir = Path.GetDirectoryName(_storagePath);
@@ -103,18 +122,6 @@ namespace ContactManager.Core.Data
             File.WriteAllText(_storagePath, payload);
         }
 
-        private static Dictionary<Guid, Person> FetchData()
-        {
-            // Sicherstellen das Ordner Sotorage existiert
-            Directory.CreateDirectory(_storageDir);
-            if (!File.Exists(_storagePath)) return new Dictionary<Guid, Person>(); // Existiert contacts.json
-
-            // Von lokalen Datenträger JSON auslesen und in einer Variable speichern
-            string data = File.ReadAllText(_storagePath);
-            if (string.IsNullOrWhiteSpace(data)) return new Dictionary<Guid, Person>();
-
-            // JSON in gespeicherte Variable zu eiem Dictionary umwandeln und ausgeben
-            return JsonSerializer.Deserialize<Dictionary<Guid, Person>>(data, _serializeOptions) ?? new Dictionary<Guid, Person>();
-        }
+        #endregion 
     }
 }
