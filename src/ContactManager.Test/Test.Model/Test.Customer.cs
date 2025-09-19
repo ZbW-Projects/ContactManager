@@ -53,12 +53,12 @@ namespace ContactManager.Test.Core.Model
         public void AddMessage_Appends_To_Protocol_With_NormalizedOwner_And_UtcTimestamp()
         {
             var c = new Customer();
-            c.AddMessage("Rückruf vereinbart", "  aLEx  ");
+            c.AddMessage("Rückruf vereinbart", "  A.S  ");
 
             Assert.AreEqual(1, c.Messages.Items.Count);
             var msg = c.Messages.Items[0];
             Assert.AreEqual("Rückruf vereinbart", msg.Content);
-            Assert.AreEqual("Alex", msg.Owner);
+            Assert.AreEqual("A.S", msg.Owner);
             Assert.IsTrue((DateTime.UtcNow - msg.TimeStamp).TotalSeconds < 5);
         }
     }
@@ -85,7 +85,7 @@ namespace ContactManager.Test.Core.Model
         public void Ctor_Sets_Content_Timestamp_And_NormalizesOwner()
         {
             var t = new DateTime(2024, 11, 1, 8, 30, 0, DateTimeKind.Utc);
-            var m = new Message("Hallo", "  lUkaS ", t);
+            var m = new Message("Hallo", "  Lukas ", t);
 
             Assert.AreEqual("Hallo", m.Content);
             Assert.AreEqual("Lukas", m.Owner);

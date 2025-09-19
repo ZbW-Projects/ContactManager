@@ -9,6 +9,7 @@
 ### UI / UX Gefundene Missverhalten
 
 - [ ] Tabs im Index richtig nummereiren
+- [ ] Bei Dropdowns in Eingabenkästen sollten mehr sinnvolle Optionen eingegeben werden, wie z.B bei `Abteilung`.
 - [ ] Einen neuen Button `Bearbeiten` einfügen und den bestehenden Button umbenennen in `Speichern`.
 - [ ] Im Checkbox `Status` soll sich das Label dynamisch verändern, wenn es `checked` oder `unchecked` ist. 
 - [ ] Ausreichende In-Line Dokumentation des Quellcodes (alle public Klassen/Methoden/Properties etc.).
