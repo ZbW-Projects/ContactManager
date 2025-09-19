@@ -220,10 +220,10 @@ namespace ContactManager.Core.Services
 
                 // Änderungen Loggen
                 ContactLogger.LogIfChanged(
-                    customer.Id, 
-                    nameof(Customer), 
-                    oldDto, 
-                    cmd, 
+                    customer.Id,
+                    nameof(Customer),
+                    oldDto,
+                    cmd,
                     nameof(customer.Status),
                     nameof(customer.Messages),
                     nameof(customer.Id)

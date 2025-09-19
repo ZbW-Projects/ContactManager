@@ -46,7 +46,7 @@ namespace ContactManager.Core.Services.features
 
             foreach (var p in properties)
             {
-                if(!p.CanRead) continue;
+                if (!p.CanRead) continue;
                 if (ignore.Contains(p.Name)) continue;
 
                 var oldProp = p.GetValue(oldDto);
