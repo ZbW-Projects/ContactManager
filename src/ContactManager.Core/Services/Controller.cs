@@ -198,6 +198,8 @@ namespace ContactManager.Core.Services
                 if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
                 if (person is not Customer customer) return (false, "Ausgewählte Person ist kein Kunde.");
 
+                var oldDto = MapToDtoCustomer(customer);
+
                 customer.Salutation = cmd.Salutation;
                 customer.FirstName = cmd.FirstName;
                 customer.LastName = cmd.LastName;
@@ -215,6 +217,17 @@ namespace ContactManager.Core.Services
 
                 // Daten persistieren 
                 LocalStorage.UpdateContact(customer.Id, customer);
+
+                // Änderungen Loggen
+                ContactLogger.LogIfChanged(
+                    customer.Id, 
+                    nameof(Customer), 
+                    oldDto, 
+                    cmd, 
+                    nameof(customer.Status),
+                    nameof(customer.Messages),
+                    nameof(customer.Id)
+                    );
 
                 // Cache aktualisieren
                 UpdateContacts();
