@@ -198,6 +198,7 @@ namespace ContactManager.Core.Services
                 if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
                 if (person is not Customer customer) return (false, "Ausgewählte Person ist kein Kunde.");
 
+                // Damit logger den bestehenden Kontakt mit dem neuen vergleichen kann
                 var oldDto = MapToDtoCustomer(customer);
 
                 customer.Salutation = cmd.Salutation;
@@ -392,6 +393,9 @@ namespace ContactManager.Core.Services
                 if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
                 if (person is not Employee employee) return (false, "Ausgewählte Person ist kein Mitarbeiter.");
 
+                // Damit logger den bestehenden Kontakt mit dem neuen vergleichen kann
+                var oldDto = MapToDtoEmployee(employee);
+
                 employee.Salutation = cmd.Salutation;
                 employee.FirstName = cmd.FirstName;
                 employee.LastName = cmd.LastName;
@@ -419,6 +423,17 @@ namespace ContactManager.Core.Services
 
                 // Daten persistieren 
                 LocalStorage.UpdateContact(employee.Id, employee);
+
+                // Änderungen Loggen
+                ContactLogger.LogIfChanged(
+                    employee.Id,
+                    nameof(Employee),
+                    oldDto,
+                    cmd,
+                    nameof(employee.Status),
+                    nameof(employee.EmployeeNumber),
+                    nameof(employee.Id)
+                    );
 
                 // Cache aktualisieren
                 UpdateContacts();
@@ -544,6 +559,9 @@ namespace ContactManager.Core.Services
                 if (!_contacts.TryGetValue(id, out var person)) return (false, "Unbekannte Kontakt-Id.");
                 if (person is not Trainee trainee) return (false, "Ausgewählte Person ist kein Lehrling.");
 
+                // Damit logger den bestehenden Kontakt mit dem neuen vergleichen kann
+                var oldDto = MapToDtoTrainee(trainee);
+
                 trainee.Salutation = cmd.Salutation;
                 trainee.FirstName = cmd.FirstName;
                 trainee.LastName = cmd.LastName;
@@ -573,6 +591,18 @@ namespace ContactManager.Core.Services
 
                 // Daten persistieren 
                 LocalStorage.UpdateContact(trainee.Id, trainee);
+
+                // Änderungen Loggen
+                ContactLogger.LogIfChanged(
+                    trainee.Id,
+                    nameof(Trainee),
+                    oldDto,
+                    cmd,
+                    nameof(trainee.Status),
+                    nameof(trainee.EmployeeNumber),
+                    nameof(trainee.ActualTraineeYear),
+                    nameof(trainee.Id)
+                    );
 
                 // Cache aktualisieren
                 UpdateContacts();

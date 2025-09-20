@@ -21,4 +21,5 @@
 - [X] Den Bug in der Suchfunktion mit `Aktiv / Inaktiv` beheben, sodass nur "entweder / oder" angezeigt wird.
 - [X] Ausreichende In-Line Dokumentation des Quellcodes (alle public Klassen/Methoden/Properties etc.).
 - [X] Passende Namen für Klassen, Methoden, Properties usw.
+- [X] Mutationshistorie von Kontaktdaten implementieren. 
 

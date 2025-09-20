@@ -38,8 +38,7 @@ Joël Rohner ( Unit Testing / Testing )</br>
 | CM-09 | Als Benutzer möchte ich, dass das System eindeutige Mitarbeiternummer generiert, damit die Nachverfolgung einfach ist. | System            | ID/Konsistenz                     |
 | CM-10 | Als Benutzer möchte ich Notizen oder Interaktionen mit Kontakten erfassen, damit die Kundenhistorie nachvollziehbar ist.         | Admin                      | Protokoll/Notizen              |
 | CM-11 | Als Benutzer möchte ich die Protokollhistorie eines Kontakts einsehen, um kürzliche Interaktionen nachzuvollziehen.                  | Alle                           | Protokoll/Notizen              |
-| CM-12 | Als Benutzer möchte ich die Gesamtzahl an Mitarbeitenden, Lernenden und Kunden sehen, um einen schnellen Überblick zu erhalten. | Alle                | Reporting (Optional)         |
-| CM-13 | Als Benutzer möchte ich Kontaktdaten als CSV exportieren / importieren können, um sie extern weiterzugeben oder zu analysieren. | Admin     | Export/Import Add on (Optional)|
+| CM-12 | Als Benutzer möchte ich nachvollziehen, wann und welchen Daten bei dem Kontakten sich verändert haben. | Admin                | Log Data (Optional)         |
 
 
 ### Umgebungen
