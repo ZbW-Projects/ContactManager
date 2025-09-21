@@ -28,7 +28,7 @@ namespace ContactManager.View.Forms
         public Details()
         {
             InitializeComponent();
-            CreateContactUISettings();  
+            CreateContactUISettings();
         }
 
         public Details(Guid id, string type)
@@ -413,7 +413,7 @@ namespace ContactManager.View.Forms
                 TxtPhonePrivateL.Text = trainee.PhoneNumberPrivate;
                 TxtPhoneMobileL.Text = trainee.PhoneNumberMobile;
                 TxtPhoneNumberBusinessL.Text = trainee.PhoneNumberBuisness;
-                TxtEmailL.Text = trainee.EmailPrivat;    
+                TxtEmailL.Text = trainee.EmailPrivat;
 
                 //Beschäftigungsdaten
                 CmbDepartmentL.Text = trainee.Department;
@@ -427,7 +427,7 @@ namespace ContactManager.View.Forms
 
                 //Meta
                 TabLehrling.Text = trainee.Type;
-               
+
             }
 
             #endregion
