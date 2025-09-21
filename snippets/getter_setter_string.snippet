@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <Header>
+    <Title>GetterSetterString</Title>
+    <Shortcut>gss</Shortcut>
+    <Description>Property with guarded getter/setter for strings</Description>
+    <Author>Eduard Anderegg</Author>
+  </Header>
+  <Snippet>
+    <Declarations>
+      <Literal>
+        <ID>name</ID>
+        <Default>ChangeMe</Default>
+      </Literal>
+      <Literal>
+        <ID>field</ID>
+        <Default>_changeMe</Default>
+      </Literal>
+    </Declarations>
+    <Code Language="csharp"><![CDATA[
+public string $name$ { get => $field$; set => $field$ = string.IsNullOrWhiteSpace(value) ? throw new ArgumentException("Der Wert kann nicht leer sein.", nameof(value)) : char.ToUpper(value.Trim()[0]) + value.Trim()[1..].ToLower(); }
+$end$]]>
+    </Code>
+  </Snippet>
+</CodeSnippet>

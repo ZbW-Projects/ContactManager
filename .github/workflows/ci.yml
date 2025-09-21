@@ -1,0 +1,29 @@
+name: build-and-test
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore ./ContactManager.sln
+
+      - name: Check code formatting
+        run: dotnet format --verify-no-changes ./ContactManager.sln
+
+      - name: Build
+        run: dotnet build ./ContactManager.sln --configuration Release
+
+      - name: Run tests
+        run: dotnet test ./src/ContactManager.Test --configuration Release
