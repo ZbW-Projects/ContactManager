@@ -1,5 +1,7 @@
 [![build-and-test](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/ci.yml) </br>
-[![Release](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml)
+[![Release](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml) </br>
+[![Offiziel](https://github.com/ZbW-Projects/ContactManager/actions/workflows/main.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/main.yml)
+
 # ContactManager
 Diese App wird von drei Entwicklern im Rahmen eines Semesterprojekts an der ZbW entwickelt.</br>
 Als Architektur wird MVC (Model View Controller) implementiert.</br>
