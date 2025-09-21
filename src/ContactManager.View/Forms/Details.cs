@@ -615,6 +615,58 @@ namespace ContactManager.View.Forms
 
         #endregion
 
+        #region Global Events
+
+        #region Event: Kunde
+
+        private void CmbStatusK_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (CmbStatusK.Checked)
+            {
+                CmbStatusK.Text = "Aktiv";
+            }
+            else
+            {
+                CmbStatusK.Text = "Inaktiv";
+            }
+        }
+
+        #endregion
+
+        #region Event: Mitarbeiter
+
+        private void CbStatusM_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CbStatusM.Checked)
+            {
+                CbStatusM.Text = "Aktiv";
+            }
+            else
+            {
+                CbStatusM.Text = "Inaktiv";
+            }
+        }
+
+        #endregion
+
+        #region Event: Lehrling
+
+        private void CbStatusL_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CbStatusL.Checked)
+            {
+                CbStatusL.Text = "Aktiv";
+            }
+            else
+            {
+                CbStatusL.Text = "Inaktiv";
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         #region Helper Methode um Messages in Kunden Anzeigen
 
         private void DisplayMessages(List<DtoMessage> messages, RichTextBox richTextBox)
@@ -657,8 +709,9 @@ namespace ContactManager.View.Forms
 
         }
 
-        #endregion  
+        #endregion
 
         #endregion
+
     }
 }

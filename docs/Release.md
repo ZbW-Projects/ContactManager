@@ -8,12 +8,12 @@
 
 ### UI / UX Gefundene Missverhalten
 
-- [ ] Tabs im Index richtig nummereiren
-- [ ] Bei Dropdowns in Eingabenkästen sollten mehr sinnvolle Optionen eingegeben werden, wie z.B bei `Abteilung`.
+- [X] Tabs im Index richtig nummereiren
+- [X] Bei Dropdowns in Eingabenkästen sollten mehr sinnvolle Optionen eingegeben werden, wie z.B bei `Abteilung`.
 - [ ] Einen neuen Button `Bearbeiten` einfügen und den bestehenden Button umbenennen in `Speichern`.
-- [ ] Im Checkbox `Status` soll sich das Label dynamisch verändern, wenn es `checked` oder `unchecked` ist. 
-- [ ] Ausreichende In-Line Dokumentation des Quellcodes (alle public Klassen/Methoden/Properties etc.).
-- [ ] Passende Namen für Klassen, Methoden, Properties usw.
+- [X] Im Checkbox `Status` soll sich das Label dynamisch verändern, wenn es `checked` oder `unchecked` ist. 
+- [X] Ausreichende In-Line Dokumentation des Quellcodes (alle public Klassen/Methoden/Properties etc.).
+- [X] Passende Namen für Klassen, Methoden, Properties usw.
 
 ### System Code & Bugs
 
