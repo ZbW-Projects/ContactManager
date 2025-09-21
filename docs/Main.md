@@ -2,7 +2,7 @@
 
 ## Installation
 
-Die aktuelle Version kann auf der [Releases-Seite](../../releases) heruntergeladen werden.
+Die aktuelle Version kann auf der [Releases-Seite](https://github.com/ZbW-Projects/ContactManager/releases/tag/JEN25.9.21) heruntergeladen werden.
 
 ### 1. Eigenständige EXE-Datei
 - **Datei:** `ContactManager.exe`  
