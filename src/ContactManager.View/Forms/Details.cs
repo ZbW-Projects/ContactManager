@@ -17,6 +17,7 @@ namespace ContactManager.View.Forms
     {
         #region Eigenschaften
 
+        // Interne ID des aktuell bearbeiteten Kontakts (wird beim Laden gesetzt).
         private Guid _idContact;
 
         #endregion
@@ -27,9 +28,8 @@ namespace ContactManager.View.Forms
         public Details()
         {
             InitializeComponent();
-            CreateContactUISettings();
+            CreateContactUISettings();  
         }
-
 
         public Details(Guid id, string type)
         {
@@ -78,23 +78,27 @@ namespace ContactManager.View.Forms
             {
                 var trainee = new DtoTrainee
                 {
+
+                    //Persönliche Angaben
                     Salutation = CmbSalutationL.Text,
                     FirstName = TxtFirstNameL.Text,
                     LastName = TxtLastNameL.Text,
                     DateOfBirth = DtpDateOfBirthL.Value,
                     Gender = CmbGenderL.Text,
                     SocialSecurityNumber = TxtSocialSecurityNumberL.Text,
-                    PhoneNumberPrivate = TxtPhonePrivateL.Text,
-                    PhoneNumberMobile = TxtPhoneMobileL.Text,
-                    PhoneNumberBuisness = TxtPhoneNumberBusinessL.Text,
-                    EmailPrivat = TxtEmailL.Text,
-                    Status = CbStatusL.Checked,
                     Nationality = CmbNationalityL.Text,
+
+                    //Adresse + Kontakt
                     Street = TxtStreetL.Text,
                     StreetNumber = TxtStreetNumberL.Text,
                     ZipCode = TxtZipCodeL.Text,
                     Place = TxtCityL.Text,
-                    Type = TabLehrling.Text,
+                    EmailPrivat = TxtEmailL.Text,
+                    PhoneNumberPrivate = TxtPhonePrivateL.Text,
+                    PhoneNumberMobile = TxtPhoneMobileL.Text,
+                    PhoneNumberBuisness = TxtPhoneNumberBusinessL.Text,
+
+                    //Beschäftigungsdaten
                     Department = CmbDepartmentL.Text,
                     StartDate = DtpStartDateL.Value,
                     EndDate = DtpEndDateL.Value,
@@ -102,6 +106,11 @@ namespace ContactManager.View.Forms
                     Role = CmbRoleL.Text,
                     CadreLevel = 0,
                     TraineeYears = int.Parse(CmbLehrjahreL.Text),
+
+                    Status = CbStatusL.Checked,
+
+                    //Meta
+                    Type = TabLehrling.Text,
                 };
 
                 var (ok, msg) = Controller.CreateTrainee(trainee);
@@ -304,7 +313,7 @@ namespace ContactManager.View.Forms
                 _idContact = id;
                 var customer = Controller.GetCustomer(id);
 
-                // Persoenliche Angaben
+                // Persönliche Angaben
                 CmbSalutationK.Text = customer.Salutation;
                 CmbTitleK.Text = customer.Title;
                 TxtFirstnameK.Text = customer.FirstName;
@@ -404,26 +413,21 @@ namespace ContactManager.View.Forms
                 TxtPhonePrivateL.Text = trainee.PhoneNumberPrivate;
                 TxtPhoneMobileL.Text = trainee.PhoneNumberMobile;
                 TxtPhoneNumberBusinessL.Text = trainee.PhoneNumberBuisness;
-                TxtEmailL.Text = trainee.EmailPrivat;
+                TxtEmailL.Text = trainee.EmailPrivat;    
 
-                // Administrative
-                CbStatusL.Checked = trainee.Status;
-
-                // Education / Employment
+                //Beschäftigungsdaten
                 CmbDepartmentL.Text = trainee.Department;
                 CmbRoleL.Text = trainee.Role;
                 CmbEmploymentRateL.Text = Convert.ToString(trainee.Employment);
-
-                // Entry / Exit
                 DtpStartDateL.Value = trainee.StartDate;
                 DtpEndDateL.Value = trainee.EndDate;
-
-                // Privileg/Typ
-                TabLehrling.Text = trainee.Type;
-
-                // Lehrjahre
+                CbStatusL.Checked = trainee.Status;
                 CmbLehrjahreL.Text = Convert.ToString(trainee.TraineeYears);
                 TxtTraineeYearsL.Text = Convert.ToString(trainee.ActualTraineeYear);
+
+                //Meta
+                TabLehrling.Text = trainee.Type;
+               
             }
 
             #endregion
@@ -650,6 +654,7 @@ namespace ContactManager.View.Forms
                 richTextBox.SelectionFont = new Font(richTextBox.Font, FontStyle.Regular);
                 richTextBox.AppendText("==================================\n\n");
             }
+
         }
 
         #endregion  

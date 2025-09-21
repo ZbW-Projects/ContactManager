@@ -8,6 +8,7 @@ namespace ContactManager.View.Forms
     {
         // Zentrale Binding-Quelle für das Grid
         private readonly BindingSource _binding = new();
+
         public Contacts()
         {
             InitializeComponent();
