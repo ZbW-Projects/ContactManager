@@ -41,7 +41,16 @@ Joël Rohner ( Unit Testing / Testing )</br>
 | CM-12 | Als Benutzer möchte ich nachvollziehen, wann und welchen Daten bei dem Kontakten sich verändert haben. | Admin                | Log Data (Optional)         |
 
 
-### Umgebungen
+## Installation
+
+#### Getestete öffentliche Anwendung und Installation
+**Branch:** `main` </br>
+**Workflow:** [![Offiziel](https://github.com/ZbW-Projects/ContactManager/actions/workflows/main.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/main.yml) </br>
+**Dokumentation:** [Installationsinfo](docs/Main.md)
+
+
+
+## Dev/Test-Umgebungen
 
 #### Entwicklung
 **Branch:** `dev` </br>
@@ -52,4 +61,5 @@ Joël Rohner ( Unit Testing / Testing )</br>
 **Branch:** `release` </br>
 **Workflow:** [![Release](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml/badge.svg)](https://github.com/ZbW-Projects/ContactManager/actions/workflows/release.yml) </br>
 **Dokumentation:** [Release](docs/Release.md)
+
 
